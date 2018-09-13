@@ -1,9 +1,9 @@
-const express = require('express')
-const cors = require('cors')
-const controllers = require('./controllers')
-
+const express = require('express');
+const cors = require('cors');
+const controllers = require('./controllers');
 
 const app = express();
+
 //security
 app.use(cors());
 
