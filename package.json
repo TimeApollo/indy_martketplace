@@ -1,0 +1,27 @@
+{
+  "name": "indy_martketplace",
+  "version": "1.0.0",
+  "description": "Indy online art marketplace",
+  "main": "app_booty.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app_booty.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimeApollo/indy_martketplace.git"
+  },
+  "author": "Aaron Jackson, Meaghan Crowell, TJ Hindman, Brian Schuessler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimeApollo/indy_martketplace/issues"
+  },
+  "homepage": "https://github.com/TimeApollo/indy_martketplace#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "mongod": "^2.0.0",
+    "mongoose": "^5.2.14"
+  }
+}
