@@ -2,10 +2,13 @@
   "name": "indy_martketplace",
   "version": "1.0.0",
   "description": "Indy online art marketplace",
-  "main": "app_booty.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app_booty.js",
+    "client": "cd client && npm run start",
+    "server": "nodemon index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "nodemon index.js",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
@@ -23,5 +26,8 @@
     "express": "^4.16.3",
     "mongod": "^2.0.0",
     "mongoose": "^5.2.14"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1"
   }
 }

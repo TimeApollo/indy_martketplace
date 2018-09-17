@@ -2,9 +2,9 @@ const express = require('express')
 const auth = express.Router()
 
 //register user
-auth.get('/register', (req, res)=>{
+auth.post('/register', (req, res)=>{
   console.log('I think its working')
-  res.json({success: true})
+  res.json({ name: 'Aaron Jackson' , userId: 8 , token: 1234 })
 })
 
 module.exports = {
