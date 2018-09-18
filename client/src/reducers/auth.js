@@ -28,6 +28,18 @@ const authReducer = ( state = initialState , action ) => {
           isRegisteringUser: false,
         }
       }
+      case LOGIN_SUCCESS:
+      return {
+        ...state,
+        auth: {
+          ...state.auth, 
+          token: action.payload.token,
+        },
+        login: {
+          ...state.login,
+          isLoginSuccess: true,
+        }
+      }
     default:
       return state
   } 
