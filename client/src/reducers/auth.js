@@ -1,5 +1,6 @@
 import {
   REGISTER_SUCCESS,
+  LOGIN_SUCCESS
 } from '../actions/auth'
 
 const initialState = {
