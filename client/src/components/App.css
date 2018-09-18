@@ -1,5 +1,31 @@
 #convo-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 auto;
-  background-color: blue;
   width: 50%;
+}
+
+.pic-wrap {
+  background-color: red;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.info-wrap {
+  justify-content: flex-start;
+  width: 80%;
+}
+
+.content {
+  color: gray;
+}
+
+.timestamp {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  font-size: 15px;
+  color: gray;
 }

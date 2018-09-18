@@ -20,12 +20,16 @@ function PaperSheet(props) {
     return (
         <div>
             <Paper id='convo-wrap' className={classes.root} elevation={1}>
-                <Typography variant="headline" component="h3">
-                Floop
-                </Typography>
-                <Typography component="p">
-                Scoop diddy poop
-                </Typography>
+                <div className="pic-wrap"></div>
+                <div className="info-wrap">
+                    <Typography variant="headline" component="h3">
+                    Floop
+                    </Typography>
+                    <div className="content" component="p">
+                    Scoop diddy poop
+                    </div>
+                </div>
+                <div className="timestamp">2h</div>
             </Paper>
         </div>
     );
