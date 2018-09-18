@@ -17,21 +17,84 @@ router.get('/:id', (req, res) => {
                 senderId: 200,
                 convoId: 1,
                 newMsg: "want to find newest message using timestamp",
-                newMsgTime: "going to want timestamp of newest message"
+                newMsgTime: "2h"
             },
             {
                 userId: 317,
                 senderId: 42,
                 convoId: 2,
                 newMsg: "want to find newest message using timestamp",
-                newMsgTime: "going to want timestamp of newest message"
+                newMsgTime: "4d"
             },
             {
                 userId: 317,
                 senderId: 300,
                 convoId: 3,
                 newMsg: "want to find newest message using timestamp",
-                newMsgTime: "going to want timestamp of newest message"
+                newMsgTime: "1d"
+            },
+            {
+                userId: 317,
+                senderId: 444,
+                convoId: 1,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "14 May 2018"
+            },
+            {
+                userId: 317,
+                senderId: 212,
+                convoId: 2,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "12h"
+            },
+            {
+                userId: 317,
+                senderId: 1018,
+                convoId: 3,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "5d"
+            },
+            {
+                userId: 317,
+                senderId: 200,
+                convoId: 1,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "2h"
+            },
+            {
+                userId: 317,
+                senderId: 42,
+                convoId: 2,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "4d"
+            },
+            {
+                userId: 317,
+                senderId: 300,
+                convoId: 3,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "1d"
+            },
+            {
+                userId: 317,
+                senderId: 444,
+                convoId: 1,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "14 May 2018"
+            },
+            {
+                userId: 317,
+                senderId: 212,
+                convoId: 2,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "12h"
+            },
+            {
+                userId: 317,
+                senderId: 1018,
+                convoId: 3,
+                newMsg: "want to find newest message using timestamp",
+                newMsgTime: "5d"
             }
         ]
     })
