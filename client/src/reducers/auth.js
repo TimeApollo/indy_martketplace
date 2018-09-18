@@ -1,13 +1,36 @@
-
+import {
+  REGISTER_SUCCESS,
+} from '../actions/auth'
 
 const initialState = {
   auth: {
-    token: null
+    token: null,
+  },
+  register: {
+    isRegisterSuccess: false,
+    isRegisterFail: false,
+    isRegisteringUser: false,
   }
 }
 
 const authReducer = ( state = initialState , action ) => {
-  return state
+  switch ( action.type ){
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          token: action.payload.token,
+        },
+        register: {
+          ...state.register,
+          isRegisterSuccess: true,
+          isRegisteringUser: false,
+        }
+      }
+    default:
+      return state
+  } 
 }
 
 export default authReducer
