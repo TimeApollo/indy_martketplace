@@ -6,25 +6,56 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Slide from '@material-ui/core/Slide';
 import {Link} from 'react-router-dom';
+import Modal from '@material-ui/core/Modal';
+import Typography from '@material-ui/core/Typography';
+import RegisterForm from './homepage/RegisterForm.jsx';
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
-};
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+  },
+});
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 class CenteredTabs extends React.Component {
   state = {
     value: 0,
-    loggedIn: false
+    loggedIn: false,
+    registerOpen: false,
   };
 
   handleChange = (event, value) => {
     this.setState({ value });
   };
   handleLogin = event => {
-    this.setState({loggedIn: !this.state.loggedIn})
-  }
+    this.setState({loggedIn: !this.state.loggedIn,
+      value: null
+    })
+  };
+  handleOpenRegister = () => {
+    this.setState({ registerOpen: true });
+  };
+
+  handleRegisterClose = () => {
+    this.setState({ registerOpen: false });
+  };
   render() {
     const { classes } = this.props;
 
@@ -59,6 +90,18 @@ class CenteredTabs extends React.Component {
         >
           <Tab label="Homepage" component={Link} to="/"/>
           <Tab label="Login" onClick={this.handleLogin}/>
+          <Tab label="Register" onClick={this.handleOpenRegister}/>
+            <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.registerOpen}
+            onClose={this.handleRegisterClose}
+            >
+            <div style={getModalStyle()} className={classes.paper}>
+            <RegisterForm/>
+            </div>
+            </Modal>
+          
         </Tabs>
         </Slide>
           )}
