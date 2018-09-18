@@ -5,7 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Slide from '@material-ui/core/Slide';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 const styles = {
   root: {
     flexGrow: 1,

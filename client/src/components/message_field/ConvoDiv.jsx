@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -14,25 +14,32 @@ const styles = theme => ({
   }
 });
 
-function PaperSheet(props) {
-    const { classes } = props;
-
-    return (
-        <div>
-            <Paper id='convo-wrap' className={classes.root} elevation={1}>
-                <Typography variant="headline" component="h3">
-                Floop
-                </Typography>
-                <Typography component="p">
-                Scoop diddy poop
-                </Typography>
-            </Paper>
-        </div>
-    );
+class ConvoDiv extends React.Component {
+    render() {
+        const { classes } = this.props;
+        return (
+            <div>
+                <Paper id='convo-wrap' className={classes.root} elevation={1}>
+                    <div className="pic-wrap">
+                        <div className="pic"></div>
+                    </div>
+                    <div className="info-wrap">
+                        <Typography variant="headline" component="h3">
+                        {this.props.sender}
+                        </Typography>
+                        <div className="content" component="p">
+                        {this.props.message}
+                        </div>
+                    </div>
+                    <div className="timestamp">{this.props.timestamp}</div>
+                </Paper>
+            </div>
+        );
+    }
 }
 
-PaperSheet.propTypes = {
+ConvoDiv.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PaperSheet);
+export default withStyles(styles)(ConvoDiv);
