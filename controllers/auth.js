@@ -10,3 +10,12 @@ auth.post('/register', (req, res)=>{
 module.exports = {
   auth
 }
+
+// auth.post('/login', (req, res)=>{
+//   console.log("it's working, yo")
+//   res.json({ })
+// })
+
+// module.exports = {
+//   auth
+// }
