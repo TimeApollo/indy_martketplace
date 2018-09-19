@@ -35,8 +35,8 @@ class RegisterForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ register }) => ({
-  register
+const mapStateToProps = ({ auth }) => ({
+  register: auth.register
 });
 
 const mapDispatchToProps = ( dispatch ) => {
