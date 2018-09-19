@@ -1,5 +1,5 @@
 const express = require('express')
-const { User } = require('../models')
+const { User , Messages } = require('../models')
 const auth = express.Router()
 
 //register user
