@@ -14,7 +14,7 @@ const styles = theme => ({
   }
 });
 
-class ConvoDiv extends React.Component {
+class SingleConversation extends React.Component {
     render() {
         const { classes } = this.props;
         return (
@@ -38,8 +38,8 @@ class ConvoDiv extends React.Component {
     }
 }
 
-ConvoDiv.propTypes = {
+SingleConversation.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ConvoDiv);
+export default withStyles(styles)(SingleConversation);

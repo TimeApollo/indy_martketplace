@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import ConvoDiv from './ConvoDiv.jsx';
+import SingleConversation from './SingleConversation.jsx';
 import IconButton from '@material-ui/core/IconButton';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { connect } from 'react-redux';
@@ -39,7 +39,7 @@ class MessageList extends React.Component {
                 </IconButton>
             </Paper>
             <div className="convo-wrap">
-                {this.props.convoList.length ? this.props.convoList.map( convo => <ConvoDiv sender={convo.senderId} message={convo.newMsg} timestamp={convo.newMsgTime}/> ) : null }
+                {this.props.convoList.length ? this.props.convoList.map( convo => <SingleConversation sender={convo.senderId} message={convo.newMsg} timestamp={convo.newMsgTime}/> ) : null }
             </div>
           </div>
         );
