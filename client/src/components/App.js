@@ -3,7 +3,7 @@ import { withRouter , Switch ,Route } from 'react-router-dom';
 
 import NavBar from './NavBar.jsx';
 import RegisterForm from './homepage/RegisterForm.jsx';
-import MessageList from './message_field/MessageList.jsx';
+import MessageList from './messages/MessageList.jsx';
 import './App.css';
 
 class App extends Component {
