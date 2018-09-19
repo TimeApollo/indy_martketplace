@@ -1,4 +1,5 @@
 const express = require('express')
+const { User } = require('../models')
 const auth = express.Router()
 
 //register user
