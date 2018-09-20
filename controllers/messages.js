@@ -1,11 +1,30 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 
 //get full message list
 // router.get('/', (req, res) => {
 //     console.log("full message list endpoint")
 //     res.json({})
 // })
+
+var MessageSchema = new mongoose.Schema({
+    message: String,
+});
+
+
+router.post('/postmessages', (req, res) => {
+    const incomingMessage = req.body.message;
+    const Message = mongoose.model(req.body.convoId, MessageSchema)
+
+    let newMessage = new Message({
+        message: incomingMessage
+    });
+
+    newMessage.save()
+
+    res.send("something was posted")
+})
 
 //get message history for user
 router.get('/:id', (req, res) => {
