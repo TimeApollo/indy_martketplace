@@ -1,17 +1,25 @@
-import { GET_MESSAGES } from "../actions/messages";
+import { GET_MESSAGES, MSG_POPUP, MSG_CLOSE } from "../actions/messages";
 
-const initialState = { convos: [] };
+const initialState = { convos: [], msgPopUp: false };
 
-const messages = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
         case GET_MESSAGES:
             return {
                 ...state,
                 convos: action.convos
             }
+        case MSG_POPUP:
+            return {
+                ...state,
+                msgPopUp: true
+            }
+        case MSG_CLOSE:
+            return {
+                ...state,
+                msgPopUp: false
+            }
         default:
             return state
     }
-}
-
-export default messages;
+};
