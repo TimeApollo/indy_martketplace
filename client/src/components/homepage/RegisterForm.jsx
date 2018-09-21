@@ -23,6 +23,15 @@ class RegisterForm extends React.Component {
       password: this.state.password,
       email: this.state.email,
     }
+
+    //testing purposes. delete
+    regFormData = {
+      firstName: 'Aaron',
+      lastName: 'Jackson',
+      password: '1234',
+      email: 'aj@gmail.com',
+    }
+    
     this.props.registerUser( regFormData )
   }
 

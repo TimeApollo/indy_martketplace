@@ -12,7 +12,7 @@ const app = express();
 // app.use(cors());
 
 //settings
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT || 5000);
 
 //middleware
 app.use(morgan('dev'))
@@ -32,7 +32,10 @@ app.listen(app.get("port"), () => {
 })
 
 mongoose.connect( process.env.MONGODB_URI , { useNewUrlParser: true } );
-console.log(mongoose.connection)
+// console.log(mongoose.connection)
+mongoose.connection.on('connected', function () {  
+  console.log('Mongoose default connection open to ' + process.env.MONGODB_URI);
+}); 
 
 const gracefulExit = function() { 
   mongoose.connection.close(function () {
