@@ -1,6 +1,7 @@
 require( 'dotenv-safe' ).config({ allowEmptyValues: true })
 const express = require('express');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const controllers = require("./controllers");
@@ -14,6 +15,7 @@ const app = express();
 app.set("port", process.env.PORT || 5000);
 
 //middleware
+app.use(morgan('dev'))
 app.use(express.json());
 // app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -30,4 +32,18 @@ app.listen(app.get("port"), () => {
 })
 
 mongoose.connect( process.env.MONGODB_URI , { useNewUrlParser: true } );
-console.log(mongoose.connection)
+// console.log(mongoose.connection)
+mongoose.connection.on('connected', function () {  
+  console.log('Mongoose default connection open to ' + process.env.MONGODB_URI);
+}); 
+
+const gracefulExit = function() { 
+  mongoose.connection.close(function () {
+    console.log('Mongoose default connection with DB :' + process.env.MONGODB_URI + ' is disconnected through app termination');
+    process.exit(0);
+  });
+}
+
+process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+
+
