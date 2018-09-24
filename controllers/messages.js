@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
-const { Conversations } = require('../models')
+const { Conversations, User } = require('../models')
 
 //Creates new conversation if one does not exist, updates if exists.
 router.patch('/', (req, res) => {
@@ -42,7 +42,19 @@ router.patch('/', (req, res) => {
 //get message history for user
 router.get('/:id', (req, res) => {
     // Conversations.find()
-    
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            res.json(err)
+        } else {
+            Conversations.find({ emails: {$in: user.email} }, function (err, convo) {
+                if (err) {
+                    res.json(err);
+                } else if (convo) {
+                    res.json(convo)
+                }
+            })
+        }
+    })
 })
 
 module.exports = router;
