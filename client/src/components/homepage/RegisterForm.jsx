@@ -28,10 +28,10 @@ class RegisterForm extends React.Component {
     regFormData = {
       firstName: 'Aaron',
       lastName: 'Jackson',
-      password: '1234',
-      email: 'aj@gmail.com',
+      password: '12345678',
+      email: 'aj@gm',
     }
-    
+
     this.props.registerUser( regFormData )
   }
 
