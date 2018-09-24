@@ -12,6 +12,7 @@ export const getMessages = () => dispatch => {
 }
 
 export const createMsgPopup = () => dispatch => {
+    console.log()
     dispatch({ type: MSG_POPUP })
 }
 
