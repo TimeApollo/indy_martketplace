@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
-const Messages = require('../models/Messages')
+const { Messages } = require('../models')
 
 //get full message list
 // router.get('/', (req, res) => {
@@ -9,14 +9,9 @@ const Messages = require('../models/Messages')
 //     res.json({})
 // })
 
-var MessageSchema = new mongoose.Schema({
-    message: String,
-});
-
 
 router.post('/', (req, res) => {
-    const MessagesArray = req.body.messages;
-    const Message = mongoose.model(req.body.convoId, MessageSchema)
+    const MessagesArray = Messages.create;
 
     let newMessage = new Message({
         message: incomingMessage
