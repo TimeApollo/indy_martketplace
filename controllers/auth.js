@@ -13,9 +13,9 @@ auth.post('/register', (req, res)=>{
   }, function( err , user){
     if (err) { res.send(err)}
     else {
-      console.log(user)
+      console.log('this is the user' , user)
       console.log(user.id)
-      res.json({ name: res.body.firstName + '' + res.body.lastName , userId: 8 , token: 1234 })
+      res.json({ name: user.firstName + '' + user.lastName , userId: user.id , token: 1234 })
     }
   })
 })
