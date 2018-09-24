@@ -5,10 +5,6 @@ const { Conversations, User } = require('../models')
 
 //Creates new conversation if one does not exist, updates if exists.
 router.patch('/', (req, res) => {
-    const emailOne = req.body.emails[0];
-    const emailTwo = req.body.emails[1];
-    console.log(emailOne, emailTwo)
-
     Conversations.findOne({ "emails": { $all: req.body.emails}}, function (err, convo) {
         if (err) {
             res.json(err);
