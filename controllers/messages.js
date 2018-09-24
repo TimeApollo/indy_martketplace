@@ -1,118 +1,48 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
-const { Messages } = require('../models')
+const { Conversations } = require('../models')
 
-//get full message list
-// router.get('/', (req, res) => {
-//     console.log("full message list endpoint")
-//     res.json({})
-// })
+//Creates new conversation if one does not exist, updates if exists.
+router.patch('/', (req, res) => {
+    const emailOne = req.body.emails[0];
+    const emailTwo = req.body.emails[1];
+    console.log(emailOne, emailTwo)
 
-
-router.post('/', (req, res) => {
-    const MessagesArray = Messages.create;
-
-    let newMessage = new Message({
-        message: incomingMessage
-    });
-
-    newMessage.save()
-
-    res.send("something was posted")
+    Conversations.findOne({ "emails": { $all: req.body.emails}}, function (err, convo) {
+        if (err) {
+            res.json(err);
+        } else if (convo) {
+            Conversations.findOneAndUpdate({ "emails": { $all: req.body.emails}}, 
+                {$push: { messages: {message: req.body.message, email: req.body.email}}},
+                 { new: true }, function(err, convo) {
+                    if (err) {
+                        res.json(err)
+                    } else {
+                        console.log("update", convo)
+                        res.json(convo)
+                    }
+                })
+        } else {
+            Conversations.create({
+                emails: req.body.emails,
+                messages: [{message: req.body.message, email: req.body.email}]
+            }, function(err, convo) {
+                if (err) {
+                    res.json(err)
+                } else {
+                    console.log(convo)
+                    res.json({emails: convo.emails, messages: convo.messages})
+                }
+            })
+        }
+    })
 })
 
 //get message history for user
 router.get('/:id', (req, res) => {
-    console.log("message list endpoint hit (for user)")
-    res.json({
-        convos: [
-            {
-                userId: 317,
-                senderId: 200,
-                convoId: 1,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "2h"
-            },
-            {
-                userId: 317,
-                senderId: 42,
-                convoId: 2,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "4d"
-            },
-            {
-                userId: 317,
-                senderId: 300,
-                convoId: 3,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "1d"
-            },
-            {
-                userId: 317,
-                senderId: 444,
-                convoId: 1,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "14 May 2018"
-            },
-            {
-                userId: 317,
-                senderId: 212,
-                convoId: 2,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "12h"
-            },
-            {
-                userId: 317,
-                senderId: 1018,
-                convoId: 3,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "5d"
-            },
-            {
-                userId: 317,
-                senderId: 200,
-                convoId: 1,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "2h"
-            },
-            {
-                userId: 317,
-                senderId: 42,
-                convoId: 2,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "4d"
-            },
-            {
-                userId: 317,
-                senderId: 300,
-                convoId: 3,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "1d"
-            },
-            {
-                userId: 317,
-                senderId: 444,
-                convoId: 1,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "14 May 2018"
-            },
-            {
-                userId: 317,
-                senderId: 212,
-                convoId: 2,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "12h"
-            },
-            {
-                userId: 317,
-                senderId: 1018,
-                convoId: 3,
-                newMsg: "want to find newest message using timestamp",
-                newMsgTime: "5d"
-            }
-        ]
-    })
+    // Conversations.find()
+    
 })
 
 module.exports = router;
