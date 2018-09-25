@@ -52,12 +52,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         auth: {
           ...state.auth,
-          token: action.payload.user.token,
+          token: action.payload.user.token
         },
         login: {
           ...state.login,
           isLoginSuccess: true,
-          isLoggingIn: false,
+          isLoggingIn: false
         },
         user: {
           userId: action.payload.user._id,
@@ -66,17 +66,17 @@ const authReducer = (state = initialState, action) => {
           email: action.payload.user.email,
           about: action.payload.user.about,
           mediums: action.payload.user.mediums,
-          styles: action.payload.user.styles,
+          styles: action.payload.user.styles
         }
       };
     case IS_LOGGING_IN:
       return {
         ...state,
         login: {
-          ...state.login, 
+          ...state.login,
           isLoggingIn: true,
           isLoginSuccess: false,
-          isLoginFail: false,
+          isLoginFail: false
         }
       };
     case LOGIN_FAIL:
@@ -85,9 +85,9 @@ const authReducer = (state = initialState, action) => {
         login: {
           ...state.login,
           isLoginFail: true,
-          isLoggingIn: false,
+          isLoggingIn: false
         }
-      }
+      };
     case GET_ONE_USER:
       return {
         ...state,

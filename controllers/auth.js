@@ -41,7 +41,7 @@ auth.post("/login", (req, res) => {
         ...user._doc,
         token: 1231231981,
         password: ""
-      }
+      };
       res.json(user);
     }
   });
