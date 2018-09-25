@@ -1,26 +1,44 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { loginUser } from '../../actions/auth'
+import React from "react";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/auth";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import NavigationIcon from "@material-ui/icons/Navigation";
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit
+  }
+});
 
 class LoginForm extends React.Component {
-
   state = {
-    email: '',
-    password: '',
-  }
+    email: "",
+    password: ""
+  };
 
-  handleLoginUser = () => {
+  handleOnChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleLoginUser = event => {
     let loginData = {
       email: this.state.email,
       password: this.state.password
-    }
-    this.props.loginUser( loginData )
-  }
+    };
 
-  render(){
+    this.props.loginUser(loginData);
+  };
+
+  render() {
+    const { classes } = this.props;
+
     return (
       <div>
         <h1
@@ -39,23 +57,30 @@ class LoginForm extends React.Component {
             border: "4px solid black",
             width: "30em",
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "column"
           }}
         >
-          <FormControl
-          style={{margin: "1em"}}
-          >
+          <FormControl style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
-            <Input/>
+            <Input type="email" name="email" onChange={this.handleOnChange} />
           </FormControl>
-
-          <FormControl
-          style={{margin: "1em"}}
-          >
+          <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
-            <Input/>
+            <Input
+              type="password"
+              name="password"
+              onChange={this.handleOnChange}
+            />
           </FormControl>
         </div>
+        <Button
+          variant="extendedFab"
+          aria-label="Delete"
+          className={classes.button}
+          onClick={this.handleLoginUser}
+        >
+          Login
+        </Button>
       </div>
     );
   }
@@ -65,12 +90,19 @@ const mapStateToProps = ({ auth }) => ({
   login: auth.login
 });
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = dispatch => {
   return {
-    loginUser: ( loginFormData ) => {
-      dispatch(loginUser( loginFormData ))
+    loginUser: loginFormData => {
+      dispatch(loginUser(loginFormData));
     }
-  }
-}
+  };
+};
 
-export default connect( mapStateToProps , mapDispatchToProps )( LoginForm )
+LoginForm.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(LoginForm));
