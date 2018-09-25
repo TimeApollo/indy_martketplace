@@ -60,7 +60,7 @@ const authReducer = (state = initialState, action) => {
           isLoggingIn: false,
         },
         user: {
-          userId: action.payload.user.id,
+          userId: action.payload.user._id,
           firstName: action.payload.user.firstName,
           lastName: action.payload.user.lastName,
           email: action.payload.user.email,
