@@ -23,6 +23,11 @@ var UserSchema = new mongoose.Schema({
     type: String,
     minlength: 5,
     required: true,
+  },
+  about: {
+    type: String,
+    minLength: 0,
+    required: false
   }
 });
 
