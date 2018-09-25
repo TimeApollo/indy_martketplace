@@ -71,8 +71,8 @@ function Gallery (props) {
   );
 }
 
-TitlebarGridList.propTypes = {
+Gallery.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TitlebarGridList);
+export default withStyles(styles)(Gallery);
