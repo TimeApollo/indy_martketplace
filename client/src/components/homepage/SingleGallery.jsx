@@ -20,7 +20,7 @@ const styles = theme => ({
   gridList: {
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)",
+    transform: "translateZ(0)"
   },
   title: {
     color: theme.palette.primary.light
@@ -62,13 +62,16 @@ const tileData = [
     img: image,
     title: "Image",
     author: "author"
+  },
+  {
+    img: image,
+    title: "Image",
+    author: "author"
   }
-]
+];
 
 class SingleGallery extends React.Component {
-  
   render() {
-    
     const { classes } = this.props;
 
     return (
