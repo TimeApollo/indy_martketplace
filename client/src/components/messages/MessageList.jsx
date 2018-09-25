@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 //Material-ui component imports
@@ -25,7 +25,7 @@ const styles = {
 
 class MessageList extends React.Component {
     componentDidMount() {
-        this.props.getMessages();
+        // this.props.getMessages();
     }
 
     render() {
@@ -65,7 +65,7 @@ const mapStateToProps = ({messages}) => ({
 
 const mapDispatchToProps = ( dispatch ) => {
     return {
-      getMessages: () => dispatch(getMessages()),
+    //   getMessages: () => dispatch(getMessages()),
       createMsgPopup: () => dispatch(createMsgPopup())
     }
 }
