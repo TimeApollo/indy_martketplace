@@ -5,30 +5,40 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 1,
-    trim: true,
+    trim: true
   },
   lastName: {
     type: String,
     required: true,
     minlength: 1,
-    trim: true,
+    trim: true
   },
   email: {
     type: String,
     unique: true,
     required: true,
-    trim: true,
+    trim: true
   },
   password: {
     type: String,
     minlength: 5,
-    required: true,
+    required: true
   },
   about: {
     type: String,
-    minLength: 0,
-    required: false
+    minLength: 1,
+    required: true
+  },
+  mediums: {
+    type: [String],
+    minLength: 1,
+    required: true
+  },
+  styles: {
+    type: [String],
+    minLength: 1,
+    required: true
   }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
