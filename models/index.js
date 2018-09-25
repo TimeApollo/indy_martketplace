@@ -4,4 +4,5 @@ const Conversations = require('./Conversations');
 module.exports = {
   User,
   Conversations,
+  Artwork
 }
