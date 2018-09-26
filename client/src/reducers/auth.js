@@ -1,7 +1,6 @@
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
-  GET_ONE_USER,
   IS_LOGGING_IN,
   LOGIN_FAIL
 } from "../actions/auth";
@@ -87,11 +86,6 @@ const authReducer = (state = initialState, action) => {
           isLoginFail: true,
           isLoggingIn: false
         }
-      };
-    case GET_ONE_USER:
-      return {
-        ...state,
-        user: action.payload.user
       };
     default:
       return state;
