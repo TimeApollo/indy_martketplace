@@ -10,10 +10,34 @@ import PropTypes from "prop-types";
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    display: "flex",
+    justifyContent: "center",
+    marginLeft: "auto", 
+    marginRight: "auto",
+    marginTop: "-1.5em",
+    width: "7em"
+
   },
   extendedIcon: {
     marginRight: theme.spacing.unit
+  },
+  header: {
+    marginBottom: "0px",
+    fontFamily: "sans-serif",
+    textAlign: "center",
+    marginTop: "3em"
+  },
+  form: {
+    margin: "3em",
+    marginTop: "0",
+    border: "4px solid black",
+    width: "30em",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginLeft: "auto", 
+    marginRight: "auto"
   }
 });
 
@@ -40,25 +64,10 @@ class LoginForm extends React.Component {
 
     return (
       <div>
-        <h1
-          style={{
-            marginLeft: "2em",
-            marginBottom: "0px",
-            fontFamily: "sans-serif"
-          }}
-        >
+        <h1 className={classes.header}>
           LOGIN
         </h1>
-        <div
-          style={{
-            margin: "3em",
-            marginTop: "0",
-            border: "4px solid black",
-            width: "30em",
-            display: "flex",
-            flexDirection: "column"
-          }}
-        >
+        <div className={classes.form}>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
             <Input type="email" name="email" onChange={this.handleOnChange} />
@@ -74,7 +83,6 @@ class LoginForm extends React.Component {
         </div>
         <Button
           variant="extendedFab"
-          aria-label="Delete"
           className={classes.button}
           onClick={this.handleLoginUser}
         >
