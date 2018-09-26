@@ -3,7 +3,6 @@
 
   var ArtworkSchema = new Schema({
     userId: String,
-    artworkId: String,
     title:  String,
     artist: String,
     date: { type: Date, default: Date.now },
