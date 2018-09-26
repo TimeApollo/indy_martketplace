@@ -13,11 +13,19 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     display: "flex",
     justifyContent: "center",
-    marginLeft: "auto", 
+    marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "-1.5em",
-    width: "7em"
-
+    marginTop: "-2em",
+    background: "#1fc8db 51%",
+    fontWeight: "bold",
+    fontSize: "1.2em",
+    color: "white",
+    paddingLeft: "1em",
+    paddingRight: "1em",
+    borderRadius: ".5em",
+    border: "white",
+    paddingTop: ".3em",
+    paddingBottom: ".3em"
   },
   extendedIcon: {
     marginRight: theme.spacing.unit
@@ -26,17 +34,18 @@ const styles = theme => ({
     marginBottom: "0px",
     fontFamily: "sans-serif",
     textAlign: "center",
-    marginTop: "3em"
+    marginTop: "1em"
   },
   form: {
     margin: "3em",
     marginTop: "0",
     border: "4px solid black",
     width: "30em",
+    // height: "15em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginLeft: "auto", 
+    marginLeft: "auto",
     marginRight: "auto"
   }
 });
@@ -64,15 +73,16 @@ class LoginForm extends React.Component {
 
     return (
       <div>
-        <h1 className={classes.header}>
-          LOGIN
-        </h1>
+        <h1 className={classes.header}>LOGIN</h1>
         <div className={classes.form}>
-          <FormControl style={{ margin: "1em" }}>
+          <FormControl required="true" style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
-            <Input type="email" name="email" onChange={this.handleOnChange} />
+            <Input 
+            type="email" 
+            name="email" 
+            onChange={this.handleOnChange} />
           </FormControl>
-          <FormControl style={{ margin: "1em" }}>
+          <FormControl required="true" style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
             <Input
               type="password"
@@ -80,14 +90,23 @@ class LoginForm extends React.Component {
               onChange={this.handleOnChange}
             />
           </FormControl>
-        </div>
-        <Button
+          <br/>
+          <br/>
+          <button
           variant="extendedFab"
           className={classes.button}
           onClick={this.handleLoginUser}
         >
           Login
-        </Button>
+        </button>
+        </div>
+        {/* <Button
+          variant="extendedFab"
+          className={classes.button}
+          onClick={this.handleLoginUser}
+        >
+          Login
+        </Button> */}
       </div>
     );
   }
