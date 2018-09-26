@@ -1,12 +1,21 @@
 const express = require('express')
 const stream = require('stream')
 const s3 = require('../config/s3.config.js');
-let upload = require('../config/multer.config.js');
-
+const upload = require('../config/multer.config.js');
+const {Artwork} = require('../models')
 const artwork = express.Router()
 
- 
+
 doUpload = (req, res) => {
+	console.log(req)
+	const artpiece = new Artwork({
+		userId: req.body.userId,
+		title: req.file.fieldName,
+		artist: req.body.artist,
+		forSale: req.body.forSale,
+		medium: req.body.medium,
+		styles: req.body.styles
+	 })
 	const s3Client = s3.s3Client;
 	const params = s3.uploadParams;
 	
