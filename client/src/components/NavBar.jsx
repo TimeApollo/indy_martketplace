@@ -47,7 +47,7 @@ class CenteredTabs extends React.Component {
   state = {
     value: 0,
     lastValue: null,
-    loggedIn: false,
+    loggedIn: true,
     loginOpened: false,
     registerOpen: false
   };

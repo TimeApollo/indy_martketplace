@@ -6,7 +6,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-import image from "../../images/penny.jpg";
+import image from "../../images/penny.png";
 
 const styles = theme => ({
   root: {
@@ -131,6 +131,7 @@ class Gallery extends Component {
             <GridListTile key={tile.img}>
               <img src={tile.img} alt={tile.title} />
               <GridListTileBar
+                style={{height: "2.5em"}}
                 title={tile.title}
                 subtitle={<span>by: {tile.author}</span>}
                 actionIcon={
