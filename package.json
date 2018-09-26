@@ -22,12 +22,14 @@
   },
   "homepage": "https://github.com/TimeApollo/indy_martketplace#readme",
   "dependencies": {
+    "aws-sdk": "^2.322.0",
     "cors": "^2.8.4",
     "dotenv-safe": "^6.0.0",
     "express": "^4.16.3",
     "mongod": "^2.0.0",
     "mongoose": "^5.2.14",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "multer": "^1.4.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
