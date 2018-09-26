@@ -24,6 +24,7 @@ app.use('/api/messages', controllers.messages);
 app.use('/api/auth', controllers.auth);
 app.use('/api/user', controllers.user);
 
+
 const URI = 'mongodb://localhost:27017/art'
 // const URI = process.env.MONGODB_URI
 // console.log(URI)
