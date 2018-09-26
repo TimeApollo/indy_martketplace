@@ -1,11 +1,11 @@
 import { push } from "connected-react-router";
 
+
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const IS_LOGGING_IN = "IS_LOGGING_IN";
-export const GET_ONE_USER = "GET_USER";
 
 export const registerUser = ({
   firstName,
@@ -111,11 +111,4 @@ export const isLoggingIn = () => {
   };
 };
 
-export const getOneUser = () => dispatch => {
-  fetch("/api/user")
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.user);
-      dispatch({ type: GET_ONE_USER, convos: data.user });
-    });
-};
+
