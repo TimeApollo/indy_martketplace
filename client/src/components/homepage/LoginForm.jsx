@@ -7,7 +7,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import NavigationIcon from "@material-ui/icons/Navigation";
 
 const styles = theme => ({
   button: {
