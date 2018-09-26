@@ -2,9 +2,11 @@
   var Schema = mongoose.Schema;
 
   var ArtworkSchema = new Schema({
+    userId: String,
     title:  String,
     artist: String,
     date: { type: Date, default: Date.now },
+    forSale: Boolean,
     medium: String,
     styles: [String],
   });

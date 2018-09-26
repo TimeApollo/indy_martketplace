@@ -1,8 +1,9 @@
 import { push } from "connected-react-router";
+
 export const GET_ONE_USER = "GET_ONE_USER";
 
-export const getOneUser = () => dispatch => {
-  fetch("/api/user")
+export const getOneUser = (userId) => dispatch => {
+  fetch(`/api/user/${userId}`)
     .then(res => res.json())
     .then(data => {
       console.log(data.user);

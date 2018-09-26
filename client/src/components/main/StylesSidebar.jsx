@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -17,8 +18,10 @@ const styles = theme => ({
   }
 });
 
-function StylesSidebar(props) {
-  const { classes } = props;
+class StylesSidebar extends Component {
+  render() {
+
+  const { classes } = this.props;
 
   return (
     <div className={classes.root}>
@@ -31,19 +34,7 @@ function StylesSidebar(props) {
         <br />
         <Typography component="p">
         <List>
-          <li>Acrylic</li>
-          <li>Oil</li>
-          <li>Watercolor</li>
-          <li>Spray Paint</li>
-          <li>Abstract</li>
-          <li>Cubism</li>
-          <li>Geometric</li>
-          <li>Landscape</li>
-          <li>Nature</li>
-          <li>Portrait</li>
-          <li>Realism</li>
-          <li>Surrealism</li>
-          <li>Visionary</li>
+          {this.props.user.styles}
       </List>
       </Typography>
       <br/>
@@ -52,10 +43,17 @@ function StylesSidebar(props) {
       </Paper>
     </div>
   );
+  }
 }
 
 StylesSidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+const mapStateToProps = ({ auth }) => ({
+  user: auth.user
+});
 
-export default withStyles(styles)(StylesSidebar);
+export default connect(
+  mapStateToProps,
+  undefined
+)(withStyles(styles)(StylesSidebar));
