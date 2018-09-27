@@ -58,6 +58,18 @@ class LoginForm extends React.Component {
   handleOnChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
+  handleLoginUserEnter = event => {
+    if (event.target.key === "Enter") {
+      let loginData = {
+        email: this.state.email,
+        password: this.state.password
+      };
+
+      this.props.loginUser(loginData);
+    }
+  };
+
   handleLoginUser = event => {
     let loginData = {
       email: this.state.email,
@@ -77,35 +89,31 @@ class LoginForm extends React.Component {
           <FormControl required={true} style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
             <Input 
-            type="email" 
-            name="email" 
-            onChange={this.handleOnChange} />
+              type="email" 
+              name="email" 
+              onChange={this.handleOnChange}
+              onKeyPress={this.handleLoginUserEnter}
+            />
           </FormControl>
-          <FormControl required={true}style={{ margin: "1em" }}>
+          <FormControl required={true} style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
             <Input
               type="password"
               name="password"
               onChange={this.handleOnChange}
+              onKeyPress={this.handleLoginUserEnter}
             />
           </FormControl>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <button
-          variant="extendedFab"
-          className={classes.button}
-          onClick={this.handleLoginUser}
-        >
-          Login
-        </button>
+            variant="extendedFab"
+            className={classes.button}
+            onClick={this.handleLoginUser}
+          >
+            Login
+          </button>
         </div>
-        {/* <Button
-          variant="extendedFab"
-          className={classes.button}
-          onClick={this.handleLoginUser}
-        >
-          Login
-        </Button> */}
       </div>
     );
   }
