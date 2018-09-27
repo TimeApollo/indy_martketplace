@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
         case GET_MESSAGES:
             return {
                 ...state,
-                convos: action.convos
+                convos: action.payload
             }
         case MSG_POPUP:
             return {

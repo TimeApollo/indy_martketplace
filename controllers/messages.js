@@ -55,7 +55,7 @@ router.get("/:id", (req, res) => {
     if (err) {
       res.json(err);
     } else {
-      Conversations.find({ emails: { $in: user.email } }, function(err, convo) {
+      Conversations.find({ emails: { $in: user.email }}, null, {sort: {"messages.timestamp": -1}}, function(err, convo) {
         if (err) {
           res.json(err);
         } else if (convo) {

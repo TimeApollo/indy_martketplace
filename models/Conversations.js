@@ -7,7 +7,7 @@ var ConvoSchema = new mongoose.Schema({
         email: String, 
         timestamp: { 
             type: Date, 
-            default: Date.now 
+            default: Date.now
         }
     }]
 });
