@@ -14,7 +14,7 @@ const styles = theme => ({
   form: {
     marginBottom: "0",
     marginTop: "3em",
-    width: "50em",
+    width: "70em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -48,7 +48,7 @@ class HomePage extends Component {
         <SingleGallery />
         <Paper className={classes.form}>
           <Typography className={classes.type}>
-            INDY mARTketplace aims to bring together local artists and art
+            INDY mARTketplace aims to bring together artists and art
             lovers in the Indianapolis community.
           </Typography>
           <br/>

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import StylesSidebar from "./StylesSidebar";
-import AboutSidebar from "./AboutSidebar";
+import ProfileStylesSidebar from "./ProfileStylesSidebar";
+import ProfileAboutSidebar from "./ProfileAboutSidebar";
 import Gallery from "./Gallery";
 import Paper from "@material-ui/core/Paper";
 
@@ -44,42 +44,40 @@ const styles = {
   }
 };
 
-class ArtistProfilePage extends Component {
+class ProfilePage extends Component {
   render() {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
-        <div className={classes.row}>
-          <div className={classes.sidebar}>
-            <img
-              src={require("../../images/penny.png")}
-              alt="penny"
-              className={classes.bigAvatar}
-            />
-            <AboutSidebar />
-            <StylesSidebar />
-          </div>
-          <div className={classes.gallery}>
-            <Paper elevation={15} className={classes.paper}>
-              FOR SALE
-            </Paper>
-            <Gallery className={classes.gallery} />
-            <br />
-            <br />
-            <Paper elevation={15} className={classes.paper}>
-              SOLD
-            </Paper>
-            <Gallery className={classes.gallery} />
-          </div>
+      <div className={classes.row}>
+        <div className={classes.sidebar}>
+          <img
+            src={require("../../images/penny.png")}
+            alt="penny"
+            className={classes.bigAvatar}
+          />
+          <ProfileAboutSidebar />
+          <ProfileStylesSidebar />
         </div>
-      </React.Fragment>
+        <div className={classes.gallery}>
+          <Paper elevation={15} className={classes.paper}>
+            FOR SALE
+          </Paper>
+          <Gallery className={classes.gallery} />
+          <br />
+          <br />
+          <Paper elevation={15} className={classes.paper}>
+            SOLD
+          </Paper>
+          <Gallery className={classes.gallery} />
+        </div>
+      </div>
     );
   }
 }
 
-ArtistProfilePage.propTypes = {
+ProfilePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ArtistProfilePage);
+export default withStyles(styles)(ProfilePage);

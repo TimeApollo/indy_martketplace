@@ -86,7 +86,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         auth: {
           ...state.auth,
-          token: action.payload.user.token
+          token: action.payload.token
         },
         login: {
           ...state.login,
@@ -94,14 +94,14 @@ const authReducer = (state = initialState, action) => {
           isLoggingIn: false
         },
         user: {
-          userId: action.payload.user._id,
-          firstName: action.payload.user.firstName,
-          lastName: action.payload.user.lastName,
-          email: action.payload.user.email,
-          email_lower: action.payload.user.email_lower,
-          about: action.payload.user.about,
-          mediums: action.payload.user.mediums,
-          styles: action.payload.user.styles
+          userId: action.payload._id,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          email: action.payload.email,
+          email_lower: action.payload.email_lower,
+          about: action.payload.about,
+          mediums: action.payload.mediums,
+          styles: action.payload.styles
         }
       };
     case IS_LOGGING_IN:
