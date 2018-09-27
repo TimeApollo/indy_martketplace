@@ -10,7 +10,7 @@ user.get('/:id', (req, res) => {
       } else {
         user = {
           ...user._doc,
-          password: ""
+          // password: ""
         };
         res.json(user)
       }

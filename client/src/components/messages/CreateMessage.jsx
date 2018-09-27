@@ -78,10 +78,12 @@ class TextFields extends React.Component {
 
   handleMessagePost = event => {
     let messageInfo = {
-      senderEmail: this.state.userEmail,
-      email: this.state.email,
+      senderEmail: this.props.userEmail,
+      email: this.state.email.toLowerCase(),
       message: this.state.message
     };
+
+    console.log("message info", messageInfo)
 
     this.props.postMessage(messageInfo);
   } 
@@ -144,8 +146,8 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ auth, messages }) => ({
-  userEmail: auth.user.email
+const mapStateToProps = ({ auth }) => ({
+  userEmail: auth.user.email_lower
 })
 
 const mapDispatchToProps = dispatch => {

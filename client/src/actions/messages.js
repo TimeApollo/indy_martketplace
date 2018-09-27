@@ -4,6 +4,7 @@ export const MSG_POPUP = 'MSG_POPUP';
 export const MSG_CLOSE = 'MSG_CLOSE';
 
 export const getMessages = ({userId}) => dispatch => {
+    console.log(userId)
     fetch('/api/messages/' + userId)
         .then( res => res.json() )
         .then( data => {
@@ -19,14 +20,15 @@ export const postMessage = ({senderEmail, email, message}) => dispatch => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            emails: ["aj@gm", email],
+            emails: [senderEmail, email],
             message: message,
-            email: "aj@gm"
+            email: senderEmail
         })
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        console.log(res)
+        dispatch({type: POST_MESSAGE, payload: res})
       })
       .catch(function(err) {
           console.log("something went wrong", err)

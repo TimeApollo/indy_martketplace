@@ -1,14 +1,20 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import classNames from "classnames";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import PropTypes from "prop-types";
+import Radio from "@material-ui/core/Radio";
+import React from "react";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   root: {
@@ -24,134 +30,256 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   },
+  mediumsButton: {
+    display: "block",
+    marginTop: theme.spacing.unit * 2
+  },
   input: {
     display: "none"
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+    minWidth: 120
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+  dense: {
+    marginTop: 19
   }
 });
 
-const ranges = [
-  {
-    value: "0-20",
-    label: "0 to 20"
-  },
-  {
-    value: "21-50",
-    label: "21 to 50"
-  },
-  {
-    value: "51-100",
-    label: "51 to 100"
-  }
+const photograpyStyleArr = [
+  "portrait",
+  "wedding",
+  "abstract",
+  "landscape",
+  "candid/street",
+  "wildlife",
+  "nature",
+  "still life",
+  "architechural",
+  "astro",
+  "macro",
+  "sports"
+];
+const paintingStyleArr = [
+  "abstract",
+  "realism",
+  "pop",
+  "surrealism",
+  "visionary",
+  "modernism",
+  "impressionism",
+  "expressionism",
+  "cubism",
+  "oil",
+  "acryilic",
+  "fluid",
+  "watercolor",
+  "pastel",
+  "ink",
+  "spray paint",
+  "digital",
+  "landscape",
+  "nature",
+  "wildlife",
+  "still life",
+  "resin",
+  "geometric",
+  "pet portrait"
+];
+const furnitureDesignStyleArr = [
+  "modern",
+  "minimalism",
+  "art deco",
+  "contemporary",
+  "rustic",
+  "ecletic",
+  "industrial",
+  "country",
+  "upcycled",
+  "outdoor",
+  "wood",
+  "metal",
+  "resin",
+  "victorian",
+  "futurism"
 ];
 
 class UploadForm extends React.Component {
   state = {
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false
+    open: false,
+    medium: "",
+    forSale: "",
+    uploadFile: {},
+    styles: [],
+    title: ""
   };
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
+  handleChange = name => event => {
+    console.log(this.state.styles)
+    this.setState({ styles: [...this.state.styles, event.target.value] });
   };
-
-  handleClickShowPassword = () => {
-    this.setState(state => ({ showPassword: !state.showPassword }));
+  handleMedium = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
-
+  handleOpen = () => {
+    this.setState({ open: !this.state.open });
+  };
+  handleForSale = event => {
+    this.setState({ forSale: event.target.value });
+  };
+  handleTitle = event => {
+    this.setState({ [event.target.name]: event.target.value})
+  }
+  onFileSelect = event => {
+    console.log(event.target.files[0]);
+    this.setState({ uploadFile: event.target.files[0] });
+  };
+  onSubmit = () => {
+    let uploadFormData = {
+      medium: this.state.medium,
+      forSale: this.state.forSale,
+      uploadFile: this.state.uploadFile,
+      styles: this.state.styles,
+      title: this.state.title
+    }
+    this.props.submitUpload(uploadFormData)
+    console.log(uploadFormData)
+  }
   render() {
     const { classes } = this.props;
-
     return (
       <div className={classes.root}>
-        <TextField
-          id="outlined-simple-start-adornment"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="With outlined TextField"
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>
-          }}
-        />
-        <TextField
-          select
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="With Select"
-          value={this.state.weightRange}
-          onChange={this.handleChange("weightRange")}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>
-          }}
-        >
-          {ranges.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="outlined-adornment-amount"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="Amount"
-          value={this.state.amount}
-          onChange={this.handleChange("amount")}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>
-          }}
-        />
-        <TextField
-          id="outlined-adornment-weight"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="Weight"
-          value={this.state.weight}
-          onChange={this.handleChange("weight")}
-          helperText="Weight"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">Kg</InputAdornment>
-          }}
-        />
-        <TextField
-          id="outlined-adornment-password"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          type={this.state.showPassword ? "text" : "password"}
-          label="Password"
-          value={this.state.password}
-          onChange={this.handleChange("password")}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
-                >
-                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-        />
-        <input
-          accept="image/*"
-          className={classes.input}
-          id="contained-button-file"
-          multiple
-          type="file"
-        />
-        <label htmlFor="contained-button-file">
-          <Button
-            variant="contained"
-            component="span"
-            className={classes.button}
-          >
-            Upload
-          </Button>
-        </label>
+          <input
+            accept="*"
+            className={classes.input}
+            id="contained-button-file"
+            multiple
+            type="file"
+            onChange={this.onFileSelect}
+          />
+          <label htmlFor="contained-button-file">
+            <Button
+              variant="contained"
+              component="span"
+              className={classes.button}
+            >
+              Select File to Upload
+            </Button>
+          </label>
+          <React.Fragment>
+            {this.state.uploadFile != {} ? (
+              <Typography variant="subheading" gutterBottom>
+                {this.state.uploadFile.name}
+              </Typography>
+            ) : null}
+          </React.Fragment>
+          <TextField
+            id="standard-dense"
+            label="Title"
+            name="title"
+            className={classNames(classes.textField, classes.dense)}
+            margin="dense"
+            onChange={this.handleTitle}
+          />
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="medium-simple"> Medium </InputLabel>
+            <Select
+              value={this.state.medium}
+              onChange={this.handleMedium}
+              inputProps={{
+                name: "medium",
+                id: "medium-simple"
+              }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={"Photography"}>Photography</MenuItem>
+              <MenuItem value={"Painting"}>Painting</MenuItem>
+              <MenuItem value={"FurnatureDesign"}>Furnature Design</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Select Styles</FormLabel>
+            {this.state.medium === "Photography"
+              ? photograpyStyleArr.map(style => {
+                  return (
+                    <React.Fragment key={style}>
+                      <FormGroup name="styles">
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              onChange={this.handleChange({ style })}
+                              value={style}
+                            />
+                          }
+                          label={style}
+                        />
+                      </FormGroup>
+                    </React.Fragment>
+                  );
+                })
+              : null}
+            {this.state.medium === "Painting"
+              ? paintingStyleArr.map(style => {
+                  return (
+                    <React.Fragment key={style}>
+                      <FormGroup name="styles">
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              onChange={this.handleChange({ style })}
+                              value={style}
+                            />
+                          }
+                          label={style}
+                        />
+                      </FormGroup>
+                    </React.Fragment>
+                  );
+                })
+              : null}
+            {this.state.medium === "FurnatureDesign"
+              ? furnitureDesignStyleArr.map(style => {
+                  return (
+                    <React.Fragment key={style}>
+                      <FormGroup name="styles">
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              onChange={this.handleChange({ style })}
+                              value={style}
+                            />
+                          }
+                          label={style}
+                        />
+                      </FormGroup>
+                    </React.Fragment>
+                  );
+                })
+              : null}
+          </FormControl>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">For Sale?</FormLabel>
+            <RadioGroup
+              aria-label="For Sale?"
+              name="forSale"
+              className={classes.group}
+              value={this.state.forSale}
+              onChange={this.handleForSale}
+            >
+              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+              <FormControlLabel value="no" control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormControl>
+        <Button variant="contained" component="span" className={classes.button} onClick={this.onSubmit}>
+          Submit Upload
+        </Button>
       </div>
     );
   }
@@ -160,5 +288,13 @@ class UploadForm extends React.Component {
 UploadForm.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    submitUpload: uploadFormData => {
+      dispatch(submitUpload(uploadFormData))
+    }
+  }
+}
 
 export default withStyles(styles)(UploadForm);
