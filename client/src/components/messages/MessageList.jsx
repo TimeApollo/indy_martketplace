@@ -71,7 +71,8 @@ class MessageList extends React.Component {
                 </IconButton>
             </Paper>
             <div className="convo-wrap">
-                {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation sender={convo.emails[1]}
+                {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation
+                        sender={convo.emails[1]}
                         message={convo.messages[0].message}
                         timestamp={convo.messages[0].timestamp}/> ) : null } 
             </div>
