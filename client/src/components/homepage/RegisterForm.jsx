@@ -67,18 +67,19 @@ class RegisterForm extends React.Component {
     errorfirstName: false,
     errorlastName: false,
     errorpassword: false,
+    errorpasswordLength: false,
     errorpasswordMatch: false,
     erroremail: false,
     isPasswordMatch: true
   };
 
   handleChange = event => {
-    let errorname = ''
     if (!this.state.isPasswordMatch){
-      errorname = 'isPasswordMatch'
-      this.setState({ [event.target.name]: event.target.value , submit: true , [errorname]: true });
-    }else{
-      errorname = `error${event.target.name}`
+      this.setState({ [event.target.name]: event.target.value , submit: true , isPasswordMatch: true });
+    } else if ( this.state.errorpasswordLength ) {
+      this.setState({ [event.target.name]: event.target.value , submit: true , errorpasswordLength: false })
+    } else {
+      let errorname = `error${event.target.name}`
       this.setState({ [event.target.name]: event.target.value , submit: true , [errorname]: false });
     }
   };
@@ -95,6 +96,7 @@ class RegisterForm extends React.Component {
     else if ( !this.state.lastName ){ this.setState({ submit: false , errorlastName: true })}
     else if ( !this.state.email ){ this.setState({ submit: false , erroremail: true })}
     else if ( !this.state.password ){ this.setState({ submit: false , errorpassword: true })}
+    else if ( this.state.password.length < 5 ){ this.setState({ submit: false , errorpasswordLength: true })}
     else if ( !this.state.passwordMatch ){ this.setState({ submit: false , errorpasswordMatch: true })}
     else if ( this.state.password !== this.state.passwordMatch ){ 
       this.setState({ submit: false , isPasswordMatch: false })
@@ -157,6 +159,7 @@ class RegisterForm extends React.Component {
             />
           </FormControl>
           { this.state.errorpassword ? <div className={classes.error}>Please Enter Password</div> : null }
+          { this.state.errorpasswordLength ? <div className={classes.error}>Password Must be Minimum of 5 Characters</div> : null }
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>Verify Password</InputLabel>
             <Input
