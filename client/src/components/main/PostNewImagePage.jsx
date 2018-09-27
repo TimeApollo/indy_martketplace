@@ -1,14 +1,15 @@
 import React from "react";
-import classNames from "classnames";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   root: {
@@ -24,8 +25,16 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   },
+  mediumsButton: {
+    display: 'block',
+    marginTop: theme.spacing.unit * 2,
+  },
   input: {
     display: "none"
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+    minWidth: 120,
   }
 });
 
@@ -46,112 +55,86 @@ const ranges = [
 
 class UploadForm extends React.Component {
   state = {
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false
+    abstract: false,
+    portrait: false,
+    contemporary: false,
+    medium: '',
+    open: false,
   };
 
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.checked });
   };
-
-  handleClickShowPassword = () => {
-    this.setState(state => ({ showPassword: !state.showPassword }));
-  };
+  handleMedium = event => {
+    this.setState({[event.target.name]: event.target.value})
+  }
+  handleOpen = () => {
+    this.setState({open: !this.state.open})
+  }
 
   render() {
     const { classes } = this.props;
-
+    const { abstract, portrait,  contemporary } = this.state
     return (
       <div className={classes.root}>
-        <TextField
-          id="outlined-simple-start-adornment"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="With outlined TextField"
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>
-          }}
-        />
-        <TextField
-          select
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="With Select"
-          value={this.state.weightRange}
-          onChange={this.handleChange("weightRange")}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>
-          }}
-        >
-          {ranges.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          id="outlined-adornment-amount"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="Amount"
-          value={this.state.amount}
-          onChange={this.handleChange("amount")}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>
-          }}
-        />
-        <TextField
-          id="outlined-adornment-weight"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          label="Weight"
-          value={this.state.weight}
-          onChange={this.handleChange("weight")}
-          helperText="Weight"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">Kg</InputAdornment>
-          }}
-        />
-        <TextField
-          id="outlined-adornment-password"
-          className={classNames(classes.margin, classes.textField)}
-          variant="outlined"
-          type={this.state.showPassword ? "text" : "password"}
-          label="Password"
-          value={this.state.password}
-          onChange={this.handleChange("password")}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="Toggle password visibility"
-                  onClick={this.handleClickShowPassword}
-                >
-                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-        />
-        <input
-          accept="image/*"
-          className={classes.input}
-          id="contained-button-file"
-          multiple
-          type="file"
-        />
-        <label htmlFor="contained-button-file">
-          <Button
-            variant="contained"
-            component="span"
-            className={classes.button}
+      <form>
+            <input
+            accept="image/*"
+            className={classes.input}
+            id="contained-button-file"
+            multiple
+            type="file"
+            />
+            <label htmlFor="contained-button-file">
+            <Button variant="contained" component="span" className={classes.button}>
+              Select File to Upload
+            </Button>
+            </label>
+        <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="medium-simple"> Medium </InputLabel>
+        <Select
+            value={this.state.medium}
+            onChange={this.handleMedium}
+            inputProps={{
+              name: 'medium',
+              id: 'medium-simple',
+            }}
           >
-            Upload
-          </Button>
-        </label>
+          <MenuItem value="">
+              <em>None</em>
+          </MenuItem>
+          <MenuItem value={'Painting'}>Painting</MenuItem>
+          <MenuItem value={'Sculpture'}>Sculpture</MenuItem>
+          <MenuItem value={'Photograph'}>Photograph</MenuItem>
+        </Select>
+      </FormControl>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Select Styles</FormLabel>
+          <FormGroup name="styles">
+            <FormControlLabel
+                control={
+                  <Checkbox checked={abstract} onChange={this.handleChange('abstract')} value="abstract" />
+                }
+                label="abstract"
+                />
+            <FormControlLabel
+              control={
+                <Checkbox checked={portrait} onChange={this.handleChange('portrait')} value="portrait" />
+              }
+              label="portrait"
+              />
+            <FormControlLabel
+              control={
+                <Checkbox checked={contemporary} onChange={this.handleChange('contemporary')} value="contemporary" />
+              }
+              label="contemporary"
+              />
+        </FormGroup>      
+      </FormControl>
+      </form>
+      <Button variant="contained" component="span" className={classes.button}>
+              Submit Upload
+      </Button>
       </div>
     );
   }
