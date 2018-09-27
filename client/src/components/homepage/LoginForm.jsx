@@ -75,14 +75,14 @@ class LoginForm extends React.Component {
       <div>
         <h1 className={classes.header}>LOGIN</h1>
         <div className={classes.form}>
-          <FormControl required="true" style={{ margin: "1em" }}>
+          <FormControl required={true} style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
             <Input 
             type="email" 
             name="email" 
             onChange={this.handleOnChange} />
           </FormControl>
-          <FormControl required="true" style={{ margin: "1em" }}>
+          <FormControl required={true}style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
             <Input
               type="password"

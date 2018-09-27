@@ -50,10 +50,12 @@ class HomePage extends Component {
           <Typography className={classes.type}>
             INDY mARTketplace aims to bring together local artists and art
             lovers in the Indianapolis community.
-            <br/>
-            <br/>
-            <Divider className={classes.divider} />
-            <br/>
+          </Typography>
+          <br/>
+          <br/>
+          <Divider className={classes.divider} />
+          <br/>
+          <Typography className={classes.type}>
             BUY ART.             SELL ART.            LOVE ART.
           </Typography>
         </Paper>

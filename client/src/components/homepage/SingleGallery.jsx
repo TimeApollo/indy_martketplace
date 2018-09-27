@@ -36,37 +36,44 @@ const tileData = [
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 1
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 2
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 3
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 4
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 5
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 6
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 7
   }
 ];
 
@@ -78,7 +85,7 @@ class SingleGallery extends React.Component {
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={5}>
           {tileData.map(tile => (
-            <GridListTile key={tile.img}>
+            <GridListTile key={tile.id}>
               <img src={tile.img} alt={tile.title} />
               <GridListTileBar
                 title={tile.title}
