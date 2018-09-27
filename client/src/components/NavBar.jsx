@@ -7,7 +7,6 @@ import Tab from "@material-ui/core/Tab";
 import Slide from "@material-ui/core/Slide";
 import { Link } from "react-router-dom";
 import Modal from "@material-ui/core/Modal";
-import Typography from "@material-ui/core/Typography";
 import RegisterForm from "./homepage/RegisterForm.jsx";
 import LoginForm from "./homepage/LoginForm.jsx";
 
@@ -55,6 +54,11 @@ class CenteredTabs extends React.Component {
   handleChange = (event, value) => {
     this.setState({ value });
   };
+  handleLogin = () => {
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    })
+  }
   openLogin = () => {
     this.setState({
       lastValue: this.state.value,

@@ -30,7 +30,7 @@ export const registerUser = ({
     .then(response => response.json())
     .then(registerResponse => {
       console.log(registerResponse);
-      if (registerResponse.hasOwnProperty("errors")) {
+      if (registerResponse.hasOwnProperty("errmsg")) {
         dispatch(registerFail());
       } else {
         dispatch(
