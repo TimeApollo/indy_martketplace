@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 //Material-ui component imports
@@ -24,12 +24,36 @@ const styles = {
 };
 
 class MessageList extends React.Component {
+    handleMsgList = event => {
+        console.log("hello")
+        let userMsgInfo = {
+            userId: "5ba936e0d7b7ba9ee41cfb66"
+        }
+
+        this.props.getMessages(userMsgInfo)
+    }
+
     componentDidMount() {
-        this.props.getMessages();
+        this.handleMsgList()
+    }
+
+    sortMessages() {
+        this.props.convoList.length && this.props.convoList[0].messages.sort(
+            (a,b) => {
+                const aDate = new Date(a.timestamp);
+                const bDate = new Date(b.timestamp);
+
+                if(aDate > bDate) return -1;
+                if(aDate < bDate) return 1;
+                return 0
+            }
+        );
     }
 
     render() {
         const { classes } = this.props;
+
+        this.sortMessages();
       
         return (
           <div id="convo-page" className={classes.root}>
@@ -47,7 +71,10 @@ class MessageList extends React.Component {
                 </IconButton>
             </Paper>
             <div className="convo-wrap">
-                {this.props.convoList.length ? this.props.convoList.map( convo => <SingleConversation sender={convo.senderId} message={convo.newMsg} timestamp={convo.newMsgTime}/> ) : null }
+                {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation
+                        sender={convo.emails[1]}
+                        message={convo.messages[0].message}
+                        timestamp={convo.messages[0].timestamp}/> ) : null } 
             </div>
           </div>
         );
@@ -65,7 +92,7 @@ const mapStateToProps = ({messages}) => ({
 
 const mapDispatchToProps = ( dispatch ) => {
     return {
-      getMessages: () => dispatch(getMessages()),
+      getMessages: userMsgInfo => dispatch(getMessages(userMsgInfo)),
       createMsgPopup: () => dispatch(createMsgPopup())
     }
 }
