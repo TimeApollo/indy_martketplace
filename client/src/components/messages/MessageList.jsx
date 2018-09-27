@@ -37,23 +37,8 @@ class MessageList extends React.Component {
         this.handleMsgList()
     }
 
-    sortMessages() {
-        this.props.convoList.length && this.props.convoList[0].messages.sort(
-            (a,b) => {
-                const aDate = new Date(a.timestamp);
-                const bDate = new Date(b.timestamp);
-
-                if(aDate > bDate) return -1;
-                if(aDate < bDate) return 1;
-                return 0
-            }
-        );
-    }
-
     render() {
         const { classes } = this.props;
-
-        this.sortMessages();
       
         return (
           <div id="convo-page" className={classes.root}>
@@ -86,7 +71,7 @@ MessageList.propTypes = {
 };
 
 const mapStateToProps = ({messages , auth}) => ({
-    convoList: messages.convos,
+    convoList: messages.allConvos,
     msgPopUp: messages.msgPopUp,
     userId: auth.user.userId
 });
