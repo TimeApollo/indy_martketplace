@@ -26,6 +26,7 @@ const initialState = {
     firstName: "",
     lastName: "",
     email: "",
+    email_lower: "",
     about: "",
     mediums: [],
     styles: [],
