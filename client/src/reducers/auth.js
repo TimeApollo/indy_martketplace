@@ -98,7 +98,7 @@ const authReducer = (state = initialState, action) => {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           email: action.payload.email,
-          email_lower: action.payload.email.toLowerCase(),
+          email_lower: action.payload.email_lower,
           about: action.payload.about,
           mediums: action.payload.mediums,
           styles: action.payload.styles
