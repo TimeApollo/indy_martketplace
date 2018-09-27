@@ -70,12 +70,21 @@ class TextFields extends React.Component {
     message: ''
   };
 
-  handleChange = (email, message) => event => {
+  handleChange = event => {
     this.setState({
-      [email]: event.target.value,
-      [message]: event.target.value
+      [event.target.name]: event.target.value
     });
   };
+
+  handleMessagePost = event => {
+    let messageInfo = {
+      senderEmail: this.state.userEmail,
+      email: this.state.email,
+      message: this.state.message
+    };
+
+    this.props.postMessage(messageInfo);
+  } 
 
   render() {
     const { classes } = this.props;
@@ -97,20 +106,22 @@ class TextFields extends React.Component {
             <form id="msg-info-wrap" className={classes.container} noValidate autoComplete="off">
               <div>To:</div>
               <TextField
+                name="email"
                 id="standard-name"
                 label="Email"
                 className={classes.textField}
                 value={this.state.email}
-                onChange={this.handleChange('email')}
+                onChange={this.handleChange}
                 margin="normal"
               />
               <TextField
+                name="message"
                 id="standard-multiline-static"
                 label="Message"
                 multiline
                 rows="20"
                 value={this.state.message}
-                onChange={this.handleChange('message')}
+                onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
               />
@@ -120,7 +131,7 @@ class TextFields extends React.Component {
                 color="primary"
                 disableRipple
                 className={classNames(classes.margin, classes.bootstrapRoot)}
-                onClick={() => {this.props.postMessage(this.state.email, this.state.message)}}>
+                onClick={this.handleMessagePost}>
                 Send
               </Button>
             </form>
@@ -133,11 +144,17 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapStateToProps = ({ auth, messages }) => ({
+  userEmail: auth.user.email
+})
+
+const mapDispatchToProps = dispatch => {
     return {
-      postMessage: (recepient, message) => dispatch(postMessage(recepient, message)),
+      postMessage: messageInfo => {
+        dispatch(postMessage(messageInfo))
+      },
       exitMsgPopup: () => dispatch(exitMsgPopup())
     }
 }
 
-export default connect(undefined, mapDispatchToProps)(withStyles(styles)(TextFields));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TextFields));

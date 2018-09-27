@@ -16,6 +16,9 @@ const styles = theme => ({
 
 class SingleConversation extends React.Component {
     render() {
+        console.log('sender: ', this.props.sender, 
+                    '\nmessage: ', this.props.message,
+                    '\ntimestamp: ', this.props.timestamp)
         const { classes } = this.props;
         return (
             <div>
@@ -31,7 +34,9 @@ class SingleConversation extends React.Component {
                         {this.props.message}
                         </div>
                     </div>
-                    <div className="timestamp">{this.props.timestamp}</div>
+                    <div className="timestamp">
+                        {this.props.timestamp}
+                    </div>
                 </Paper>
             </div>
         );
