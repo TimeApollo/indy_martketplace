@@ -4,7 +4,6 @@ import { loginUser } from "../../actions/auth";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
