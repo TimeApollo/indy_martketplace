@@ -27,7 +27,7 @@ class MessageList extends React.Component {
     handleMsgList = event => {
         console.log("hello")
         let userMsgInfo = {
-            userId: "5ba936e0d7b7ba9ee41cfb66"
+            userId: this.props.userId
         }
 
         this.props.getMessages(userMsgInfo)
@@ -85,9 +85,10 @@ MessageList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({messages}) => ({
+const mapStateToProps = ({messages , auth}) => ({
     convoList: messages.convos,
-    msgPopUp: messages.msgPopUp
+    msgPopUp: messages.msgPopUp,
+    userId: auth.user.userId
 });
 
 const mapDispatchToProps = ( dispatch ) => {
