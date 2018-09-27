@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 //Material-ui component imports
@@ -24,8 +24,17 @@ const styles = {
 };
 
 class MessageList extends React.Component {
+    handleMsgList = event => {
+        console.log("hello")
+        let userMsgInfo = {
+            userId: this.props.userId
+        }
+
+        this.props.getMessages(userMsgInfo)
+    }
+
     componentDidMount() {
-        this.props.getMessages();
+        this.handleMsgList()
     }
 
     render() {
@@ -47,7 +56,10 @@ class MessageList extends React.Component {
                 </IconButton>
             </Paper>
             <div className="convo-wrap">
-                {this.props.convoList.length ? this.props.convoList.map( convo => <SingleConversation sender={convo.senderId} message={convo.newMsg} timestamp={convo.newMsgTime}/> ) : null }
+                {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation
+                        sender={convo.emails[1]}
+                        message={convo.messages[0].message}
+                        timestamp={convo.messages[0].timestamp}/> ) : <div className="filler-msg"><p>To get started, send a message.</p></div> } 
             </div>
           </div>
         );
@@ -58,14 +70,15 @@ MessageList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({messages}) => ({
-    convoList: messages.convos,
-    msgPopUp: messages.msgPopUp
+const mapStateToProps = ({messages , auth}) => ({
+    convoList: messages.allConvos,
+    msgPopUp: messages.msgPopUp,
+    userId: auth.user.userId
 });
 
 const mapDispatchToProps = ( dispatch ) => {
     return {
-      getMessages: () => dispatch(getMessages()),
+      getMessages: userMsgInfo => dispatch(getMessages(userMsgInfo)),
       createMsgPopup: () => dispatch(createMsgPopup())
     }
 }

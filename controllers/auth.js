@@ -10,37 +10,39 @@ auth.post("/register", (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      password: req.body.email,
+      email_lower: req.body.email.toLowerCase(),
+      password: req.body.password,
       about: "Tell us about yoself"
     },
     function(err, user) {
       if (err) {
         res.send(err);
+      } else if ( user.hasOwnProperty('errmsg') ) {
+        res.json(user)
       } else {
-        console.log("this is the user", user);
-        console.log(user.id);
-        res.json({
-          name: user.firstName + "" + user.lastName,
-          userId: user.id,
-          token: 1234
-        });
+        delete user._doc.password
+        user = {
+          ...user._doc,
+          token: 1231231981,
+        };
+        res.json(user);
       }
     }
   );
 });
 
 auth.post("/login", (req, res) => {
-  User.findOne({ email: req.body.email, password: req.body.password }, function(
+  User.findOne({ email_lower: req.body.email.toLowerCase(), password: req.body.password }, function(
     err,
     user
   ) {
     if (err) {
       res.json(err);
     } else {
+      delete user._doc.password
       user = {
         ...user._doc,
         token: 1231231981,
-        password: ""
       };
       res.json(user);
     }

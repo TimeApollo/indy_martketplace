@@ -6,6 +6,7 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const IS_LOGGING_IN = "IS_LOGGING_IN";
+export const IS_REGISTERING = "IS_REGISTERING";
 
 export const registerUser = ({
   firstName,
@@ -13,6 +14,7 @@ export const registerUser = ({
   email,
   password
 }) => dispatch => {
+  dispatch(isRegistering())
   const header = {
     method: "POST",
     headers: {
@@ -29,37 +31,37 @@ export const registerUser = ({
   fetch("/api/auth/register", header)
     .then(response => response.json())
     .then(registerResponse => {
-      console.log(registerResponse);
-      if (registerResponse.hasOwnProperty("errors")) {
-        dispatch(registerFail());
+      console.log("hello",registerResponse);
+      if (registerResponse.hasOwnProperty("errmsg")) {
+        dispatch(registerFail(registerResponse));
       } else {
         dispatch(
-          registerSuccess(
-            registerResponse.name,
-            registerResponse.userId,
-            registerResponse.token
-          )
+          registerSuccess(registerResponse)
         );
-        dispatch(push("/"));
+        dispatch(push("/profile"));
       }
     });
 };
 
-export const registerSuccess = (name, userId) => {
+export const registerSuccess = (user) => {
   return {
     type: REGISTER_SUCCESS,
-    payload: {
-      name,
-      userId
-    }
+    payload: user
   };
 };
 
-export const registerFail = () => {
+export const registerFail = (user) => {
   return {
-    type: REGISTER_FAIL
+    type: REGISTER_FAIL,
+    payload: user
   };
 };
+
+export const isRegistering = () => {
+  return {
+    type: IS_REGISTERING
+  }
+}
 
 export const loginUser = ({ email, password }) => dispatch => {
   dispatch(isLoggingIn());
@@ -85,7 +87,7 @@ export const loginUser = ({ email, password }) => dispatch => {
         dispatch(loginFail());
       } else {
         dispatch(loginSuccess(loginResponse));
-        dispatch(push("/"));
+        dispatch(push("/profile"));
       }
     });
 };
@@ -93,9 +95,7 @@ export const loginUser = ({ email, password }) => dispatch => {
 export const loginSuccess = user => {
   return {
     type: LOGIN_SUCCESS,
-    payload: {
-      user
-    }
+    payload: user
   };
 };
 

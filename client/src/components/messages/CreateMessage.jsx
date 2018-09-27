@@ -12,7 +12,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
-import { exitMsgPopup } from '../../actions/messages';
+import { postMessage, exitMsgPopup } from '../../actions/messages';
 
 import './style.css';
 
@@ -70,12 +70,23 @@ class TextFields extends React.Component {
     message: ''
   };
 
-  handleChange = (email, message) => event => {
+  handleChange = event => {
     this.setState({
-      [email]: event.target.value,
-      [message]: event.target.value
+      [event.target.name]: event.target.value
     });
   };
+
+  handleMessagePost = event => {
+    let messageInfo = {
+      senderEmail: this.props.userEmail,
+      email: this.state.email.toLowerCase(),
+      message: this.state.message
+    };
+
+    console.log("message info", messageInfo)
+
+    this.props.postMessage(messageInfo);
+  } 
 
   render() {
     const { classes } = this.props;
@@ -83,46 +94,48 @@ class TextFields extends React.Component {
     return (
         <div className="msg-popup">
             <Paper id="convo-page-bar" className={classes.root} elevation={2}>
-                <Toolbar>
-                    <Typography variant="title" color="inherit">
-                        New Message
-                    </Typography>
-                </Toolbar>
-                <IconButton aria-label="New Message">
-                    <SvgIcon onClick={ () => this.props.exitMsgPopup()}>
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                    </SvgIcon>
-                </IconButton>
+              <Toolbar>
+                <Typography variant="title" color="inherit">
+                  New Message
+                </Typography>
+              </Toolbar>
+              <IconButton aria-label="New Message">
+                <SvgIcon onClick={ () => this.props.exitMsgPopup()}>
+                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                </SvgIcon>
+              </IconButton>
             </Paper>
             <form id="msg-info-wrap" className={classes.container} noValidate autoComplete="off">
-                <div>To:</div>
-                <TextField
-                    id="standard-name"
-                    label="Email"
-                    className={classes.textField}
-                    value={this.state.email}
-                    onChange={this.handleChange('email')}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-multiline-static"
-                    label="Message"
-                    multiline
-                    rows="26"
-                    value={this.state.message}
-                    onChange={this.handleChange('message')}
-                    className={classes.textField}
-                    margin="normal"
-                />
-                <Button
-                    id="new-msg-btn"
-                    variant="contained"
-                    color="primary"
-                    disableRipple
-                    className={classNames(classes.margin, classes.bootstrapRoot)}
-                >
-                  Send
-                </Button>
+              <div>To:</div>
+              <TextField
+                name="email"
+                id="standard-name"
+                label="Email"
+                className={classes.textField}
+                value={this.state.email}
+                onChange={this.handleChange}
+                margin="normal"
+              />
+              <TextField
+                name="message"
+                id="standard-multiline-static"
+                label="Message"
+                multiline
+                rows="20"
+                value={this.state.message}
+                onChange={this.handleChange}
+                className={classes.textField}
+                margin="normal"
+              />
+              <Button
+                id="new-msg-btn"
+                variant="contained"
+                color="primary"
+                disableRipple
+                className={classNames(classes.margin, classes.bootstrapRoot)}
+                onClick={this.handleMessagePost}>
+                Send
+              </Button>
             </form>
         </div>
     );
@@ -133,10 +146,17 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapStateToProps = ({ auth }) => ({
+  userEmail: auth.user.email_lower
+})
+
+const mapDispatchToProps = dispatch => {
     return {
+      postMessage: messageInfo => {
+        dispatch(postMessage(messageInfo))
+      },
       exitMsgPopup: () => dispatch(exitMsgPopup())
     }
 }
 
-export default connect(undefined, mapDispatchToProps)(withStyles(styles)(TextFields));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TextFields));

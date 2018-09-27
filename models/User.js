@@ -19,6 +19,12 @@ var UserSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  email_lower: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
   password: {
     type: String,
     minlength: 5,

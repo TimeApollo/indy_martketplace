@@ -18,7 +18,7 @@ const styles = theme => ({
   }
 });
 
-class StylesSidebar extends Component {
+class ProfileStylesSidebar extends Component {
   render() {
 
   const { classes } = this.props;
@@ -46,7 +46,7 @@ class StylesSidebar extends Component {
   }
 }
 
-StylesSidebar.propTypes = {
+ProfileStylesSidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = ({ auth }) => ({
@@ -56,4 +56,4 @@ const mapStateToProps = ({ auth }) => ({
 export default connect(
   mapStateToProps,
   undefined
-)(withStyles(styles)(StylesSidebar));
+)(withStyles(styles)(ProfileStylesSidebar));

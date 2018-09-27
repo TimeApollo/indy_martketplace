@@ -1,30 +1,28 @@
 const express = require('express')
-const router = express.Router();
 const { User } = require('../models')
 const user = express.Router()
 
 
-router.get('/:id', (req, res) => {
+user.get('/:id', (req, res) => {
   User.findById(req.params.id, function (err, user) {
       if (err) {
           res.json(err)
       } else {
         user = {
           ...user._doc,
-          password: ""
+          // password: ""
         };
         res.json(user)
       }
   })
 })
 
-router.patch("/", (req, res) => {
+//will only need to update one field at a time so this won't  be necessary
+
+user.patch("/", (req, res) => {
   const patch = {};
   if (req.body.password !== undefined) {
     patch.password = req.body.password;
-  }
-  if (req.body.about !== undefined) {
-    patch.about = req.body.about;
   }
   if (req.body.about !== undefined) {
     patch.about = req.body.about;
@@ -44,11 +42,7 @@ router.patch("/", (req, res) => {
       id: req.user.id
     }
   })
-    .then(_ => User.findById({ where: { id: req.user.id } }))
-    .then(user => res.send({ user }))
-    .catch(err => {
-      //not sure what else to put here
-    });
+
 });
 
 

@@ -1,13 +1,32 @@
-import { GET_MESSAGES, MSG_POPUP, MSG_CLOSE } from "../actions/messages";
+import { GET_MESSAGES, POST_MESSAGE, MSG_POPUP, MSG_CLOSE } from "../actions/messages";
 
-const initialState = { convos: [], msgPopUp: false };
+const initialState = { allConvos: [], msgPopUp: false };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_MESSAGES:
             return {
                 ...state,
-                convos: action.convos
+                allConvos: action.payload
+            }
+        case POST_MESSAGE:
+            let sortedEmails = action.payload.emails.concat().sort();
+
+            let newAllConvos = state.allConvos.map(convo => {
+                let sortedConvoEmails = convo.emails.concat().sort()
+
+                sortedEmails.forEach((email, index) => {
+                    if (email !== sortedConvoEmails[index]) {
+                        return convo
+                    }
+                });
+
+                return action.payload;
+            })
+
+            return {
+                ...state,
+                allConvos: newAllConvos
             }
         case MSG_POPUP:
             return {
