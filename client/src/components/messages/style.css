@@ -96,3 +96,9 @@
 form div {
     margin: 5px 5px -30px 5px;
 }
+
+.filler-msg {
+    display: flex;
+    justify-content: center;
+    color: gray;
+ }
