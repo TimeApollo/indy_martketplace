@@ -7,7 +7,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 
-import image from "../../images/penny.jpg";
+import image from "../../images/penny.png";
 
 const styles = theme => ({
   root: {
@@ -15,12 +15,12 @@ const styles = theme => ({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
   },
   gridList: {
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)"
+    transform: "translateZ(0)",
   },
   title: {
     color: theme.palette.primary.light
@@ -36,37 +36,44 @@ const tileData = [
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 1
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 2
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 3
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 4
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 5
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 6
   },
   {
     img: image,
     title: "Image",
-    author: "author"
+    author: "author",
+    id: 7
   }
 ];
 
@@ -76,9 +83,9 @@ class SingleGallery extends React.Component {
 
     return (
       <div className={classes.root}>
-        <GridList className={classes.gridList} cols={2.5}>
+        <GridList className={classes.gridList} cols={5}>
           {tileData.map(tile => (
-            <GridListTile key={tile.img}>
+            <GridListTile key={tile.id}>
               <img src={tile.img} alt={tile.title} />
               <GridListTileBar
                 title={tile.title}

@@ -1,4 +1,5 @@
 import { push } from "connected-react-router";
+
 export const GET_ONE_USER = "GET_ONE_USER";
 
 export const getOneUser = (userId) => dispatch => {

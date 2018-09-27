@@ -52,7 +52,7 @@ class ArtistProfilePage extends Component {
       <div className={classes.row}>
         <div className={classes.sidebar}>
           <img
-            src={require("../../images/penny.jpg")}
+            src={require("../../images/penny.png")}
             className={classes.bigAvatar}
           />
           <AboutSidebar />
