@@ -26,6 +26,7 @@ const initialState = {
     firstName: "",
     lastName: "",
     email: "",
+    email_lower: "",
     about: "",
     mediums: [],
     styles: [],
@@ -97,6 +98,7 @@ const authReducer = (state = initialState, action) => {
           firstName: action.payload.user.firstName,
           lastName: action.payload.user.lastName,
           email: action.payload.user.email,
+          email_lower: action.payload.user.email_lower,
           about: action.payload.user.about,
           mediums: action.payload.user.mediums,
           styles: action.payload.user.styles
