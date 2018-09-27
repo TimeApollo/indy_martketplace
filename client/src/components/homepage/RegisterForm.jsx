@@ -73,31 +73,34 @@ class RegisterForm extends React.Component {
   };
 
   handleChange = event => {
-    let errorname = `error${[event.target.name]}`
-    console.log(errorname)
-    this.setState({ [event.target.name]: event.target.value , submit: true , [errorname]: false });
+    let errorname = ''
+    if (!this.state.isPasswordMatch){
+      errorname = 'isPasswordMatch'
+      this.setState({ [event.target.name]: event.target.value , submit: true , [errorname]: true });
+    }else{
+      errorname = `error${event.target.name}`
+      this.setState({ [event.target.name]: event.target.value , submit: true , [errorname]: false });
+    }
   };
 
   handleRegisterUser = () => {
-  
-    if ( !this.state.firstName ){ this.setState({ submit: false , errorFirstName: true })}
-    if ( !this.state.lastName ){ this.setState({ submit: false , errorLastName: true })}
-    if ( !this.state.password ){ this.setState({ submit: false , errorPassword: true })}
-    if ( !this.state.passwordMatch ){ this.setState({ submit: false , errorPasswordMatch: true })}
-    if ( !this.state.email ){ this.setState({ submit: false , errorEmail: true })}
-    if ( this.state.password !== this.state.passwordMatch ){ 
-      this.setState({ submit: false , isPasswordMatch: false })
-    }
-    
     let regFormData = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       password: this.state.password,
       email: this.state.email
     };
-    if ( this.state.submit ){
+  
+    if ( !this.state.firstName ){ this.setState({ submit: false , errorfirstName: true })}
+    else if ( !this.state.lastName ){ this.setState({ submit: false , errorlastName: true })}
+    else if ( !this.state.email ){ this.setState({ submit: false , erroremail: true })}
+    else if ( !this.state.password ){ this.setState({ submit: false , errorpassword: true })}
+    else if ( !this.state.passwordMatch ){ this.setState({ submit: false , errorpasswordMatch: true })}
+    else if ( this.state.password !== this.state.passwordMatch ){ 
+      this.setState({ submit: false , isPasswordMatch: false })
+    } else {
       this.props.registerUser(regFormData);
-    } 
+    }
   };
 
   render() {
@@ -105,7 +108,7 @@ class RegisterForm extends React.Component {
 
     return (
       <div>
-        { this.state.submit ? null : <div className={classes.error}> Error with Submission. Please Correct Entries. </div>}
+        { this.state.submit ? null : <div className={classes.error}> Error with Submission. Please Correct Entry. </div>}
         <h1 className={classes.header}>
           REGISTER
         </h1>
@@ -120,7 +123,7 @@ class RegisterForm extends React.Component {
               required={true}
             />
           </FormControl>
-          { this.state.errorFirstName ? <div className={classes.error}>Please Enter First Name</div> : null }
+          { this.state.errorfirstName ? <div className={classes.error}>Please Enter First Name</div> : null }
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>Last Name</InputLabel>
             <Input 
@@ -131,7 +134,7 @@ class RegisterForm extends React.Component {
               required={true}
             />
           </FormControl>
-          { this.state.errorLastName ? <div className={classes.error}>Please Enter Last Name</div> : null }
+          { this.state.errorlastName ? <div className={classes.error}>Please Enter Last Name</div> : null }
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>Email</InputLabel>
             <Input 
@@ -142,7 +145,7 @@ class RegisterForm extends React.Component {
               required={true} 
             />
           </FormControl>
-          { this.state.errorEmail ? <div className={classes.error}>Please Enter Email</div> : null }
+          { this.state.erroremail ? <div className={classes.error}>Please Enter Email</div> : null }
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>Password</InputLabel>
             <Input
@@ -153,7 +156,7 @@ class RegisterForm extends React.Component {
               required={true}
             />
           </FormControl>
-          { this.state.errorPassword ? <div className={classes.error}>Please Enter Password</div> : null }
+          { this.state.errorpassword ? <div className={classes.error}>Please Enter Password</div> : null }
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>Verify Password</InputLabel>
             <Input
@@ -164,7 +167,7 @@ class RegisterForm extends React.Component {
               required={true}
             />
           </FormControl>
-          { this.state.errorPasswordMatch ? <div className={classes.match}>Please Enter Password</div> : null }
+          { this.state.errorpasswordMatch ? <div className={classes.match}>Please Enter Password</div> : null }
           { this.state.isPasswordMatch ? null : <div className={classes.match}>Please Enter Matching Passwords</div>}
           <br/>
           <br/>
