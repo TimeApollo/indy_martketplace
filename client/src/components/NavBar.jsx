@@ -89,7 +89,7 @@ class CenteredTabs extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        {this.props.loggedIn ? (
+        {this.state.loggedIn ? (
           <div>
             <Slide
               direction="left"

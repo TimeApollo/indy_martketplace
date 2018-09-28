@@ -5,15 +5,15 @@ const upload = require('../config/multer.config.js');
 const {Artwork} = require('../models')
 const artwork = express.Router()
 
+
 artwork.post('/upload', upload.single("file"), doUpload = (req, res) => {
-	// console.log(req)
 	const artpiece = new Artwork({
 		userId: req.body.userId,
 		firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    	lastName: req.body.lastName,
 		email: req.body.email,
-		email_lower: req.body.email.toLowerCase(),
-		image: req.file.originalname,
+		email_lower: req.body.email_lower,
+		image: req.body.uploadFile,
 		title: req.body.title,
 		artist: req.body.artist,
 		forSale: req.body.forSale,
