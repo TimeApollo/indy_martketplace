@@ -4,6 +4,8 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
+export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
 export const IS_LOGGING_IN = "IS_LOGGING_IN";
 export const IS_REGISTERING = "IS_REGISTERING";
 
@@ -110,4 +112,37 @@ export const isLoggingIn = () => {
   };
 };
 
+export function logoutUser() {
+  const options = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
 
+  return dispatch => {
+    dispatch(logoutUserRequest());
+
+    fetch('api/auth/logout', options)
+      .then(res => res.json())
+      .then(data => {
+        dispatch(logoutUserReceived(data));
+
+        return data;
+      });
+  };
+}
+
+const logoutUserRequest = () => {
+  return {
+    type: LOGOUT_USER_REQUEST,
+  };
+};
+
+const logoutUserReceived = data => {
+  return {
+    type: LOGOUT_USER_RESPONSE,
+    message: data.message
+  };
+};

@@ -1,3 +1,6 @@
+import React from "react";
+import {connect} from "react-redux";
+import {submitUpload} from "../../actions/art"
 import Button from "@material-ui/core/Button";
 import classNames from "classnames";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -9,7 +12,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
 import Radio from "@material-ui/core/Radio";
-import React from "react";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
@@ -40,11 +42,6 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit * 3,
     minWidth: 120
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
   },
   dense: {
     marginTop: 19
@@ -140,13 +137,7 @@ class UploadForm extends React.Component {
     this.setState({ uploadFile: event.target.files[0] });
   };
   onSubmit = () => {
-    let uploadFormData = {
-      medium: this.state.medium,
-      forSale: this.state.forSale,
-      uploadFile: this.state.uploadFile,
-      styles: this.state.styles,
-      title: this.state.title
-    }
+    let uploadFormData = this.state
     this.props.submitUpload(uploadFormData)
     console.log(uploadFormData)
   }
@@ -154,6 +145,7 @@ class UploadForm extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
+      
           <input
             accept="*"
             className={classes.input}
@@ -172,7 +164,7 @@ class UploadForm extends React.Component {
             </Button>
           </label>
           <React.Fragment>
-            {this.state.uploadFile != {} ? (
+            {this.state.uploadFile !== {} ? (
               <Typography variant="subheading" gutterBottom>
                 {this.state.uploadFile.name}
               </Typography>
@@ -277,9 +269,9 @@ class UploadForm extends React.Component {
               <FormControlLabel value="no" control={<Radio />} label="No" />
             </RadioGroup>
           </FormControl>
-        <Button variant="contained" component="span" className={classes.button} onClick={this.onSubmit}>
-          Submit Upload
-        </Button>
+      <Button variant="contained" component="span" className={classes.button} onClick={this.onSubmit}>
+        Submit Upload
+      </Button>
       </div>
     );
   }
@@ -297,4 +289,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withStyles(styles)(UploadForm);
+export default connect (null, mapDispatchToProps)(withStyles(styles)(UploadForm));
