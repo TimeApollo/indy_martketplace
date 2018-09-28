@@ -34,25 +34,25 @@ const styles = theme => ({
 //  The example data is structured as follows:
 const tileData = [
   {
-    img: image,
+    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badab25838f13487e4d6924',
     title: "Image",
     author: "author",
     id: 1
   },
   {
-    img: image,
+    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badab25838f13487e4d6924',
     title: "Image",
     author: "author",
     id: 2
   },
   {
-    img: image,
+    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badaf68bf47b348ccd3985b',
     title: "Image",
     author: "author",
     id: 3
   },
   {
-    img: image,
+    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badaecdbf47b348ccd3985a',
     title: "Image",
     author: "author",
     id: 4
@@ -78,6 +78,11 @@ const tileData = [
 ];
 
 class SingleGallery extends React.Component {
+
+  componentDidMount(){
+     
+  }
+
   render() {
     const { classes } = this.props;
 
