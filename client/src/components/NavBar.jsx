@@ -59,6 +59,9 @@ class CenteredTabs extends React.Component {
       loggedIn: !this.state.loggedIn
     })
   }
+  handleLogout = () => {
+
+  }
   openLogin = () => {
     this.setState({
       lastValue: this.state.value,
@@ -105,7 +108,7 @@ class CenteredTabs extends React.Component {
                 <Tab label="Upload" component={Link} to="/upload" />
                 <Tab label="Messages" component={Link} to="/messages" />
                 <Tab label="Profile" component={Link} to="/profile" />
-                <Tab label="Logout" onClick={this.handleLogin} />
+                <Tab label="Logout" onClick={this.handleLogout} />
               </Tabs>
             </Slide>
           </div>
@@ -165,5 +168,17 @@ class CenteredTabs extends React.Component {
 CenteredTabs.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.user.isLoggedIn
+  }
+}
+
+const mapDispatchToProps = state => {
+  return {
+    
+  }
+}
 
 export default withStyles(styles)(CenteredTabs);

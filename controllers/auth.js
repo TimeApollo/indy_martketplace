@@ -49,6 +49,11 @@ auth.post("/login", (req, res) => {
   });
 });
 
+auth.get("/logout", (req, res) => {
+  req.logout();
+  res.json({ success: true, message: "Logged out!" });
+});
+
 module.exports = {
   auth
 };

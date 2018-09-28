@@ -3,6 +3,8 @@ import {
   LOGIN_SUCCESS,
   IS_LOGGING_IN,
   LOGIN_FAIL,
+  // LOGOUT_USER_REQUEST,
+  // LOGOUT_USER_RESPONSE,
   IS_REGISTERING,
   REGISTER_FAIL
 } from "../actions/auth";
@@ -20,7 +22,7 @@ const initialState = {
   login: {
     isLoginSuccess: false,
     isLoginFail: false,
-    isLoggingIn: false
+    isLoggingIn: false,
   },
   user: {
     firstName: "",
@@ -30,7 +32,8 @@ const initialState = {
     about: "",
     mediums: [],
     styles: [],
-    userId: null
+    userId: null,
+    isLoggedIn: false,
   },
   users: {}
 };
@@ -125,6 +128,23 @@ const authReducer = (state = initialState, action) => {
       };
     default:
       return state;
+
+    // case LOGOUT_USER_REQUEST:
+    //   return {
+    //     ...state,
+    //     user: {
+    //       ...user,
+    //       isloggedIn: false,
+    //       fetching: true,
+    //     }
+    //   };
+    // case LOGOUT_USER_RESPONSE:
+    //   return {
+    //     ...state,
+    //     user: initialState.user,
+    //     message: action.message,
+    //     fetching: false,
+    //   };
   }
 };
 
