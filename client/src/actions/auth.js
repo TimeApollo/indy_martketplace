@@ -33,8 +33,12 @@ export const registerUser = ({
     .then(response => response.json())
     .then(registerResponse => {
       console.log("hello",registerResponse);
-      if (registerResponse.hasOwnProperty("errmsg")) {
-        dispatch(registerFail(registerResponse));
+      if (registerResponse.hasOwnProperty("error")) {
+        if (registerResponse.error.hasOwnProperty('errmsg')){
+          dispatch(registerFail({error: true, errorMessage: 'Email is already used. Please use another Email Address.'}));
+        } else {
+          dispatch(registerFail({error: true, errorMessage: 'Issue with registering. Please try again.'}))
+        }
       } else {
         dispatch(
           registerSuccess(registerResponse)
