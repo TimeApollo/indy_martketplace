@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { createDmPopup } from '../../actions/messages';
+import { connect } from 'react-redux';
 
 import './style.css'
 
@@ -22,7 +24,7 @@ class SingleConversation extends React.Component {
         const { classes } = this.props;
         return (
             <div>
-                <Paper id='convo-wrap' className={classes.root} elevation={1}>
+                <Paper id='convo-wrap' className={classes.root} onClick={() => {this.props.createDmPopup()}} elevation={1}>
                     <div className="pic-wrap">
                         <div className="pic"></div>
                     </div>
@@ -47,4 +49,10 @@ SingleConversation.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SingleConversation);
+const mapDispatchToProps = ( dispatch ) => {
+    return {
+        createDmPopup: () => dispatch(createDmPopup())
+    }
+}
+
+export default connect(undefined, mapDispatchToProps)(withStyles(styles)(SingleConversation));

@@ -2,6 +2,8 @@ export const GET_MESSAGES = 'GET_MESSAGES';
 export const POST_MESSAGE = 'POST_MESSAGE';
 export const MSG_POPUP = 'MSG_POPUP';
 export const MSG_CLOSE = 'MSG_CLOSE';
+export const DM_POPUP = 'DM_POPUP';
+export const DM_CLOSE = 'DM_CLOSE';
 
 export const getMessages = ({userId}) => dispatch => {
     console.log(userId)
@@ -41,4 +43,12 @@ export const createMsgPopup = () => dispatch => {
 
 export const exitMsgPopup = () => dispatch => {
     dispatch({ type: MSG_CLOSE })
+}
+
+export const createDmPopup = () => dispatch => {
+    dispatch({ type: DM_POPUP })
+}
+
+export const exitDmPopup = () => dispatch => {
+    dispatch({ type: DM_CLOSE })
 }
