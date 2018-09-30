@@ -12,7 +12,7 @@ import LoginForm from "./homepage/LoginForm.jsx";
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper: {
     position: "absolute",

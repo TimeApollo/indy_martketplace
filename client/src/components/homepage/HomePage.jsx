@@ -21,7 +21,7 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     padding: "2em",
-    background: "linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)",
+    background: "linear-gradient(141deg, #9fb8ad 10%, #1fc8db 59%, #2cb5e8 75%)",
   },
   divider: {
     width: "20em",

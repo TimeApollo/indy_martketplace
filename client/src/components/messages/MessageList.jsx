@@ -20,6 +20,7 @@ import { getMessages, createMsgPopup } from '../../actions/messages';
 const styles = {
   root: {
     flexGrow: 1,
+    marginTop: "3em"
   },
 };
 
@@ -43,7 +44,7 @@ class MessageList extends React.Component {
         return (
           <div id="convo-page" className={classes.root}>
             {this.props.msgPopUp && <CreateMessage />}
-            <Paper id="convo-page-bar" className={classes.root} elevation={2}>
+            <Paper id="convo-page-bar" className={classes.root} elevation={8}>
                 <Toolbar>
                     <Typography variant="title" color="inherit">
                         Conversations
