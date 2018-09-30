@@ -34,25 +34,25 @@ const styles = theme => ({
 //  The example data is structured as follows:
 const tileData = [
   {
-    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badab25838f13487e4d6924',
+    img: image,
     title: "Image",
     author: "author",
     id: 1
   },
   {
-    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badab25838f13487e4d6924',
+    img: image,
     title: "Image",
     author: "author",
     id: 2
   },
   {
-    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badaf68bf47b348ccd3985b',
+    img: image,
     title: "Image",
     author: "author",
     id: 3
   },
   {
-    img: 'https://artbin.s3.us-east-2.amazonaws.com/5badaecdbf47b348ccd3985a',
+    img: image,
     title: "Image",
     author: "author",
     id: 4
@@ -74,6 +74,24 @@ const tileData = [
     title: "Image",
     author: "author",
     id: 7
+  },
+  {
+    img: image,
+    title: "Image",
+    author: "author",
+    id: 8
+  },
+  {
+    img: image,
+    title: "Image",
+    author: "author",
+    id: 9
+  },
+  {
+    img: image,
+    title: "Image",
+    author: "author",
+    id: 10
   }
 ];
 
@@ -88,7 +106,7 @@ class SingleGallery extends React.Component {
 
     return (
       <div className={classes.root}>
-        <GridList className={classes.gridList} cols={5}>
+        <GridList className={classes.gridList} cols={8}>
           {tileData.map(tile => (
             <GridListTile key={tile.id}>
               <img src={tile.img} alt={tile.title} />
