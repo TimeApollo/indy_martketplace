@@ -6,7 +6,10 @@ import {
   // LOGOUT_USER_REQUEST,
   // LOGOUT_USER_RESPONSE,
   IS_REGISTERING,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  EDIT_PROFILE,
+  IS_EDITING,
+  DELETE_USER_SUCCESS
 } from "../actions/auth";
 
 const initialState = {
@@ -18,12 +21,12 @@ const initialState = {
     isRegisterFail: false,
     isRegistering: false,
     error: false,
-    errorMessage: ''
+    errorMessage: ""
   },
   login: {
     isLoginSuccess: false,
     isLoginFail: false,
-    isLoggingIn: false,
+    isLoggingIn: false
   },
   user: {
     firstName: "",
@@ -34,7 +37,7 @@ const initialState = {
     mediums: [],
     styles: [],
     userId: null,
-    isLoggedIn: false,
+    isLoggedIn: false
   },
   users: {}
 };
@@ -84,9 +87,9 @@ const authReducer = (state = initialState, action) => {
           isRegisterFail: false,
           isRegistering: true,
           error: false,
-          errorMessage: ''
+          errorMessage: ""
         }
-      }
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -129,6 +132,16 @@ const authReducer = (state = initialState, action) => {
           isLoggingIn: false
         }
       };
+    // case EDIT_PROFILE:
+    //   return {
+    //     ...state,
+    //     isPasswordUpdated: true
+    //   };
+    // case IS_EDITING:
+    //   return {
+    //     ...state,
+    //     isPasswordUpdated: false
+    //   };
     default:
       return state;
 

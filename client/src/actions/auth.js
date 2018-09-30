@@ -8,6 +8,8 @@ export const LOGOUT_USER_REQUEST = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_RESPONSE = 'LOGOUT_USER_RESPONSE';
 export const IS_LOGGING_IN = "IS_LOGGING_IN";
 export const IS_REGISTERING = "IS_REGISTERING";
+export const EDIT_PROFILE = "EDIT_PROFILE";
+export const IS_EDITING = "IS_EDITING";
 
 export const registerUser = ({
   firstName,
@@ -150,3 +152,68 @@ const logoutUserReceived = data => {
     message: data.message
   };
 };
+
+// export const editProfile = (password, token, displayName, about) => (dispatch) => {
+//   dispatch(isEditing())
+
+//   let changes = {}
+//   if (firstName) changes ["firstName"] = firstName
+//   if (lastName) changes ["lastName"] = lastName
+//   if (email) changes ["email"] = email
+//   if (password) changes["password"] = password
+//   if (about) changes["about"] = about
+//   if (mediums) changes["mediums"] = mediums
+//   if (styles) changes["styles"] = styles
+
+
+//   const header = {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": `Bearer ${token}`
+//     },
+//     body: JSON.stringify(changes)
+//   }
+//   fetch(`${api}/users`, header)
+//     .then(response => response.json())
+//     .then(users => {
+//       dispatch(updatePasswordSuccess(users))
+//   })
+// }
+
+// export const isEditing = () => {
+//   return {
+//     type: IS_EDITING,
+//   }
+// }
+
+// export const updatePasswordSuccess = (users) => {
+//     return {
+//         type: EDIT_PROFILE,
+    
+//     payload: users
+//     }
+// }
+
+// export const deleteUser = (token) => dispatch => {
+//   const header = {
+//     method: "DELETE",
+//     headers: {
+//       "Authorization": `Bearer ${token}`
+//     }
+//   }
+
+//   fetch(`${api}/users`, header)
+//     .then(response => response.json())
+//     .then(isDeleted => {
+//       console.log(isDeleted)
+//       dispatch(userDeletedSuccess())
+//       dispatch(push("/"))
+//     })
+// }
+
+// export const userDeletedSuccess = () => {
+//   return {
+//     type:  DELETE_USER_SUCCESS
+//   }
+// }

@@ -14,7 +14,6 @@ const initialState = {
   },
 };
 
-
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ONE_USER:
