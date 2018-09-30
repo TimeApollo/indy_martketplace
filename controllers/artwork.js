@@ -6,11 +6,15 @@ const {Artwork} = require('../models')
 const artwork = express.Router()
 
 
-doUpload = (req, res) => {
-	console.log(req)
+artwork.post('/upload', upload.single("file"), doUpload = (req, res) => {
 	const artpiece = new Artwork({
 		userId: req.body.userId,
-		title: req.file.fieldName,
+		firstName: req.body.firstName,
+    lastName: req.body.lastName,
+		email: req.body.email,
+		email_lower: req.body.email_lower,
+		image: req.body.uploadFile,
+		title: req.body.title,
 		artist: req.body.artist,
 		forSale: req.body.forSale,
 		medium: req.body.medium,
@@ -21,17 +25,28 @@ doUpload = (req, res) => {
 	
 	params.Key = artpiece.id;
 	params.Body = req.file.buffer;
+	params.ACL = 'public-read';
 		
+	// console.log("this is the model",artpiece)
 	s3Client.upload(params, (err, data) => {
+		console.log( data )
 		if (err) {
 			res.status(500).json({error:"Error -> " + err});
+		} else {
+			// save artpiece to database if uploads correctly to amazon web service
+			artpiece.url = data.Location
+			artpiece.save( function(err){
+				if (err){
+					res.json({error: err})
+				} else {
+				res.json({message: 'File uploaded successfully! -> keyname = ' + artpiece.id});
+				}
+			})
 		}
-		// artpiece.save()
-		res.json({message: 'File uploaded successfully! -> keyname = ' + req.file.originalname});
 	});
-}
+})  
 
-doDownload = (req, res) => {
+artwork.get('/:filename', doDownload = (req, res) => {
 	const s3Client = s3.s3Client;
 	const params = s3.downloadParams;
 	
@@ -42,39 +57,13 @@ doDownload = (req, res) => {
 			.on('error', function(err){
 				res.status(500).json({error:"Error -> " + err});
 		}).pipe(res);
-}
+});
 
-artwork.post('/upload', upload.single("file"), doUpload);
-artwork.get('/:filename', doDownload);
- 
+artwork.get('/', (req, res) => {
+	Artwork.find({}, null , function ( err , docs ){
+		res.json(docs)
+	})
+})
 
 module.exports = {artwork}
 
-
-// artwork.get('/', (req, res) => {
-//     console.log('Test')
-//     res.json(
-//         {
-//             imgLink: 'something',
-//             pieceId: 2,
-//             userId: 12,
-//             mediums: {
-//                 type: 'photography',
-//                 styles: {
-//                     portraits: true
-//                 }
-//             }
-//         },
-//         {
-//             imgLink: 'something else',
-//             pieceId: 3,
-//             userId: 16,
-//             mediums: {
-//                 type: 'painting',
-//                 styles: {
-//                     abstract: true,
-//                     surrealism: true
-//                 }
-//             }
-//         })
-// })

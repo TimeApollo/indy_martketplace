@@ -111,6 +111,7 @@ class RegisterForm extends React.Component {
     return (
       <div>
         { this.state.submit ? null : <div className={classes.error}> Error with Submission. Please Correct Entry. </div>}
+        { this.props.register.error ? <div className={classes.error}> {this.props.register.errorMessage} </div> : null }
         <h1 className={classes.header}>
           REGISTER
         </h1>

@@ -3,6 +3,8 @@ import {
   LOGIN_SUCCESS,
   IS_LOGGING_IN,
   LOGIN_FAIL,
+  // LOGOUT_USER_REQUEST,
+  // LOGOUT_USER_RESPONSE,
   IS_REGISTERING,
   REGISTER_FAIL
 } from "../actions/auth";
@@ -15,12 +17,13 @@ const initialState = {
     isRegisterSuccess: false,
     isRegisterFail: false,
     isRegistering: false,
-    error: ''
+    error: false,
+    errorMessage: ''
   },
   login: {
     isLoginSuccess: false,
     isLoginFail: false,
-    isLoggingIn: false
+    isLoggingIn: false,
   },
   user: {
     firstName: "",
@@ -30,7 +33,8 @@ const initialState = {
     about: "",
     mediums: [],
     styles: [],
-    userId: null
+    userId: null,
+    isLoggedIn: false,
   },
   users: {}
 };
@@ -57,9 +61,9 @@ const authReducer = (state = initialState, action) => {
           email_lower: action.payload.email_lower,
           about: action.payload.about,
           mediums: action.payload.mediums,
-          styles: action.payload.styles
+          styles: action.payload.styles,
+          isLoggedIn: true
         }
-
       };
     case REGISTER_FAIL:
       return {
@@ -68,7 +72,8 @@ const authReducer = (state = initialState, action) => {
           ...state.register,
           isRegisterFail: true,
           isRegistering: false,
-          error: action.payload.user
+          error: action.payload.error,
+          errorMessage: action.payload.errorMessage
         }
       };
     case IS_REGISTERING:
@@ -78,7 +83,8 @@ const authReducer = (state = initialState, action) => {
           isRegisterSuccess: false,
           isRegisterFail: false,
           isRegistering: true,
-          error: ''
+          error: false,
+          errorMessage: ''
         }
       }
     case LOGIN_SUCCESS:
@@ -125,6 +131,23 @@ const authReducer = (state = initialState, action) => {
       };
     default:
       return state;
+
+    // case LOGOUT_USER_REQUEST:
+    //   return {
+    //     ...state,
+    //     user: {
+    //       ...user,
+    //       isloggedIn: false,
+    //       fetching: true,
+    //     }
+    //   };
+    // case LOGOUT_USER_RESPONSE:
+    //   return {
+    //     ...state,
+    //     user: initialState.user,
+    //     message: action.message,
+    //     fetching: false,
+    //   };
   }
 };
 

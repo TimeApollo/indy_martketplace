@@ -16,9 +16,9 @@ auth.post("/register", (req, res) => {
     },
     function(err, user) {
       if (err) {
-        res.send(err);
-      } else if ( user.hasOwnProperty('errmsg') ) {
-        res.json(user)
+        res.send({error: err});
+      // } else if ( user.hasOwnProperty('errmsg') ) {
+      //   res.json({ error: true, message: user.errmsg })
       } else {
         delete user._doc.password
         user = {
@@ -47,6 +47,11 @@ auth.post("/login", (req, res) => {
       res.json(user);
     }
   });
+});
+
+auth.get("/logout", (req, res) => {
+  req.logout();
+  res.json({ success: true, message: "Logged out!" });
 });
 
 module.exports = {
