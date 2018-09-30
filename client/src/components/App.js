@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Switch, Route } from "react-router-dom";
 
+import BannerComponent from "./BannerComponent.jsx";
 import NavBar from "./NavBar.jsx";
 import RegisterForm from "./homepage/RegisterForm.jsx";
 import MessageList from "./messages/MessageList.jsx";
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
+        <BannerComponent/>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/messages" component={MessageList} />

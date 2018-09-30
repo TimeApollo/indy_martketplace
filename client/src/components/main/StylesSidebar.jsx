@@ -6,6 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from "@material-ui/core/Divider";
 import List from '@material-ui/core/List';
+import Icon from '@material-ui/core/Icon';
+
 
 const styles = theme => ({
   root: {
@@ -15,7 +17,11 @@ const styles = theme => ({
     width: "15em",
     fontFamily: "sans-serif",
     textAlign: "center",
-  }
+  },
+  icon: {
+    margin: theme.spacing.unit,
+    fontSize: 32,
+  },
 });
 
 class StylesSidebar extends Component {
@@ -36,6 +42,7 @@ class StylesSidebar extends Component {
         <List>
           {this.props.user.styles}
       </List>
+      <Icon/>
       </Typography>
       <br/>
       <Divider/>
