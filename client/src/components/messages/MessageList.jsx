@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 //Custom react component imports
 import CreateMessage from './CreateMessage.jsx';
 import SingleConversation from './SingleConversation.jsx';
+import ConvoModal from './ConvoModal';
 
 //Redux imports
 import { getMessages, createMsgPopup } from '../../actions/messages';
@@ -38,13 +39,19 @@ class MessageList extends React.Component {
         this.handleMsgList()
     }
 
+    componentDidUpdate(prevProps) {
+        console.log("UPDATE: ", prevProps)
+        this.props.getMessages()
+    }
+
     render() {
         const { classes } = this.props;
       
         return (
           <div id="convo-page" className={classes.root}>
-            {this.props.msgPopUp && <CreateMessage />}
-            <Paper id="convo-page-bar" className={classes.root} elevation={8}>
+            { this.props.msgPopUp && <CreateMessage /> }
+            { this.props.dmPopUp && <ConvoModal /> }
+            <Paper id="convo-page-bar" className={classes.root} elevation={2}>
                 <Toolbar>
                     <Typography variant="title" color="inherit">
                         Conversations
@@ -59,8 +66,8 @@ class MessageList extends React.Component {
             <div className="convo-wrap">
                 {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation
                         sender={convo.emails[1]}
-                        message={convo.messages[0].message}
-                        timestamp={convo.messages[0].timestamp}/> ) : <div className="filler-msg"><p>To get started, send a message.</p></div> } 
+                        message={convo.messages[convo.messages.length - 1].message}
+                        timestamp={convo.messages[convo.messages.length - 1].timestamp}/> ) : <div className="filler-msg"><p>To get started, send a message.</p></div> } 
             </div>
           </div>
         );
@@ -74,7 +81,8 @@ MessageList.propTypes = {
 const mapStateToProps = ({messages , auth}) => ({
     convoList: messages.allConvos,
     msgPopUp: messages.msgPopUp,
-    userId: auth.user.userId
+    userId: auth.user.userId,
+    dmPopUp: messages.dmPopUp
 });
 
 const mapDispatchToProps = ( dispatch ) => {

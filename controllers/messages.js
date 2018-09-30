@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const { Conversations, User } = require("../models");
+const moment = require("moment");
 
 //Creates new conversation if one does not exist, updates if exists.
 router.patch("/", (req, res) => {
@@ -16,7 +17,7 @@ router.patch("/", (req, res) => {
         { emails: { $all: req.body.emails } },
         {
           $push: {
-            messages: { message: req.body.message, email: req.body.email }
+            messages: { message: req.body.message, email: req.body.email, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }
           }
         },
         { new: true },
@@ -33,7 +34,7 @@ router.patch("/", (req, res) => {
       Conversations.create(
         {
           emails: req.body.emails,
-          messages: [{ message: req.body.message, email: req.body.email }]
+          messages: [{ message: req.body.message, email: req.body.email, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }]
         },
         function(err, convo) {
           if (err) {
