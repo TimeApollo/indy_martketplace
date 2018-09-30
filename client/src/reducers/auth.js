@@ -17,7 +17,8 @@ const initialState = {
     isRegisterSuccess: false,
     isRegisterFail: false,
     isRegistering: false,
-    error: ''
+    error: false,
+    errorMessage: ''
   },
   login: {
     isLoginSuccess: false,
@@ -60,9 +61,9 @@ const authReducer = (state = initialState, action) => {
           email_lower: action.payload.email_lower,
           about: action.payload.about,
           mediums: action.payload.mediums,
-          styles: action.payload.styles
+          styles: action.payload.styles,
+          isLoggedIn: true
         }
-
       };
     case REGISTER_FAIL:
       return {
@@ -71,7 +72,8 @@ const authReducer = (state = initialState, action) => {
           ...state.register,
           isRegisterFail: true,
           isRegistering: false,
-          error: action.payload.user
+          error: action.payload.error,
+          errorMessage: action.payload.errorMessage
         }
       };
     case IS_REGISTERING:
@@ -81,7 +83,8 @@ const authReducer = (state = initialState, action) => {
           isRegisterSuccess: false,
           isRegisterFail: false,
           isRegistering: true,
-          error: ''
+          error: false,
+          errorMessage: ''
         }
       }
     case LOGIN_SUCCESS:

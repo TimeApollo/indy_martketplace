@@ -7,7 +7,7 @@
     lastName: String,
     email: String,
     email_lower: String,
-    image: String,
+    image: String, 
     url: String,
     title:  String,
     artist: String,

@@ -10,7 +10,7 @@ artwork.post('/upload', upload.single("file"), doUpload = (req, res) => {
 	const artpiece = new Artwork({
 		userId: req.body.userId,
 		firstName: req.body.firstName,
-    	lastName: req.body.lastName,
+    lastName: req.body.lastName,
 		email: req.body.email,
 		email_lower: req.body.email_lower,
 		image: req.body.uploadFile,
