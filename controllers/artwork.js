@@ -60,7 +60,7 @@ artwork.get('/:filename', doDownload = (req, res) => {
 });
 
 artwork.get('/', (req, res) => {
-	Artwork.find({}, null , function ( err , docs ){
+	Artwork.find({}, null , { sort: {date: -1}} , function ( err , docs ){
 		res.json(docs)
 	})
 })
