@@ -7,6 +7,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 const styles = theme => ({
   button: {
