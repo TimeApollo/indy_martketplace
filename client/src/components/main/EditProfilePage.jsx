@@ -7,7 +7,9 @@ import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-// import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 
 const styles = theme => ({
@@ -195,6 +197,14 @@ class EditProfilePage extends React.Component {
             onChange={this.handleOnChange}            
             />
           </FormControl>
+          Mediums
+          <List className={classes.error}>
+            <ListItem className={classes.error}>
+              Painting
+              <Checkbox>
+              </Checkbox>
+            </ListItem>
+          </List>
           <br />
           <br />
           <button
@@ -205,7 +215,7 @@ class EditProfilePage extends React.Component {
             Update Profile
           </button>
         </div>
-        <h1 className={classes.header}>Edit Profile</h1>
+        <h1 className={classes.header}>Delete Profile</h1>
         <div className={classes.form}>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
