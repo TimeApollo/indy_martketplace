@@ -13,14 +13,14 @@ import RegisterForm from "./RegisterForm";
 const styles = theme => ({
   form: {
     marginBottom: "0",
-    marginTop: "3em",
-    width: "70em",
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    padding: "2em",
+    paddingTop: "2em",
+    paddingBottom: "2em",
     background: "linear-gradient(141deg, #9fb8ad 10%, #1fc8db 59%, #2cb5e8 75%)",
   },
   divider: {
@@ -51,7 +51,6 @@ class HomePage extends Component {
             Indy mARTketplace connects artists and art
             lovers in the Indianapolis community.
           </Typography>
-          <br/>
           <br/>
           <Divider className={classes.divider} />
           <br/>

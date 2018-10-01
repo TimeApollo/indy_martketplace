@@ -69,4 +69,14 @@ router.get("/:id", (req, res) => {
   });
 });
 
+router.get("/:id", (req, res) => {
+  Conversations.findById(req.params.id, function(err, convo) {
+    if (err) {
+      res.json("error getting conversation: ", err);
+    } else if (convo) {
+      res.json(convo)
+    }
+  })
+})
+
 module.exports = router;
