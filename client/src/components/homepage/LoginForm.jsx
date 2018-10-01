@@ -6,6 +6,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import {tabChange} from "../../actions/tab";
 
 const styles = theme => ({
   button: {
@@ -52,11 +53,14 @@ const styles = theme => ({
 class LoginForm extends React.Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
 
   handleOnChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.name)
+    this.setState({ 
+      [event.target.name]: event.target.value,
+     });
   };
 
   handleLoginUserEnter = event => {
@@ -65,7 +69,6 @@ class LoginForm extends React.Component {
         email: this.state.email,
         password: this.state.password
       };
-
       this.props.loginUser(loginData);
     }
   };
@@ -75,7 +78,8 @@ class LoginForm extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-
+    let value = "/profile"
+    this.props.tabChange(value)
     this.props.loginUser(loginData);
   };
 
@@ -125,6 +129,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
+    tabChange: (value) => dispatch(tabChange(value)),
     loginUser: loginFormData => {
       dispatch(loginUser(loginFormData));
     }
