@@ -132,16 +132,16 @@ const authReducer = (state = initialState, action) => {
           isLoggingIn: false
         }
       };
-    // case EDIT_PROFILE:
-    //   return {
-    //     ...state,
-    //     isPasswordUpdated: true
-    //   };
-    // case IS_EDITING:
-    //   return {
-    //     ...state,
-    //     isPasswordUpdated: false
-    //   };
+    case EDIT_PROFILE:
+      return {
+        ...state,
+        isPasswordUpdated: true
+      };
+    case IS_EDITING:
+      return {
+        ...state,
+        isPasswordUpdated: false
+      };
     default:
       return state;
 
