@@ -15,7 +15,8 @@ export const registerUser = ({
   firstName,
   lastName,
   email,
-  password
+  password,
+  isArtist
 }) => dispatch => {
   dispatch(isRegistering())
   const header = {
@@ -27,7 +28,8 @@ export const registerUser = ({
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: password
+      password: password,
+      isArtist: isArtist,
     })
   };
 
