@@ -13,6 +13,7 @@ auth.post("/register", (req, res) => {
       email_lower: req.body.email.toLowerCase(),
       password: req.body.password,
       about: "Tell us about yoself",
+      isArtist: req.body.isArtist
     },
     function(err, user) {
       if (err) {

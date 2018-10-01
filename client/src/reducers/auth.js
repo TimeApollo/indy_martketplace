@@ -37,9 +37,9 @@ const initialState = {
     mediums: [],
     styles: [],
     userId: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    isArtist: false,
   },
-  users: {}
 };
 
 const authReducer = (state = initialState, action) => {
@@ -65,7 +65,8 @@ const authReducer = (state = initialState, action) => {
           about: action.payload.about,
           mediums: action.payload.mediums,
           styles: action.payload.styles,
-          isLoggedIn: true
+          isLoggedIn: true,
+          isArtist: action.payload.isArtist
         }
       };
     case REGISTER_FAIL:
@@ -110,7 +111,9 @@ const authReducer = (state = initialState, action) => {
           email_lower: action.payload.email_lower,
           about: action.payload.about,
           mediums: action.payload.mediums,
-          styles: action.payload.styles
+          styles: action.payload.styles,
+          isLoggedIn: true,
+          isArtist: action.payload.isArtist
         }
       };
     case IS_LOGGING_IN:
