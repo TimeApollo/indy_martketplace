@@ -155,3 +155,42 @@ const logoutUserReceived = data => {
   };
 };
 
+export const editProfile = (firstName, lastName, password, about, mediums, styles, isArtist, userId) => (dispatch) => {
+  dispatch(isEditing())
+
+  let changes = {userId: userId}
+
+  if (firstName) changes["firstName"] = firstName
+  if (lastName) changes["lastName"] = lastName
+  if (password) changes["password"] = password
+  if (about) changes["about"] = about
+  if (mediums) changes["mediums"] = mediums
+  if (styles) changes["styles"] = styles
+  if (isArtist) changes["isArtist"] = isArtist
+
+  const header = {
+    method: "PATCH", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(changes)
+  }
+  fetch(`/api/auth/editProfile/`, header)
+  .then(res => res.json())
+  .then(users => {
+    dispatch(editProfileSuccess(users))
+  })
+}
+
+export const isEditing = () => {
+  return {
+    type: IS_EDITING,
+  }
+}
+
+export const editProfileSuccess = (user) => {
+  return {
+    type: EDIT_PROFILE,
+    payload: user
+  }
+}

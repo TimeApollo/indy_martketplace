@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { editProfile, deleteUser } from "../../actions/auth";
+import { editProfile } from "../../actions/auth";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -66,12 +66,13 @@ class EditProfilePage extends React.Component {
     about: "",
     mediums: "",
     styles: "",
+    isArtist: this.props.isArtist,
     doesPasswordMatch: false
   };
 
-  handleDeleteUser = event => {
-    this.props.deleteUser(this.props.token);
-  };
+  // handleDeleteUser = event => {
+  //   this.props.deleteUser(this.props.token);
+  // };
 
   passwordMismatch = () => {
     return (
@@ -108,12 +109,14 @@ class EditProfilePage extends React.Component {
     if (this.state.password) {
       if (this.state.password === this.state.passwordMatch) {
         this.props.editProfile(
-          this.state.password,
           this.state.firstName,
           this.state.lastName,
+          this.state.password,
           this.state.about,
           this.state.mediums,
-          this.state.styles
+          this.state.styles, 
+          this.state.isArtist,
+          this.props.user.userId
         );
       } else {
         this.setState({ doesPasswordMatch: true });
@@ -126,12 +129,14 @@ class EditProfilePage extends React.Component {
       this.state.styles
     ) {
       this.props.editProfile(
-        this.state.password,
         this.state.firstName,
         this.state.lastName,
+        this.state.password,
         this.state.about,
         this.state.mediums,
-        this.state.styles
+        this.state.styles,
+        this.state.isArtist,
+        this.props.user.userId
       );
     }
   };
@@ -147,36 +152,53 @@ class EditProfilePage extends React.Component {
       <div>
         <h1 className={classes.header}>Edit Profile</h1>
         <div className={classes.form}>
-          <FormControl style={{ margin: "1em" }} required={true}>
+          <FormControl style={{ margin: "1em" }}>
             <InputLabel>First Name</InputLabel>
-            <Input type="text" name="firstName" />
+            <Input 
+            type="text" 
+            name="firstName"
+            onChange={this.handleOnChange}
+             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Last Name</InputLabel>
-            <Input type="text" name="lastName" />
-          </FormControl>
-          <FormControl style={{ margin: "1em" }}>
-            <InputLabel>Email</InputLabel>
-            <Input type="email" name="email" />
+            <Input 
+            type="text" 
+            name="lastName"
+            onChange={this.handleOnChange}
+             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
-            <Input type="password" name="password" />
+            <Input 
+            type="password" 
+            name="password" 
+            onChange={this.handleOnChange}
+            />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Verify Password</InputLabel>
-            <Input type="password" name="passwordMatch" />
+            <Input 
+            type="password" 
+            name="passwordMatch" 
+            onChange={this.handleOnChange}
+            />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>About</InputLabel>
-            <Input type="text" name="about" inputMultiline="true" />
+            <Input 
+            type="text" 
+            name="about" 
+            multiline={true} 
+            onChange={this.handleOnChange}            
+            />
           </FormControl>
           <br />
           <br />
           <button
             variant="extendedFab"
             className={classes.button}
-            onClick={this.editProfile}
+            onClick={this.handleSubmitProfile}
           >
             Update Profile
           </button>
@@ -186,47 +208,30 @@ class EditProfilePage extends React.Component {
   }
 }
 
-// EditProfilePage.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
+EditProfilePage.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
-// function mapStateToProps(state) {
-//   return {
-//     token: state.auth.token,
-//     isEditing: state.isPasswordUpdated
-//   };
-// }
+function mapStateToProps({auth}) {
+  return {
+    user: auth.user
+  };
+}
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     editProfile: (
-//       password,
-//       token,
-//       firstName,
-//       lastName,
-//       about,
-//       mediums,
-//       styles
-//     ) => {
-//       dispatch(
-//         editProfile(
-//           password,
-//           token,
-//           firstName,
-//           lastName,
-//           about,
-//           mediums,
-//           styles
-//         )
-//       );
-//     },
-//     deleteUser: token => {
-//       dispatch(deleteUser(token));
-//     }
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    editProfile: (firstName, lastName, password, about, mediums, styles, isArtist, userId) => {
+      dispatch(
+        editProfile(firstName, lastName, password, about, mediums, styles, isArtist, userId)
+      );
+    },
+    // deleteUser: token => {
+    //   dispatch(deleteUser(token));
+    // }
+  };
+};
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(withStyles(styles)(EditProfilePage));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(EditProfilePage));

@@ -142,7 +142,13 @@ const authReducer = (state = initialState, action) => {
     case EDIT_PROFILE:
       return {
         ...state,
-        isPasswordUpdated: true
+        isPasswordUpdated: true,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        about: action.payload.about,
+        mediums: action.payload.mediums,
+        styles: action.payload.styles,
+        isArtist: action.payload.isArtist,
       };
     case IS_EDITING:
       return {
