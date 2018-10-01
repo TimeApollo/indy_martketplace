@@ -1,14 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Slide from "@material-ui/core/Slide";
-import { Link } from "react-router-dom";
 import Modal from "@material-ui/core/Modal";
+import Paper from "@material-ui/core/Paper";
+import Slide from "@material-ui/core/Slide";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import { Link } from "react-router-dom";
 import RegisterForm from "./homepage/RegisterForm.jsx";
 import LoginForm from "./homepage/LoginForm.jsx";
+import {logoutUser} from "../actions/auth"
+import {tabChange} from "../actions/tab"
 
 const styles = theme => ({
   root: {
@@ -44,91 +47,91 @@ function getModalStyle() {
 
 class CenteredTabs extends React.Component {
   state = {
-    value: 0,
     lastValue: null,
-    loggedIn: true,
     loginOpened: false,
-    registerOpen: false
+    registerOpen: false,
+    email: "",
+    password: "",
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleTabChange = (event, value) => {
+    this.props.tabChange(value)
   };
-  handleLogin = () => {
-    this.setState({
-      loggedIn: !this.state.loggedIn
-    })
-  }
+  
   handleLogout = () => {
-
+    this.setState({
+      loginOpened: false
+    })
+    this.props.logoutUser()
   }
   openLogin = () => {
     this.setState({
-      lastValue: this.state.value,
       loginOpened: true
     });
   };
   closeLogin = () => {
+    let value = "/"
+    this.props.tabChange(value)
     this.setState({
-      value: this.state.lastValue,
       loginOpened: false
     });
   };
   handleOpenRegister = () => {
-    this.setState({ registerOpen: true });
+    this.setState({ 
+      registerOpen: true,
+    });
   };
 
   handleRegisterClose = () => {
+    let value = "/"
+    this.props.tabChange(value)
     this.setState({
-      registerOpen: false,
-      value: this.state.lastValue
+      registerOpen: false
     });
   };
+
   render() {
     const { classes } = this.props;
-
     return (
       <Paper className={classes.root}>
-        {this.state.loggedIn ? (
-          <div>
+        {this.props.loggedIn ? (
             <Slide
               direction="left"
-              in={this.state.loggedIn}
+              in={this.props.loggedIn}
               mountOnEnter
               unmountOnExit
             >
               <Tabs
-                value={this.state.value}
-                onChange={this.handleChange}
+                value={this.props.currentTab}
+                onChange={this.handleTabChange}
                 indicatorColor="primary"
                 textColor="primary"
                 centered
               >
-                <Tab label="Homepage" component={Link} to="/" />
-                <Tab label="Upload" component={Link} to="/upload" />
-                <Tab label="Messages" component={Link} to="/messages" />
-                <Tab label="Profile" component={Link} to="/profile" />
-                <Tab label="Logout" onClick={this.handleLogout} />
+                <Tab label="Homepage" component={Link} to="/" value="/"/>
+                <Tab label="Upload" component={Link} to="/upload" value="/upload"/>
+                <Tab label="Messages" component={Link} to="/messages" value="/messages"/>
+                <Tab label="Profile" component={Link} to="/profile" value="/profile"/>
                 <Tab label="Edit Profile" component={Link} to="/editProfile" />
+                <Tab label="Logout"  component={Link} to="/" onClick={this.handleLogout} />
               </Tabs>
             </Slide>
-          </div>
         ) : (
           <Slide
             direction="left"
-            in={this.state.loggedIn === false}
+            in={this.props.loggedIn === false}
             mountOnEnter
             unmountOnExit
           >
             <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
+              value={this.props.currentTab}
+              onChange={this.handleTabChange}
               indicatorColor="primary"
               textColor="primary"
               centered
             >
-              <Tab label="Homepage" component={Link} to="/" />
-              <Tab label="Login" onClick={this.openLogin} />
+              <Tab label="Homepage" component={Link} to="/" value="/"/>
+              <Tab label="Login" onClick={this.openLogin} value="/login"/>
               {this.state.loginOpened ? (
                 <Modal
                   aria-labelledby="simple-modal-title"
@@ -143,7 +146,7 @@ class CenteredTabs extends React.Component {
               ) : 
                 null
               }
-              <Tab label="Register" onClick={this.handleOpenRegister} />
+              <Tab label="Register" onClick={this.handleOpenRegister} value="/register"/>
               {this.state.registerOpen ? (
                 <Modal
                   aria-labelledby="simple-modal-title"
@@ -170,16 +173,21 @@ CenteredTabs.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = ({auth, tabs}) => {
   return {
-    loggedIn: state.user.isLoggedIn
+    loggedIn: auth.user.isLoggedIn,
+    currentTab: tabs.value
   }
 }
 
-const mapDispatchToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    
+    tabChange: (value) => dispatch(tabChange(value)),
+    logoutUser: () => dispatch(logoutUser())
   }
 }
 
-export default withStyles(styles)(CenteredTabs);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(CenteredTabs));

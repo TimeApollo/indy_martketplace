@@ -89,7 +89,6 @@ export const loginUser = ({ email, password }) => dispatch => {
   fetch("/api/auth/login", header)
     .then(response => response.json())
     .then(loginResponse => {
-      console.log(loginResponse);
       if (!loginResponse) {
         dispatch(loginFail());
       } else if (loginResponse.hasOwnProperty("errors")) {
@@ -149,9 +148,10 @@ const logoutUserRequest = () => {
 };
 
 const logoutUserReceived = data => {
+  console.log(data)
   return {
     type: LOGOUT_USER_RESPONSE,
-    message: data.message
+    payload: data
   };
 };
 
