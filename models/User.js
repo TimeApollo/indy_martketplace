@@ -44,6 +44,10 @@ var UserSchema = new mongoose.Schema({
     type: [String],
     minLength: 1,
     required: true
+  },
+  isArtist: {
+    type: Boolean,
+    required: true
   }
 });
 
