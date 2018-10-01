@@ -12,7 +12,7 @@ auth.post("/register", (req, res) => {
       email: req.body.email,
       email_lower: req.body.email.toLowerCase(),
       password: req.body.password,
-      about: "Tell us about yoself"
+      about: "Tell us about yoself",
     },
     function(err, user) {
       if (err) {
@@ -31,6 +31,7 @@ auth.post("/register", (req, res) => {
   );
 });
 
+//login
 auth.post("/login", (req, res) => {
   User.findOne({ email_lower: req.body.email.toLowerCase(), password: req.body.password }, function(
     err,
@@ -49,10 +50,45 @@ auth.post("/login", (req, res) => {
   });
 });
 
+//logout
 auth.get("/logout", (req, res) => {
   req.logout();
   res.json({ success: true, message: "Logged out!" });
 });
+
+//edit profile
+auth.patch("/", (req, res) => {
+  const patch = {};
+  if (req.body.password !== undefined) {
+    patch.password = req.body.password;
+  }
+  if (req.body.about !== undefined) {
+    patch.about = req.body.about;
+  }
+  if (req.body.mediums !== undefined) {
+    patch.mediums = req.body.mediums
+  }
+  if (req.body.styles !== undefined) {
+    patch.styles = req.body.styles
+  }
+  if (req.body.email !== undefined) {
+    patch.email = req.body.email
+  }
+  if (req.body.firstName !== undefined) {
+    patch.firstName = req.body.firstName
+  }
+  if (req.body.lastName !== undefined) {
+    patch.lastName = req.body.lastName
+  }
+
+  User.update(patch, {
+    where: {
+      id: req.user.id
+    }
+  })
+
+});
+
 
 module.exports = {
   auth

@@ -49,8 +49,8 @@ class ProfileStylesSidebar extends Component {
 ProfileStylesSidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-const mapStateToProps = ({ auth }) => ({
-  user: auth.user
+const mapStateToProps = ({ users }) => ({
+  user: user
 });
 
 export default connect(
