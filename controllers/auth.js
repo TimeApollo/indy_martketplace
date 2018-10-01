@@ -53,7 +53,6 @@ auth.post("/login", (req, res) => {
 
 //logout
 auth.get("/logout", (req, res) => {
-  req.logout();
   res.json({ success: true, message: "Logged out!" });
 });
 

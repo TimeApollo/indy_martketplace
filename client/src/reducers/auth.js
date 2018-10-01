@@ -3,8 +3,8 @@ import {
   LOGIN_SUCCESS,
   IS_LOGGING_IN,
   LOGIN_FAIL,
-  // LOGOUT_USER_REQUEST,
-  // LOGOUT_USER_RESPONSE,
+  LOGOUT_USER_REQUEST,
+  LOGOUT_USER_RESPONSE,
   IS_REGISTERING,
   REGISTER_FAIL,
   EDIT_PROFILE,
@@ -27,6 +27,11 @@ const initialState = {
     isLoginSuccess: false,
     isLoginFail: false,
     isLoggingIn: false
+  },
+  logout: {
+    isLoggingOut: false,
+    message: "",
+    success: false
   },
   user: {
     firstName: "",
@@ -112,8 +117,7 @@ const authReducer = (state = initialState, action) => {
           about: action.payload.about,
           mediums: action.payload.mediums,
           styles: action.payload.styles,
-          isLoggedIn: true,
-          isArtist: action.payload.isArtist
+          isLoggedIn: true
         }
       };
     case IS_LOGGING_IN:
@@ -148,22 +152,23 @@ const authReducer = (state = initialState, action) => {
     default:
       return state;
 
-    // case LOGOUT_USER_REQUEST:
-    //   return {
-    //     ...state,
-    //     user: {
-    //       ...user,
-    //       isloggedIn: false,
-    //       fetching: true,
-    //     }
-    //   };
-    // case LOGOUT_USER_RESPONSE:
-    //   return {
-    //     ...state,
-    //     user: initialState.user,
-    //     message: action.message,
-    //     fetching: false,
-    //   };
+    case LOGOUT_USER_REQUEST:
+      return {
+        ...state,
+        logout: {
+          isLoggingOut: true
+        }
+      };
+    case LOGOUT_USER_RESPONSE:
+      return {
+        ...state,
+        user: initialState.user,
+        logout: {
+          isLoggingOut: false,
+          message: action.payload.message,
+          success: action.payload.success
+        }
+      };
   }
 };
 
