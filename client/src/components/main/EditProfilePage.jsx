@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { editProfile, deleteUser } from "../../actions/auth";
+// import { editProfile, editProfileSuccess } from "../../actions/auth";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -149,27 +149,51 @@ class EditProfilePage extends React.Component {
         <div className={classes.form}>
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>First Name</InputLabel>
-            <Input type="text" name="firstName" />
+            <Input 
+            type="text" 
+            name="firstName"
+            value="firstName"
+             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Last Name</InputLabel>
-            <Input type="text" name="lastName" />
+            <Input 
+            type="text" 
+            name="lastName"
+            value="lastName"
+             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
-            <Input type="email" name="email" />
+            <Input 
+            type="email" 
+            name="email"
+            value="email"
+             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
-            <Input type="password" name="password" />
+            <Input 
+            type="password" 
+            name="password" 
+            value="password"
+            />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Verify Password</InputLabel>
-            <Input type="password" name="passwordMatch" />
+            <Input 
+            type="password" 
+            name="passwordMatch" 
+            value="passwordMatch"
+            />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>About</InputLabel>
-            <Input type="text" name="about" inputMultiline="true" />
+            <Input 
+            type="text" 
+            name="about" 
+            value="about"
+            inputMultiline="true" />
           </FormControl>
           <br />
           <br />
@@ -186,9 +210,9 @@ class EditProfilePage extends React.Component {
   }
 }
 
-// EditProfilePage.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
+EditProfilePage.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
 // function mapStateToProps(state) {
 //   return {

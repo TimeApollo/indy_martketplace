@@ -27,7 +27,6 @@ class BuyerAboutSidebar extends Component {
           <Typography variant="headline" component="h1">
             {this.props.user.firstName} {this.props.user.lastName}
           </Typography>
-          <Typography component="h2">{this.props.user.mediums}</Typography>
           <br />
           <Divider />
           <br />
