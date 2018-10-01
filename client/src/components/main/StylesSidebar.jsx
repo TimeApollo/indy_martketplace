@@ -1,4 +1,4 @@
-import React, { Component, Text } from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -39,7 +39,6 @@ class StylesSidebar extends Component {
         <Typography component="p">
         <List>
           {this.props.user.styles}
-          
       </List>
       </Typography>
       <br/>

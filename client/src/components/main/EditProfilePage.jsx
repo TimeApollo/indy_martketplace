@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editProfile, deleteUser } from "../../actions/auth";
+// import { editProfile, deleteUser } from "../../actions/auth";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
@@ -73,11 +74,33 @@ class EditProfilePage extends React.Component {
   };
 
   passwordMismatch = () => {
-    return <Segment raised>Passwords don't match, buddy!</Segment>;
+    return (
+      <Paper
+        style={{
+          width: "15em",
+          fontFamily: "sans-serif",
+          textAlign: "center"
+        }}
+        elevation={10}
+      >
+        Passwords don't match, buddy!
+      </Paper>
+    );
   };
 
   profileEditSuccess = () => {
-    return <Segment raised>Profile successfully updated!</Segment>;
+    return (
+      <Paper
+        style={{
+          width: "15em",
+          fontFamily: "sans-serif",
+          textAlign: "center"
+        }}
+        elevation={10}
+      >
+        Profile successfully updated!
+      </Paper>
+    );
   };
 
   handleSubmitProfile = () => {
@@ -86,7 +109,6 @@ class EditProfilePage extends React.Component {
       if (this.state.password === this.state.passwordMatch) {
         this.props.editProfile(
           this.state.password,
-          this.props.token,
           this.state.firstName,
           this.state.lastName,
           this.state.about,
@@ -105,7 +127,6 @@ class EditProfilePage extends React.Component {
     ) {
       this.props.editProfile(
         this.state.password,
-        this.props.token,
         this.state.firstName,
         this.state.lastName,
         this.state.about,
@@ -148,7 +169,7 @@ class EditProfilePage extends React.Component {
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>About</InputLabel>
-            <TextArea type="text" name="about" />
+            <Input type="text" name="about" inputMultiline="true" />
           </FormControl>
           <br />
           <br />
@@ -165,47 +186,47 @@ class EditProfilePage extends React.Component {
   }
 }
 
-EditProfilePage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// EditProfilePage.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
-function mapStateToProps(state) {
-  return {
-    token: state.auth.token,
-    isEditing: state.isPasswordUpdated
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     token: state.auth.token,
+//     isEditing: state.isPasswordUpdated
+//   };
+// }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    editProfile: (
-      password,
-      token,
-      firstName,
-      lastName,
-      about,
-      mediums,
-      styles
-    ) => {
-      dispatch(
-        editProfile(
-          password,
-          token,
-          firstName,
-          lastName,
-          about,
-          mediums,
-          styles
-        )
-      );
-    },
-    deleteUser: token => {
-      dispatch(deleteUser(token));
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     editProfile: (
+//       password,
+//       token,
+//       firstName,
+//       lastName,
+//       about,
+//       mediums,
+//       styles
+//     ) => {
+//       dispatch(
+//         editProfile(
+//           password,
+//           token,
+//           firstName,
+//           lastName,
+//           about,
+//           mediums,
+//           styles
+//         )
+//       );
+//     },
+//     deleteUser: token => {
+//       dispatch(deleteUser(token));
+//     }
+//   };
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(EditProfilePage));
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(withStyles(styles)(EditProfilePage));
