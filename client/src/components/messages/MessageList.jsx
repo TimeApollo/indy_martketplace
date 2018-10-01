@@ -87,7 +87,7 @@ const mapStateToProps = ({messages , auth}) => ({
 
 const mapDispatchToProps = ( dispatch ) => {
     return {
-      getMessages: userMsgInfo => dispatch(getMessages(userMsgInfo)),
+      getMessages: (userMsgInfo) => dispatch(getMessages(userMsgInfo)),
       createMsgPopup: () => dispatch(createMsgPopup())
     }
 }
