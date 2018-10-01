@@ -1,9 +1,12 @@
 export const GET_ARTWORK = "GET_ARTWORK";
 export const POST_ARTWORK = "POST_ARTWORK";
+export const IS_GETTING_ARTWORK = "IS_GETTING_ARTWORK";
+export const IS_UPLOADING = "IS_UPLOADING";
+export const UPLOAD_FAIL = "UPLOAD_FAIL";
+export const GET_ARTWORK_SUCCESS = "GET_ARTWORK_SUCCESS";
+export const IS_GETTING_ARTIST_ARTWORK = "IS_GETTING_ARTIST_ARTWORK";
+export const GET_ARTIST_ARTWORK_SUCCESS = "GET_ARTIST_ARTWORK_SUCCESS";
 
-// export const uploadArtwork = () => dispatch => {
-//     fetch('')
-// }
 export const submitUpload = uploadFormData => dispatch => {
   // dispatchEvent(isUploading())
   // console.log(uploadFormData);
@@ -36,8 +39,72 @@ export const submitUpload = uploadFormData => dispatch => {
     });
 };
 
-// export const isUploading = () => {
-//     return {
-//         type: IS_UPLOADING
-//     }
-// }
+export const isUploading = () => {
+    return {
+        type: IS_UPLOADING
+    }
+}
+
+export const uploadFail = () => {
+  return {
+    type: UPLOAD_FAIL
+  }
+}
+
+export const getArtwork = () => dispatch => {
+  dispatch(isGettingArtwork())
+
+  const header = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  fetch("/api/artwork/", header )
+    .then( response => response.json())
+    .then( artwork => {
+      dispatch(getArtworkSuccess(artwork))
+    })
+}
+
+export const isGettingArtwork = () => {
+  return {
+    type: IS_GETTING_ARTWORK
+  }
+}
+
+export const getArtworkSuccess = (artwork) => {
+  return {
+    type: GET_ARTWORK_SUCCESS,
+    payload: artwork 
+  }
+}
+
+export const getArtistArtwork = (userId) => dispatch => {
+  dispatch(isGettingArtistArtwork())
+
+  const header = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  fetch(`/api/artwork/${userId}`, header)
+    .then(response => response.json())
+    .then(artwork => {
+      dispatch(getArtistArtworkSuccess(artwork))
+    })
+}
+
+export const isGettingArtistArtwork = () => {
+  return {
+    type: IS_GETTING_ARTIST_ARTWORK
+  }
+}
+
+export const getArtistArtworkSuccess = (artwork) => {
+  return {
+    type: GET_ARTIST_ARTWORK_SUCCESS,
+    payload: artwork
+  }
+}

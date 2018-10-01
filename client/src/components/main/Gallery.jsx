@@ -7,9 +7,9 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import image from "../../images/penny.png";
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
+// import Modal from '@material-ui/core/Modal';
+// import Button from '@material-ui/core/Button';
 
 const tileData = [
   {
@@ -97,21 +97,6 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4,
   },
 });
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 class Gallery extends Component {
 

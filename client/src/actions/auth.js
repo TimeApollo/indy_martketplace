@@ -15,7 +15,8 @@ export const registerUser = ({
   firstName,
   lastName,
   email,
-  password
+  password,
+  isArtist
 }) => dispatch => {
   dispatch(isRegistering())
   const header = {
@@ -27,7 +28,8 @@ export const registerUser = ({
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: password
+      password: password,
+      isArtist: isArtist,
     })
   };
 
@@ -87,7 +89,6 @@ export const loginUser = ({ email, password }) => dispatch => {
   fetch("/api/auth/login", header)
     .then(response => response.json())
     .then(loginResponse => {
-      console.log(loginResponse);
       if (!loginResponse) {
         dispatch(loginFail());
       } else if (loginResponse.hasOwnProperty("errors")) {
@@ -147,73 +148,49 @@ const logoutUserRequest = () => {
 };
 
 const logoutUserReceived = data => {
+  console.log(data)
   return {
     type: LOGOUT_USER_RESPONSE,
-    message: data.message
+    payload: data
   };
 };
 
-// export const editProfile = (password, token, displayName, about) => (dispatch) => {
-//   dispatch(isEditing())
+export const editProfile = (firstName, lastName, password, about, mediums, styles, isArtist, userId) => (dispatch) => {
+  dispatch(isEditing())
 
-//   let changes = {}
-//   if (firstName) changes ["firstName"] = firstName
-//   if (lastName) changes ["lastName"] = lastName
-//   if (email) changes ["email"] = email
-//   if (password) changes["password"] = password
-//   if (about) changes["about"] = about
-//   if (mediums) changes["mediums"] = mediums
-//   if (styles) changes["styles"] = styles
+  let changes = {userId: userId}
 
+  if (firstName) changes["firstName"] = firstName
+  if (lastName) changes["lastName"] = lastName
+  if (password) changes["password"] = password
+  if (about) changes["about"] = about
+  if (mediums) changes["mediums"] = mediums
+  if (styles) changes["styles"] = styles
+  if (isArtist) changes["isArtist"] = isArtist
 
-//   const header = {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${token}`
-//     },
-//     body: JSON.stringify(changes)
-//   }
-//   fetch(`${api}/users`, header)
-//     .then(response => response.json())
-//     .then(users => {
-//       dispatch(updatePasswordSuccess(users))
-//   })
-// }
+  const header = {
+    method: "PATCH", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(changes)
+  }
+  fetch(`/api/auth/editProfile/`, header)
+  .then(res => res.json())
+  .then(users => {
+    dispatch(editProfileSuccess(users))
+  })
+}
 
-// export const isEditing = () => {
-//   return {
-//     type: IS_EDITING,
-//   }
-// }
+export const isEditing = () => {
+  return {
+    type: IS_EDITING,
+  }
+}
 
-// export const updatePasswordSuccess = (users) => {
-//     return {
-//         type: EDIT_PROFILE,
-    
-//     payload: users
-//     }
-// }
-
-// export const deleteUser = (token) => dispatch => {
-//   const header = {
-//     method: "DELETE",
-//     headers: {
-//       "Authorization": `Bearer ${token}`
-//     }
-//   }
-
-//   fetch(`${api}/users`, header)
-//     .then(response => response.json())
-//     .then(isDeleted => {
-//       console.log(isDeleted)
-//       dispatch(userDeletedSuccess())
-//       dispatch(push("/"))
-//     })
-// }
-
-// export const userDeletedSuccess = () => {
-//   return {
-//     type:  DELETE_USER_SUCCESS
-//   }
-// }
+export const editProfileSuccess = (user) => {
+  return {
+    type: EDIT_PROFILE,
+    payload: user
+  }
+}

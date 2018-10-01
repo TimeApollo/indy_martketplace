@@ -48,7 +48,7 @@ class HomePage extends Component {
         <SingleGallery />
         <Paper className={classes.form}>
           <Typography className={classes.type}>
-            INDY mARTketplace aims to bring together artists and art
+            Indy mARTketplace connects artists and art
             lovers in the Indianapolis community.
           </Typography>
           <br/>
@@ -56,7 +56,7 @@ class HomePage extends Component {
           <Divider className={classes.divider} />
           <br/>
           <Typography className={classes.type}>
-            BUY ART.             SELL ART.            LOVE ART.
+            BUY ART.   SELL ART.   LOVE ART.
           </Typography>
         </Paper>
         <LoginForm />

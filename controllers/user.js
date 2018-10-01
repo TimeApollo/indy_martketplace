@@ -16,6 +16,12 @@ user.get('/:id', (req, res) => {
   })
 })
 
+user.get('/', (req, res) => {
+  User.find({}, null , { sort: { firstName: 1}} , function ( err , users ){
+    res.json(users)
+  })
+})
+
 module.exports = {
   user
 }

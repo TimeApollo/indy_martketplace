@@ -3,8 +3,8 @@ import {
   LOGIN_SUCCESS,
   IS_LOGGING_IN,
   LOGIN_FAIL,
-  // LOGOUT_USER_REQUEST,
-  // LOGOUT_USER_RESPONSE,
+  LOGOUT_USER_REQUEST,
+  LOGOUT_USER_RESPONSE,
   IS_REGISTERING,
   REGISTER_FAIL,
   EDIT_PROFILE,
@@ -28,6 +28,11 @@ const initialState = {
     isLoginFail: false,
     isLoggingIn: false
   },
+  logout: {
+    isLoggingOut: false,
+    message: "",
+    success: false
+  },
   user: {
     firstName: "",
     lastName: "",
@@ -37,9 +42,9 @@ const initialState = {
     mediums: [],
     styles: [],
     userId: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    isArtist: false,
   },
-  users: {}
 };
 
 const authReducer = (state = initialState, action) => {
@@ -65,7 +70,8 @@ const authReducer = (state = initialState, action) => {
           about: action.payload.about,
           mediums: action.payload.mediums,
           styles: action.payload.styles,
-          isLoggedIn: true
+          isLoggedIn: true,
+          isArtist: action.payload.isArtist
         }
       };
     case REGISTER_FAIL:
@@ -110,7 +116,8 @@ const authReducer = (state = initialState, action) => {
           email_lower: action.payload.email_lower,
           about: action.payload.about,
           mediums: action.payload.mediums,
-          styles: action.payload.styles
+          styles: action.payload.styles,
+          isLoggedIn: true
         }
       };
     case IS_LOGGING_IN:
@@ -132,35 +139,42 @@ const authReducer = (state = initialState, action) => {
           isLoggingIn: false
         }
       };
-    // case EDIT_PROFILE:
-    //   return {
-    //     ...state,
-    //     isPasswordUpdated: true
-    //   };
-    // case IS_EDITING:
-    //   return {
-    //     ...state,
-    //     isPasswordUpdated: false
-    //   };
+    case EDIT_PROFILE:
+      return {
+        ...state,
+        isPasswordUpdated: true,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        about: action.payload.about,
+        mediums: action.payload.mediums,
+        styles: action.payload.styles,
+        isArtist: action.payload.isArtist,
+      };
+    case IS_EDITING:
+      return {
+        ...state,
+        isPasswordUpdated: false
+      };
     default:
       return state;
 
-    // case LOGOUT_USER_REQUEST:
-    //   return {
-    //     ...state,
-    //     user: {
-    //       ...user,
-    //       isloggedIn: false,
-    //       fetching: true,
-    //     }
-    //   };
-    // case LOGOUT_USER_RESPONSE:
-    //   return {
-    //     ...state,
-    //     user: initialState.user,
-    //     message: action.message,
-    //     fetching: false,
-    //   };
+    case LOGOUT_USER_REQUEST:
+      return {
+        ...state,
+        logout: {
+          isLoggingOut: true
+        }
+      };
+    case LOGOUT_USER_RESPONSE:
+      return {
+        ...state,
+        user: initialState.user,
+        logout: {
+          isLoggingOut: false,
+          message: action.payload.message,
+          success: action.payload.success
+        }
+      };
   }
 };
 

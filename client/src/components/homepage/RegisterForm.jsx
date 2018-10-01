@@ -6,6 +6,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const styles = theme => ({
   button: {
@@ -53,7 +57,18 @@ const styles = theme => ({
   match: {
     textAlign: "center",
     marginBottom: "2em"
-  }
+  },
+  formControl: {
+    margin: "1em",
+  },
+  group: {
+    display: "flex",
+    flexDirection: 'row',
+    flexWrap: "nowrap",
+    width: "auto",
+    height: "auto",
+    justifyContent: "space-around",
+  },
 });
 
 class RegisterForm extends React.Component {
@@ -63,6 +78,7 @@ class RegisterForm extends React.Component {
     password: "",
     passwordMatch: "",
     email: "",
+    isArtist: true,
     submit: true,
     errorfirstName: false,
     errorlastName: false,
@@ -89,7 +105,8 @@ class RegisterForm extends React.Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       password: this.state.password,
-      email: this.state.email
+      email: this.state.email,
+      isArtist: this.state.isArtist
     };
   
     if ( !this.state.firstName ){ this.setState({ submit: false , errorfirstName: true })}
@@ -173,6 +190,19 @@ class RegisterForm extends React.Component {
           </FormControl>
           { this.state.errorpasswordMatch ? <div className={classes.match}>Please Enter Password</div> : null }
           { this.state.isPasswordMatch ? null : <div className={classes.match}>Please Enter Matching Passwords</div>}
+          <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Account Type (Posting own artwork? Please click Artist!)</FormLabel>
+          <RadioGroup
+            aria-label="Account"
+            name="isArtist"
+            className={classes.group}
+            value={this.state.isArtist}
+            onChange={this.handleChange}
+          >
+            <FormControlLabel value={true} control={<Radio />} label="Artist" />
+            <FormControlLabel value={false} control={<Radio />} label="Art Lover" />
+          </RadioGroup>
+        </FormControl>
           <br/>
           <br/>
           <button

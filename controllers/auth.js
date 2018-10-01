@@ -1,5 +1,5 @@
 const express = require("express");
-const { User, Messages } = require("../models");
+const { User } = require("../models");
 const auth = express.Router();
 
 //register user
@@ -13,6 +13,7 @@ auth.post("/register", (req, res) => {
       email_lower: req.body.email.toLowerCase(),
       password: req.body.password,
       about: "Tell us about yoself",
+      isArtist: req.body.isArtist
     },
     function(err, user) {
       if (err) {
@@ -52,13 +53,13 @@ auth.post("/login", (req, res) => {
 
 //logout
 auth.get("/logout", (req, res) => {
-  req.logout();
   res.json({ success: true, message: "Logged out!" });
 });
 
 //edit profile
-auth.patch("/", (req, res) => {
+auth.patch("/editProfile", (req, res) => {
   const patch = {};
+
   if (req.body.password !== undefined) {
     patch.password = req.body.password;
   }
@@ -71,8 +72,8 @@ auth.patch("/", (req, res) => {
   if (req.body.styles !== undefined) {
     patch.styles = req.body.styles
   }
-  if (req.body.email !== undefined) {
-    patch.email = req.body.email
+  if (req.body.isArtist !== undefined) {
+    patch.isArtist = req.body.isArtist
   }
   if (req.body.firstName !== undefined) {
     patch.firstName = req.body.firstName
@@ -81,14 +82,17 @@ auth.patch("/", (req, res) => {
     patch.lastName = req.body.lastName
   }
 
-  User.update(patch, {
-    where: {
-      id: req.user.id
+  User.findOneAndUpdate({ _id: req.body.userId }, {$set: patch}, { new: true }, 
+    function(err, user) {
+      if (err) {
+        res.json(err)
+      } else {
+        console.log(user)
+        res.json(user)
+      }
     }
-  })
-
+  )
 });
-
 
 module.exports = {
   auth
