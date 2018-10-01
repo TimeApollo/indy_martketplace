@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import { Icon } from "semantic-ui-react";
 
 const styles = theme => ({
   root: {
@@ -18,7 +17,7 @@ const styles = theme => ({
   }
 });
 
-class AboutSidebar extends Component {
+class ArtistAboutSidebar extends Component {
   render() {
     const { classes } = this.props;
 
@@ -45,7 +44,7 @@ class AboutSidebar extends Component {
   }
 }
 
-AboutSidebar.propTypes = {
+ArtistAboutSidebar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -60,4 +59,4 @@ const mapStateToProps = ({ auth }) => ({
 export default connect(
   mapStateToProps,
   undefined
-)(withStyles(styles)(AboutSidebar));
+)(withStyles(styles)(ArtistAboutSidebar));
