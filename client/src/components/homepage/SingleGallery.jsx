@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { getArtwork } from "../../actions/art";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -6,8 +8,6 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-
-import image from "../../images/penny.png";
 
 const styles = theme => ({
   root: {
@@ -31,74 +31,10 @@ const styles = theme => ({
   }
 });
 
-//  The example data is structured as follows:
-const tileData = [
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 1
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 2
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 3
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 4
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 5
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 6
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 7
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 8
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 9
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author",
-    id: 10
-  }
-];
-
 class SingleGallery extends React.Component {
 
   componentDidMount(){
-     
+     this.props.getArtwork()
   }
 
   render() {
@@ -107,11 +43,11 @@ class SingleGallery extends React.Component {
     return (
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={8}>
-          {tileData.map(tile => (
-            <GridListTile key={tile.id}>
-              <img src={tile.img} alt={tile.title} />
+          {this.props.artwork.length ? this.props.artwork.map(piece => (
+            <GridListTile key={piece.id}>
+              <img src={piece.url} alt={piece.title} />
               <GridListTileBar
-                title={tile.title}
+                title={piece.title}
                 classes={{
                   root: classes.titleBar,
                   title: classes.title
@@ -123,15 +59,30 @@ class SingleGallery extends React.Component {
                 }
               />
             </GridListTile>
-          ))}
+          )) : null }
         </GridList>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ art }) => ({
+  artwork: art.artwork
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getArtwork: () => {
+      dispatch(getArtwork());
+    }
+  };
+};
+
 SingleGallery.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SingleGallery);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SingleGallery));
