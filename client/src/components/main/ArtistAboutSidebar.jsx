@@ -5,10 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-<<<<<<< HEAD:client/src/components/main/AboutSidebar.jsx
-// import { Icon } from "semantic-ui-react";
-=======
->>>>>>> 5761982c28bfce1b03dabd7eb74424bf5027ce61:client/src/components/main/ArtistAboutSidebar.jsx
 
 const styles = theme => ({
   root: {
