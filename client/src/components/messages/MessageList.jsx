@@ -63,7 +63,9 @@ class MessageList extends React.Component {
           <div id="convo-page" className={classes.root}>
             { this.props.msgPopUp && <CreateMessage /> }
             { this.props.dmPopUp && <ConvoModal
-                recEmail={this.state.singleConvoArr[0].emails[1]}
+                recEmail={this.state.singleConvoArr[0].emails[1] === this.props.userEmail 
+                    ? this.state.singleConvoArr[0].emails[0]
+                    : this.state.singleConvoArr[0].emails[1]}
                 messages={this.state.singleConvoArr[0].messages}
             /> }
             <Paper id="convo-page-bar" className={classes.root} elevation={2}>
@@ -82,7 +84,7 @@ class MessageList extends React.Component {
                 {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation
                         key={convo._id}
                         id={convo._id}
-                        sender={convo.emails[1]}
+                        sender={convo.emails[1] === this.props.userEmail ? convo.emails[0] : convo.emails[1]}
                         message={convo.messages[convo.messages.length - 1].message}
                         timestamp={convo.messages[convo.messages.length - 1].timestamp}
                         onClick={this.handleSingleConvo(convo._id)}/> ) : <div className="filler-msg"><p>To get started, send a message.</p></div> } 
@@ -100,6 +102,7 @@ const mapStateToProps = ({messages, auth}) => ({
     convoList: messages.allConvos,
     msgPopUp: messages.msgPopUp,
     userId: auth.user.userId,
+    userEmail: auth.user.email_lower,
     dmPopUp: messages.dmPopUp
 });
 
