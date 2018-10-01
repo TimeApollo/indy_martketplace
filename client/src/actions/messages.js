@@ -37,6 +37,15 @@ export const postMessage = ({senderEmail, email, message}) => dispatch => {
       })
 }
 
+export const getSingleConvo = (convoId) => dispatch => {
+    console.log(convoId)
+    fetch('/api/messages/' + convoId)
+        .then( res => res.json() )
+        .then(res => {
+            console.log(res);
+        })
+}
+
 export const createMsgPopup = () => dispatch => {
     dispatch({ type: MSG_POPUP })
 }
