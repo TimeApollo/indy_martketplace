@@ -7,6 +7,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
+// import Checkbox from '@material-ui/core/Checkbox';
+
 
 const styles = theme => ({
   button: {
@@ -201,6 +203,42 @@ class EditProfilePage extends React.Component {
             onClick={this.handleSubmitProfile}
           >
             Update Profile
+          </button>
+        </div>
+        <h1 className={classes.header}>Edit Profile</h1>
+        <div className={classes.form}>
+          <FormControl style={{ margin: "1em" }}>
+            <InputLabel>Password</InputLabel>
+            <Input 
+            type="password" 
+            name="password" 
+            onChange={this.handleOnChange}
+            />
+          </FormControl>
+          <FormControl style={{ margin: "1em" }}>
+            <InputLabel>Verify Password</InputLabel>
+            <Input 
+            type="password" 
+            name="passwordMatch" 
+            onChange={this.handleOnChange}
+            />
+          </FormControl>
+          <FormControl style={{ margin: "1em" }}>
+            <InputLabel>Tell us why you're leaving...</InputLabel>
+            <Input 
+            type="text" 
+            name="about" 
+            multiline={true} 
+            onChange={this.handleOnChange}            
+            />
+          </FormControl>
+          <br />
+          <br />
+          <button
+            variant="extendedFab"
+            className={classes.button}
+          >
+            Delete Profile
           </button>
         </div>
       </div>
