@@ -109,6 +109,7 @@ class CenteredTabs extends React.Component {
                 <Tab label="Messages" component={Link} to="/messages" />
                 <Tab label="Profile" component={Link} to="/profile" />
                 <Tab label="Logout" onClick={this.handleLogout} />
+                <Tab label="Edit Profile" component={Link} to="/editProfile" />
               </Tabs>
             </Slide>
           </div>

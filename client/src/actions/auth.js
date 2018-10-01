@@ -155,10 +155,10 @@ const logoutUserReceived = data => {
   };
 };
 
-export const editProfile = (firstName, lastName, password, about, mediums, styles) => (dispatch) => {
+export const editProfile = (firstName, lastName, password, about, mediums, styles, isArtist, userId) => (dispatch) => {
   dispatch(isEditing())
 
-  let changes = {}
+  let changes = {userId: userId}
 
   if (firstName) changes["firstName"] = firstName
   if (lastName) changes["lastName"] = lastName
@@ -166,6 +166,7 @@ export const editProfile = (firstName, lastName, password, about, mediums, style
   if (about) changes["about"] = about
   if (mediums) changes["mediums"] = mediums
   if (styles) changes["styles"] = styles
+  if (isArtist) changes["isArtist"] = isArtist
 
   const header = {
     method: "PATCH", 
@@ -174,8 +175,8 @@ export const editProfile = (firstName, lastName, password, about, mediums, style
     },
     body: JSON.stringify(changes)
   }
-  fetch(`/api/profile/`, header())
-  .then(response => response.json())
+  fetch(`/api/auth/editProfile/`, header)
+  .then(res => res.json())
   .then(users => {
     dispatch(editProfileSuccess(users))
   })

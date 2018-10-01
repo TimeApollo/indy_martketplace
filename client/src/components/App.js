@@ -23,7 +23,7 @@ class App extends Component {
           <Route exact path="/upload" component={UploadForm} />
           {/* <Route exact path="/profile"  */}
           <Route exact path="/profile" component={ArtistProfilePage} />
-          {/* <Route exact path="/editProfile" component={EditProfilePage} /> */}
+          <Route exact path="/editProfile" component={EditProfilePage} />
         </Switch>
       </div>
     );
