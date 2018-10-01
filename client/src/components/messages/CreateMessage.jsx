@@ -106,7 +106,7 @@ class TextFields extends React.Component {
               </IconButton>
             </Paper>
             <form id="msg-info-wrap" className={classes.container} noValidate autoComplete="off">
-              <div>To:</div>
+              <div className="to">To:</div>
               <TextField
                 name="email"
                 id="standard-name"

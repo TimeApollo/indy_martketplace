@@ -18,13 +18,12 @@ const styles = theme => ({
 
 class SingleConversation extends React.Component {
     render() {
-        console.log('sender: ', this.props.sender, 
-                    '\nmessage: ', this.props.message,
-                    '\ntimestamp: ', this.props.timestamp)
         const { classes } = this.props;
         return (
             <div>
-                <Paper id='convo-wrap' className={classes.root} onClick={() => {this.props.createDmPopup()}} elevation={1}>
+                <Paper id='convo-wrap' className={classes.root} onClick={(event) => {
+                    this.props.onClick(event)
+                    this.props.createDmPopup()}} elevation={1}>
                     <div className="pic-wrap">
                         <div className="pic"></div>
                     </div>

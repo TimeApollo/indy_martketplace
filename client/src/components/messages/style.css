@@ -41,16 +41,9 @@
 }
 
 #convo-page {
-    overflow: hidden;
-}
-
-#convo-page-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin: 0 auto;
-    width: 50%;
-    z-index: 1;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .convo-wrap {
@@ -74,6 +67,7 @@
     margin: 0 auto;
     height: 100vh;
     width: 100%;
+    top: -10px;
     background-color: rgba(0, 0, 0, 0.6);
     overflow: hidden;
 }
@@ -88,12 +82,13 @@
 }
 
 #new-msg-btn {
-    width: 15%;
+    width: 10%;
+    background-color: aqua;
+    border-color: rgb(0, 156, 156);
     color: white;
-    align-self: flex-end;
 }
 
-form div {
+.to {
     margin: 5px 5px -30px 5px;
 }
 
@@ -101,4 +96,88 @@ form div {
     display: flex;
     justify-content: center;
     color: gray;
+}
+
+#convo-page-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
+    height: 60px;
+    z-index: 1;
+}
+
+#write-msg-wrap {
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.msgs-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-image: linear-gradient(to right, rgb(147, 255, 255), rgb(204, 204, 204));
+    height: 95%;
+    overflow: hidden;
+}
+
+.convo-modal-wrap {
+    align-items: center;
+    width: 50%;
+    height: 80%;
+}
+
+.single-msg-time {
+    margin: 0 auto;
+    font-size: 10px;
+}
+
+.sender-msg-wrap {
+    flex-direction: column;
+    align-self: flex-end;
+    margin: 10px 30px;
+}
+
+.rec-msg-wrap {
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 10px 30px;
+}
+
+.sender-bubble {
+    background-color: aqua;
+    color: rgb(255, 255, 255);
+    align-self: flex-end;
+    padding: 5px;
+}
+
+.rec-bubble {
+    background-color: black;
+    color: white;
+    align-self: flex-start;
+    padding: 5px;
+}
+
+.msg-input {
+    margin-left: 1%;
+    width: 90%;
+    font-size: 1em;
+}
+
+.convo-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border-bottom: 3px solid aqua;
+    width: 50%;
+}
+
+.convo-who {
+    color: aqua;
+    font-size: 2.5em;
+    margin: 10px;
 }
