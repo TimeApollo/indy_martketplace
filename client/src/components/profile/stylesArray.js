@@ -1,7 +1,7 @@
 module.exports = [
   "abstract",
   "acryilic",
-  "architechural",
+  "architectural",
   "art deco",
   "astro",
   "candid",
