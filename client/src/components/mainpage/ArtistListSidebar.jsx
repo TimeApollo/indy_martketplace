@@ -11,10 +11,10 @@ import Icon from '@material-ui/core/Icon';
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
+    // ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "15em",
+    width: "30vw",
     fontFamily: "sans-serif",
     textAlign: "center",
   },
@@ -35,7 +35,7 @@ class ArtistListSidebar extends Component {
           ARTISTS
         </Typography>
         <br />
-        <Divider />
+        <Divider/>
         <br />
         <Typography component="p">
         <List>
