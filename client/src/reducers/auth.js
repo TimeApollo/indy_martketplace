@@ -43,8 +43,8 @@ const initialState = {
     styles: [],
     userId: null,
     isLoggedIn: false,
-    isArtist: false,
-  },
+    isArtist: false
+  }
 };
 
 const authReducer = (state = initialState, action) => {
@@ -118,7 +118,7 @@ const authReducer = (state = initialState, action) => {
           mediums: action.payload.mediums,
           styles: action.payload.styles,
           isLoggedIn: true,
-          isArtist: action.payload.isArtist,
+          isArtist: action.payload.isArtist
         }
       };
     case IS_LOGGING_IN:
@@ -143,13 +143,16 @@ const authReducer = (state = initialState, action) => {
     case EDIT_PROFILE:
       return {
         ...state,
-        isPasswordUpdated: true,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        about: action.payload.about,
-        mediums: action.payload.mediums,
-        styles: action.payload.styles,
-        isArtist: action.payload.isArtist,
+        user: {
+          ...state.user,
+          isPasswordUpdated: true,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          about: action.payload.about,
+          mediums: action.payload.mediums,
+          styles: action.payload.styles,
+          isArtist: action.payload.isArtist
+        }
       };
     case IS_EDITING:
       return {

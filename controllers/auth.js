@@ -82,14 +82,14 @@ auth.patch("/editProfile", (req, res) => {
     patch.lastName = req.body.lastName
   }
 
-  console.log(patch)
+  console.log("patch:" + patch)
 
   User.findOneAndUpdate({ _id: req.body.userId }, {$set: patch}, { new: true }, 
     function(err, user) {
       if (err) {
         res.json(err)
       } else {
-        console.log(user)
+        console.log("user" + user)
         res.json(user)
       }
     }
