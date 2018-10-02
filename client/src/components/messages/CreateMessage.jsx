@@ -120,12 +120,13 @@ class TextFields extends React.Component {
                 name="message"
                 id="standard-multiline-static"
                 label="Message"
-                multiline
+                multiline={true}
                 rows="20"
                 value={this.state.message}
                 onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
+
               />
               <Button
                 id="new-msg-btn"
