@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import ArtistListSidebar from "./ArtistListSidebar";
-import Gallery from "./Gallery";
+import ArtistListSidebar from "../profile/ArtistListSidebar";
+import Gallery from "../profile/Gallery";
 
 const styles = {
   row: {

@@ -5,9 +5,9 @@ import BannerComponent from "./BannerComponent.jsx";
 import NavBar from "./NavBar.jsx";
 import MessageList from "./messages/MessageList.jsx";
 import HomePage from "./homepage/HomePage.jsx";
-import UserProfilePageContainer from "./main/UserProfilePageContainer.jsx"
-import UploadForm from "./main/PostNewImagePage.jsx";
-import EditProfilePage from "./main/EditProfilePage.jsx"
+import UserProfilePageContainer from "./profile/UserProfilePageContainer.jsx"
+import UploadForm from "./profile/PostNewImagePage.jsx";
+import EditProfilePage from "./profile/EditProfilePage.jsx"
 import "./App.css";
 
 class App extends Component {
