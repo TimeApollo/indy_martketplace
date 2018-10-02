@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getArtworkAndFiltered } from "../../actions/art";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ArtistListSidebar from "../profile/ArtistListSidebar";
-import Gallery from "../profile/Gallery";
-import FilterComponent from "../profile/FilterComponent"
+import MainGallery from "../mainpage/MainGallery";
+import FilterComponent from "./FilterComponent"
 
 const styles = {
   row: {
@@ -44,6 +46,11 @@ const styles = {
 };
 
 class MainPage extends Component {
+
+  componentDidMount(){
+    this.props.getArtworkAndFiltered()
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -55,7 +62,7 @@ class MainPage extends Component {
             <ArtistListSidebar />
           </div>
           <div className={classes.gallery}>
-            <Gallery className={classes.gallery} />
+            <MainGallery className={classes.gallery} />
           </div>
         </div>
       </React.Fragment>
@@ -67,4 +74,17 @@ MainPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MainPage);
+const mapStateToProps = ({ art }) => ({
+  artwork: art.artwork,
+  filteredArtwork: art.filteredArtwork,
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getArtworkAndFiltered: () => {
+      dispatch(getArtworkAndFiltered());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MainPage));
