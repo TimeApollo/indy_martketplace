@@ -117,7 +117,8 @@ const authReducer = (state = initialState, action) => {
           about: action.payload.about,
           mediums: action.payload.mediums,
           styles: action.payload.styles,
-          isLoggedIn: true
+          isLoggedIn: true,
+          isArtist: action.payload.isArtist,
         }
       };
     case IS_LOGGING_IN:

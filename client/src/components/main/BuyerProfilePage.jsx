@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import BuyerAboutSidebar from "./AboutSidebar";
+import { connect } from "react-redux";
+import BuyerAboutSidebar from "./BuyerAboutSidebar";
 import Gallery from "./Gallery";
 import Paper from "@material-ui/core/Paper";
 
@@ -62,7 +63,7 @@ class BuyerProfilePage extends Component {
             <Paper elevation={15} className={classes.paper}>
               FAVORITE
             </Paper>
-            <Gallery className={classes.gallery} />
+            {this.props.artwork ? <Gallery className={classes.gallery} artworks={this.props.artwork} page={"buyer"}/> : null }
             <br />
             <br />
           </div>
@@ -76,4 +77,8 @@ BuyerProfilePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(BuyerProfilePage);
+const mapStateToProps = ({ art }) => ({
+  artwork: art.artwork
+});
+
+export default connect( mapStateToProps , undefined )(withStyles(styles)(BuyerProfilePage));

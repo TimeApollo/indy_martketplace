@@ -78,7 +78,7 @@ class RegisterForm extends React.Component {
     password: "",
     passwordMatch: "",
     email: "",
-    isArtist: true,
+    isArtist: 'true',
     submit: true,
     errorfirstName: false,
     errorlastName: false,
@@ -106,7 +106,7 @@ class RegisterForm extends React.Component {
       lastName: this.state.lastName,
       password: this.state.password,
       email: this.state.email,
-      isArtist: this.state.isArtist
+      isArtist: (this.state.isArtist === 'true' ? true : false )
     };
   
     if ( !this.state.firstName ){ this.setState({ submit: false , errorfirstName: true })}
@@ -199,8 +199,8 @@ class RegisterForm extends React.Component {
             value={this.state.isArtist}
             onChange={this.handleChange}
           >
-            <FormControlLabel value={true} control={<Radio />} label="Artist" />
-            <FormControlLabel value={false} control={<Radio />} label="Art Lover" />
+            <FormControlLabel value='true' control={<Radio />} label="Artist" />
+            <FormControlLabel value='false' control={<Radio />} label="Art Lover" />
           </RadioGroup>
         </FormControl>
           <br/>

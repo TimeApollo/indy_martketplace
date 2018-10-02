@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import ArtistProfilePage from "./ArtistProfilePage.jsx";
 import BuyerProfilePage from "./BuyerProfilePage.jsx"
@@ -6,7 +7,9 @@ import BuyerProfilePage from "./BuyerProfilePage.jsx"
 class UserProfilePageContainer extends Component {
   render() {
     return (
-      {this.props.isArtist ? <ArtistProfilePage/> : <BuyerProfilePage/>}
+      <React.Fragment>
+        {this.props.isArtist ? <ArtistProfilePage/> : <BuyerProfilePage/>}
+      </React.Fragment>
     )
   }
 }
