@@ -6,8 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from "@material-ui/core/Divider";
 import List from '@material-ui/core/List';
-import Icon from '@material-ui/core/Icon';
-
 
 const styles = theme => ({
   root: {
@@ -18,30 +16,29 @@ const styles = theme => ({
     fontFamily: "sans-serif",
     textAlign: "center",
   },
-  icon: {
-    margin: theme.spacing.unit,
+  edit: {
+    color: "gray", 
+
   },
 });
 
-class ArtistListSidebar extends Component {
+class ViewStylesSidebar extends Component {
   render() {
 
   const { classes } = this.props;
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.root} elevation={15}>
+      <Paper className={classes.root} elevation={10}>
         <Typography variant="headline" component="h1">
-          ARTISTS
+          STYLES
         </Typography>
         <br />
         <Divider />
         <br />
-        <Typography component="p">
         <List>
+          {this.props.artist.styles}
       </List>
-      <Icon/>
-      </Typography>
       <br/>
       <Divider/>
       <br/>
@@ -51,14 +48,14 @@ class ArtistListSidebar extends Component {
   }
 }
 
-ArtistListSidebar.propTypes = {
+ViewStylesSidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-const mapStateToProps = ({ users }) => ({
-  users
+const mapStateToProps = ({ artist }) => ({
+  artist: artist.artist
 });
 
 export default connect(
   mapStateToProps,
   undefined
-)(withStyles(styles)(ArtistListSidebar));
+)(withStyles(styles)(ViewStylesSidebar));
