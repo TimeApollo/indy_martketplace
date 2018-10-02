@@ -1,5 +1,7 @@
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const POST_MESSAGE = 'POST_MESSAGE';
+export const POST_SINGLE_MESSAGE = 'POST_SINGLE_MESSAGE';
+export const ASSIGN_CONVO = 'ASSIGN_CONVO';
 export const MSG_POPUP = 'MSG_POPUP';
 export const MSG_CLOSE = 'MSG_CLOSE';
 export const DM_POPUP = 'DM_POPUP';
@@ -29,8 +31,9 @@ export const postMessage = ({senderEmail, email, message}) => dispatch => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
+        console.log("post message response: ", res)
         dispatch({type: POST_MESSAGE, payload: res})
+        dispatch({type: POST_SINGLE_MESSAGE, payload: res})
       })
       .catch(function(err) {
           console.log("something went wrong", err)
@@ -44,6 +47,10 @@ export const getSingleConvo = (convoId) => dispatch => {
         .then(res => {
             console.log(res);
         })
+}
+
+export const assignSingletoStore = (newConvoArray) => dispatch => {
+    dispatch({type: ASSIGN_CONVO, payload: newConvoArray})
 }
 
 export const createMsgPopup = () => dispatch => {
