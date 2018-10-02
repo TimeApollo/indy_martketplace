@@ -21,7 +21,10 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    padding: "3em",
+    justifyContent: "center",
+    alignItems: "center"
   },
   margin: {
     margin: theme.spacing.unit
