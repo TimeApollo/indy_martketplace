@@ -7,7 +7,8 @@ import MessageList from "./messages/MessageList.jsx";
 import HomePage from "./homepage/HomePage.jsx";
 import UserProfilePageContainer from "./profile/UserProfilePageContainer.jsx"
 import UploadForm from "./profile/PostNewImagePage.jsx";
-import EditProfilePage from "./profile/EditProfilePage.jsx"
+import EditProfilePage from "./profile/EditProfilePage.jsx";
+import MainPage from "./mainpage/MainPage.jsx";
 import "./App.css";
 
 class App extends Component {
@@ -20,7 +21,7 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/messages" component={MessageList} />
           <Route exact path="/upload" component={UploadForm} />
-          {/* <Route exact path="/profile"  */}
+          <Route exact path="/artwork" component={MainPage} />
           <Route exact path="/profile" component={UserProfilePageContainer} />
           <Route exact path="/editProfile" component={EditProfilePage} />
         </Switch>

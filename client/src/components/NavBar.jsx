@@ -109,6 +109,7 @@ class CenteredTabs extends React.Component {
                 centered
               >
                 <Tab label="Homepage" component={Link} to="/" value="/"/>
+                <Tab label="Artwork" component={Link} to="/artwork" value="/Artwork"/>
                 <Tab label="Upload" component={Link} to="/upload" value="/upload"/>
                 <Tab label="Messages" component={Link} to="/messages" value="/messages"/>
                 <Tab label="Profile" component={Link} to="/profile" value="/profile"/>
@@ -131,6 +132,7 @@ class CenteredTabs extends React.Component {
               centered
             >
               <Tab label="Homepage" component={Link} to="/" value="/"/>
+              <Tab label="Artwork" component={Link} to="/artwork" value="/artwork"/>
               <Tab label="Login" onClick={this.openLogin} value="/login"/>
               {this.state.loginOpened ? (
                 <Modal

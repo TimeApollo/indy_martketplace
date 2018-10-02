@@ -7,9 +7,9 @@ import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import Checkbox from '@material-ui/core/Checkbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import Checkbox from "@material-ui/core/Checkbox";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 
 const styles = theme => ({
   button: {
@@ -43,23 +43,82 @@ const styles = theme => ({
     margin: "3em",
     marginTop: "0",
     border: "4px solid black",
-    width: "30em",
-    // height: "15em",
+    width: "40em",
+    // height: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
+    // flexFlow: "row wrap"
   },
   error: {
     textAlign: "center",
-
+    fontSize: ".9em",
+    padding: "0",
+    // flexFlow: "wrap",
   },
   match: {
     textAlign: "center",
     marginBottom: "2em"
   }
 });
+
+const mediumsArray = [
+  "Furniture Design",
+  "Mixed Media",
+  "Painting",
+  "Photography"
+]
+
+const stylesArray = [
+  "abstract",
+  "acryilic",
+  "architechural",
+  "art deco",
+  "astro",
+  "candid",
+  "contemporary",
+  "country",
+  "cubism",
+  "digital",
+  "ecletic",
+  "expressionism",
+  "fluid",
+  "futurism",
+  "geometric",
+  "impressionism",
+  "industrial",
+  "ink",
+  "landscape",
+  "macro",
+  "metal",
+  "modern",
+  "modernism",
+  "minimalism",
+  "nature",
+  "oil",
+  "outdoor",
+  "pop",
+  "portrait",
+  "pet portrait",
+  "pop",
+  "realism",
+  "resin",
+  "rustic",
+  "sports",
+  "spray paint",
+  "still life",
+  "street",
+  "surrealism",
+  "upcycled",
+  "victorian",
+  "visionary",
+  "watercolor",
+  "wedding",
+  "wildlife",
+  "wood",
+]
 
 class EditProfilePage extends React.Component {
   state = {
@@ -118,7 +177,7 @@ class EditProfilePage extends React.Component {
           this.state.password,
           this.state.about,
           this.state.mediums,
-          this.state.styles, 
+          this.state.styles,
           this.state.isArtist,
           this.props.user.userId
         );
@@ -158,59 +217,69 @@ class EditProfilePage extends React.Component {
         <div className={classes.form}>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>First Name</InputLabel>
-            <Input 
-            type="text" 
-            name="firstName"
-            onChange={this.handleOnChange}
-             />
+            <Input
+              type="text"
+              name="firstName"
+              onChange={this.handleOnChange}
+            />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Last Name</InputLabel>
-            <Input 
-            type="text" 
-            name="lastName"
-            onChange={this.handleOnChange}
-             />
+            <Input type="text" name="lastName" onChange={this.handleOnChange} />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
-            <Input 
-            type="password" 
-            name="password" 
-            onChange={this.handleOnChange}
+            <Input
+              type="password"
+              name="password"
+              onChange={this.handleOnChange}
             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Verify Password</InputLabel>
-            <Input 
-            type="password" 
-            name="passwordMatch" 
-            onChange={this.handleOnChange}
+            <Input
+              type="password"
+              name="passwordMatch"
+              onChange={this.handleOnChange}
             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>About</InputLabel>
-            <Input 
-            type="text" 
-            name="about" 
-            multiline={true} 
-            onChange={this.handleOnChange}            
+            <Input
+              type="text"
+              name="about"
+              multiline={true}
+              onChange={this.handleOnChange}
             />
           </FormControl>
           Mediums
           <List className={classes.error}>
-            <ListItem className={classes.error}>
-              Painting
-              <Checkbox>
-              </Checkbox>
-            </ListItem>
+            {mediumsArray.map(medium => (
+              <ListItem 
+                value= {medium} 
+                key= {medium} 
+                className={classes.error}
+              >
+              <Checkbox/>
+              {medium}
+              </ListItem>
+            ))}
+            Styles
+            {stylesArray.map(style => (
+              <ListItem 
+                value= {style} 
+                key= {style} 
+                className={classes.error}
+              >
+              <Checkbox/>
+              {style}
+              </ListItem>
+            ))}
+
           </List>
           <br />
           <br />
-          <button
-            className={classes.button}
-            onClick={this.handleSubmitProfile}
-          >
+          <button className={classes.button} onClick={this.handleSubmitProfile}>
             Update Profile
           </button>
         </div>
@@ -218,36 +287,32 @@ class EditProfilePage extends React.Component {
         <div className={classes.form}>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
-            <Input 
-            type="password" 
-            name="password" 
-            onChange={this.handleOnChange}
+            <Input
+              type="password"
+              name="password"
+              onChange={this.handleOnChange}
             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Verify Password</InputLabel>
-            <Input 
-            type="password" 
-            name="passwordMatch" 
-            onChange={this.handleOnChange}
+            <Input
+              type="password"
+              name="passwordMatch"
+              onChange={this.handleOnChange}
             />
           </FormControl>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Tell us why you're leaving...</InputLabel>
-            <Input 
-            type="text" 
-            name="about" 
-            multiline={true} 
-            onChange={this.handleOnChange}            
+            <Input
+              type="text"
+              name="about"
+              multiline={true}
+              onChange={this.handleOnChange}
             />
           </FormControl>
           <br />
           <br />
-          <button
-            className={classes.button}
-          >
-            Delete Profile
-          </button>
+          <button className={classes.button}>Delete Profile</button>
         </div>
       </div>
     );
@@ -258,7 +323,7 @@ EditProfilePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({auth}) {
+function mapStateToProps({ auth }) {
   return {
     user: auth.user
   };
@@ -266,11 +331,29 @@ function mapStateToProps({auth}) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editProfile: (firstName, lastName, password, about, mediums, styles, isArtist, userId) => {
+    editProfile: (
+      firstName,
+      lastName,
+      password,
+      about,
+      mediums,
+      styles,
+      isArtist,
+      userId
+    ) => {
       dispatch(
-        editProfile(firstName, lastName, password, about, mediums, styles, isArtist, userId)
+        editProfile(
+          firstName,
+          lastName,
+          password,
+          about,
+          mediums,
+          styles,
+          isArtist,
+          userId
+        )
       );
-    },
+    }
     // deleteUser: token => {
     //   dispatch(deleteUser(token));
     // }
