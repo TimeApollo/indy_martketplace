@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
 import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import FilterComponent from "./FilterComponent.jsx"
 
 const styles = theme => ({
   button: {
@@ -250,8 +249,6 @@ class EditProfilePage extends React.Component {
             Delete Profile
           </button>
         </div>
-
-        <FilterComponent></FilterComponent>
       </div>
     );
   }
