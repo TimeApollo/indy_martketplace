@@ -185,7 +185,7 @@ export const editProfile = (firstName, lastName, password, about, mediums, style
 
 export const isEditing = () => {
   return {
-    type: IS_EDITING
+    type: IS_EDITING,
   }
 }
 
