@@ -11,6 +11,12 @@ import Checkbox from "@material-ui/core/Checkbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
+let mediumsArray = require("./mediumsArray.js");
+let stylesArray = require("./stylesArray.js");
+
+//could pull out the styling to make this file shorter but it's not my
+//priority right now ¯\_(ツ)_/¯
+
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
@@ -49,13 +55,13 @@ const styles = theme => ({
     flexDirection: "column",
     justifyContent: "center",
     marginLeft: "auto",
-    marginRight: "auto",
+    marginRight: "auto"
     // flexFlow: "row wrap"
   },
   error: {
     textAlign: "center",
     fontSize: ".9em",
-    padding: "0",
+    padding: "0"
     // flexFlow: "wrap",
   },
   match: {
@@ -63,63 +69,6 @@ const styles = theme => ({
     marginBottom: "2em"
   }
 });
-
-const mediumsArray = [
-  "Furniture Design",
-  "Mixed Media",
-  "Painting",
-  "Photography"
-]
-
-const stylesArray = [
-  "abstract",
-  "acryilic",
-  "architechural",
-  "art deco",
-  "astro",
-  "candid",
-  "contemporary",
-  "country",
-  "cubism",
-  "digital",
-  "ecletic",
-  "expressionism",
-  "fluid",
-  "futurism",
-  "geometric",
-  "impressionism",
-  "industrial",
-  "ink",
-  "landscape",
-  "macro",
-  "metal",
-  "modern",
-  "modernism",
-  "minimalism",
-  "nature",
-  "oil",
-  "outdoor",
-  "pop",
-  "portrait",
-  "pet portrait",
-  "pop",
-  "realism",
-  "resin",
-  "rustic",
-  "sports",
-  "spray paint",
-  "still life",
-  "street",
-  "surrealism",
-  "upcycled",
-  "victorian",
-  "visionary",
-  "watercolor",
-  "wedding",
-  "wildlife",
-  "wood",
-]
-
 class EditProfilePage extends React.Component {
   state = {
     firstName: "",
@@ -127,15 +76,11 @@ class EditProfilePage extends React.Component {
     password: "",
     passwordMatch: "",
     about: "",
-    mediums: "",
-    styles: "",
+    mediums: [],
+    styles: [],
     isArtist: this.props.isArtist,
     doesPasswordMatch: false
   };
-
-  // handleDeleteUser = event => {
-  //   this.props.deleteUser(this.props.token);
-  // };
 
   passwordMismatch = () => {
     return (
@@ -152,23 +97,36 @@ class EditProfilePage extends React.Component {
     );
   };
 
-  profileEditSuccess = () => {
-    return (
-      <Paper
-        style={{
-          width: "15em",
-          fontFamily: "sans-serif",
-          textAlign: "center"
-        }}
-        elevation={10}
-      >
-        Profile successfully updated!
-      </Paper>
-    );
-  };
+  // profileEditSuccess = () => {
+  //   return (
+  //     <Paper
+  //       style={{
+  //         width: "15em",
+  //         fontFamily: "sans-serif",
+  //         textAlign: "center"
+  //       }}
+  //       elevation={10}
+  //     >
+  //       Profile successfully updated!
+  //     </Paper>
+  //   );
+  // };
 
   handleSubmitProfile = () => {
+
+    let selectedMediums = []
     this.setState({ doesPasswordMatch: false });
+    mediumsArray.forEach(medium => {
+      if (this.state[medium]) {
+        selectedMediums.push(medium)
+      }
+    })
+    let selectedStyles = []
+    stylesArray.forEach(style => {
+      if (this.state[style]) {
+        selectedStyles.push(style)
+      }
+    })
     if (this.state.password) {
       if (this.state.password === this.state.passwordMatch) {
         this.props.editProfile(
@@ -176,8 +134,8 @@ class EditProfilePage extends React.Component {
           this.state.lastName,
           this.state.password,
           this.state.about,
-          this.state.mediums,
-          this.state.styles,
+          selectedMediums,
+          selectedStyles,
           this.state.isArtist,
           this.props.user.userId
         );
@@ -254,28 +212,39 @@ class EditProfilePage extends React.Component {
           </FormControl>
           Mediums
           <List className={classes.error}>
-            {mediumsArray.map(medium => (
-              <ListItem 
-                value= {medium} 
-                key= {medium} 
-                className={classes.error}
-              >
-              <Checkbox/>
-              {medium}
-              </ListItem>
+            {mediumsArray.map(mediums => (
+              <FormControl>
+                <ListItem
+                  value={mediums}
+                  className={classes.error}
+                  name={mediums}
+                >
+                  <Checkbox
+                    onChange={this.handleOnChange}
+                    value={mediums}
+                    key={mediums}
+                    name={mediums}
+                  />
+                  {mediums}
+                </ListItem>
+              </FormControl>
             ))}
             Styles
-            {stylesArray.map(style => (
-              <ListItem 
-                value= {style} 
-                key= {style} 
+            {stylesArray.map(styles => (
+              <ListItem
+                value={styles}
                 className={classes.error}
+                name={styles}
               >
-              <Checkbox/>
-              {style}
+                <Checkbox
+                  onChange={this.handleOnChange}
+                  value={styles}
+                  key={styles}
+                  name={styles}
+                />
+                {styles}
               </ListItem>
             ))}
-
           </List>
           <br />
           <br />

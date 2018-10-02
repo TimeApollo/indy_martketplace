@@ -13,7 +13,7 @@ import RegisterForm from "./RegisterForm";
 const styles = theme => ({
   form: {
     marginBottom: "0",
-    width: "100%",
+    width: "100em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -40,6 +40,7 @@ const styles = theme => ({
     whiteSpace: "pre-wrap",
   }
 });
+
 class HomePage extends Component {
   render() {
     const { classes } = this.props;

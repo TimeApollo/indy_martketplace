@@ -36,11 +36,9 @@ class StylesSidebar extends Component {
         <br />
         <Divider />
         <br />
-        {/* <Typography component="p"> */}
         <List>
           {this.props.user.styles}
       </List>
-      {/* </Typography> */}
       <br/>
       <Divider/>
       <br/>

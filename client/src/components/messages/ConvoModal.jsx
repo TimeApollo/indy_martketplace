@@ -62,8 +62,7 @@ const styles = theme => ({
 class DirectConvo extends React.Component {
     state = {
         messages: this.props.messages,
-        message: '',
-        // printMessage: '',
+        message: ''
     }
     
     handleChange = event => {
@@ -75,20 +74,15 @@ class DirectConvo extends React.Component {
     handleMessagePost = event => {
         let messageInfo = {
           senderEmail: this.props.userEmail,
-          email: this.props.recEmail,
+          email: this.props.currentEmails[1] === this.props.userEmail 
+                ? this.props.currentEmails[0]
+                : this.props.currentEmails[1],
           message: this.state.message
         };
-
-        // this.setState({printMessage: this.state.message})
     
-        console.log("message info", messageInfo)
-    
+        this.setState({message: ''})
         this.props.postMessage(messageInfo);
     }
-
-    // componentWillReceiveProps = ({messages}) => {
-    //     this.setState({messages: messages})
-    // }
 
     render() {
     const { classes } = this.props;
@@ -96,7 +90,9 @@ class DirectConvo extends React.Component {
     return (
         <div className="msg-popup">
             <div className="convo-nav">
-                <div className="convo-who">{this.props.recEmail}</div>
+                <div className="convo-who">{this.props.currentEmails[1] === this.props.userEmail 
+                    ? this.props.currentEmails[0]
+                    : this.props.currentEmails[1]}</div>
                 <IconButton >
                     <SvgIcon onClick={ () => this.props.exitDmPopup()}>
                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
@@ -105,23 +101,21 @@ class DirectConvo extends React.Component {
             </div>
             <div className="convo-modal-wrap">
                 <div className="msgs-wrap">
-                    {this.state.messages ? this.state.messages.map(message => {
+                    {this.props.currentMessages.length && this.props.currentMessages.map(message => {
                         if (message !== null) {
                             if (message.email === this.props.userEmail) {
-                                console.log("sender message: ", message.message);
                                 return (<div className="sender-msg-wrap">
                                             <div className="sender-bubble">{message.message}</div>
                                             <div className="single-msg-time">{message.timestamp}</div>
                                         </div>);
                             } else {
-                                console.log("reciever message: ", message.message)
                                 return (<div className="rec-msg-wrap">
                                             <div className="rec-bubble">{message.message}</div>
                                             <div className="single-msg-time">{message.timestamp}</div>
                                         </div>);
                             }
                         }
-                    }) : console.log("please type a message")}
+                    })}
                 </div>
                 <form id="write-msg-wrap" noValidate autoComplete="off">
                     <input className="msg-input" type="text" name="message" value={this.state.message} onChange={this.handleChange}/>
@@ -139,17 +133,14 @@ class DirectConvo extends React.Component {
   }
 }
 
-// {/* { this.state.printMessage ? <div className="sender-msg-wrap">
-//                                             <div className="sender-bubble">{this.state.printMessage}</div>
-//                                             {/* <div className="single-msg-time">{message.timestamp}</div> */}
-//                                         </div> : null} */}
-
 DirectConvo.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({auth, messages}) => ({
     userEmail: auth.user.email_lower,
+    currentEmails: messages.currentEmails,
+    currentMessages: messages.currentMessages
 });
 
 const mapDispatchToProps = ( dispatch ) => {
