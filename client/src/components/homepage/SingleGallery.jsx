@@ -44,7 +44,7 @@ class SingleGallery extends React.Component {
       <div className={classes.root}>
         <GridList className={classes.gridList} cols={8}>
           {this.props.artwork.length ? this.props.artwork.map(piece => (
-            <GridListTile key={piece.id}>
+            <GridListTile key={piece._id}>
               <img src={piece.url} alt={piece.title} />
               <GridListTileBar
                 title={piece.title}

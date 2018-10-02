@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import BuyerAboutSidebar from "./AboutSidebar";
+import StylesSidebar from "./StylesSidebar";
+import ArtistAboutSidebar from "./ArtistAboutSidebar";
 import Gallery from "./Gallery";
 import Paper from "@material-ui/core/Paper";
+import { getArtistArtwork } from "../../actions/art"
 
 const styles = {
   row: {
@@ -43,7 +46,12 @@ const styles = {
   }
 };
 
-class BuyerProfilePage extends Component {
+class ArtistProfilePage extends Component {
+
+  componentDidMount = () => {
+    this.props.getArtistArtwork(this.props.userId)
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -56,15 +64,20 @@ class BuyerProfilePage extends Component {
               alt="penny"
               className={classes.bigAvatar}
             />
-            <BuyerAboutSidebar />
+            <ArtistAboutSidebar/>
+            <StylesSidebar />
           </div>
           <div className={classes.gallery}>
             <Paper elevation={15} className={classes.paper}>
-              FAVORITE
+              FOR SALE
             </Paper>
-            <Gallery className={classes.gallery} />
+            {this.props.userArtworkSale.length ? <Gallery className={classes.gallery} artworks={this.props.userArtworkSale} /> : null }
             <br />
             <br />
+            <Paper elevation={15} className={classes.paper}>
+              SOLD
+            </Paper>
+            {this.props.userArtworkSold.length ? <Gallery className={classes.gallery} artworks={this.props.userArtworkSold}/> : null }
           </div>
         </div>
       </React.Fragment>
@@ -72,8 +85,22 @@ class BuyerProfilePage extends Component {
   }
 }
 
-BuyerProfilePage.propTypes = {
+ArtistProfilePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(BuyerProfilePage);
+const mapStateToProps = ({ art , auth }) => ({
+  userArtworkSale: art.userArtwork.filter( art => art.forSale === true ),
+  userArtworkSold: art.userArtwork.filter( art => art.forSale === false ),
+  userId: auth.user.userId
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getArtistArtwork: (userId) => {
+      dispatch(getArtistArtwork(userId));
+    }
+  };
+};
+
+export default connect( mapStateToProps , mapDispatchToProps )(withStyles(styles)(ArtistProfilePage));

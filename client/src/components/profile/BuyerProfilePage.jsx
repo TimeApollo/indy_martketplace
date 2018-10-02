@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import ArtistListSidebar from "./ArtistListSidebar";
+import { connect } from "react-redux";
+import BuyerAboutSidebar from "./BuyerAboutSidebar";
 import Gallery from "./Gallery";
+import Paper from "@material-ui/core/Paper";
 
 const styles = {
   row: {
@@ -42,7 +44,7 @@ const styles = {
   }
 };
 
-class MainPage extends Component {
+class BuyerProfilePage extends Component {
   render() {
     const { classes } = this.props;
 
@@ -55,10 +57,15 @@ class MainPage extends Component {
               alt="penny"
               className={classes.bigAvatar}
             />
-            <ArtistListSidebar />
+            <BuyerAboutSidebar />
           </div>
           <div className={classes.gallery}>
-            <Gallery className={classes.gallery} />
+            <Paper elevation={15} className={classes.paper}>
+              FAVORITE
+            </Paper>
+            {this.props.artwork ? <Gallery className={classes.gallery} artworks={this.props.artwork} page={"buyer"}/> : null }
+            <br />
+            <br />
           </div>
         </div>
       </React.Fragment>
@@ -66,8 +73,12 @@ class MainPage extends Component {
   }
 }
 
-MainPage.propTypes = {
+BuyerProfilePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MainPage);
+const mapStateToProps = ({ art }) => ({
+  artwork: art.artwork
+});
+
+export default connect( mapStateToProps , undefined )(withStyles(styles)(BuyerProfilePage));

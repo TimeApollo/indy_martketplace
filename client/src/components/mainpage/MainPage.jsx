@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import StylesSidebar from "./StylesSidebar";
-import ArtistAboutSidebar from "./ArtistAboutSidebar";
-import Gallery from "./Gallery";
-import Paper from "@material-ui/core/Paper";
+import ArtistListSidebar from "../profile/ArtistListSidebar";
+import Gallery from "../profile/Gallery";
 
 const styles = {
   row: {
@@ -44,7 +42,7 @@ const styles = {
   }
 };
 
-class ArtistProfilePage extends Component {
+class MainPage extends Component {
   render() {
     const { classes } = this.props;
 
@@ -57,19 +55,9 @@ class ArtistProfilePage extends Component {
               alt="penny"
               className={classes.bigAvatar}
             />
-            <ArtistAboutSidebar/>
-            <StylesSidebar />
+            <ArtistListSidebar />
           </div>
           <div className={classes.gallery}>
-            <Paper elevation={15} className={classes.paper}>
-              FOR SALE
-            </Paper>
-            <Gallery className={classes.gallery} />
-            <br />
-            <br />
-            <Paper elevation={15} className={classes.paper}>
-              SOLD
-            </Paper>
             <Gallery className={classes.gallery} />
           </div>
         </div>
@@ -78,8 +66,8 @@ class ArtistProfilePage extends Component {
   }
 }
 
-ArtistProfilePage.propTypes = {
+MainPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ArtistProfilePage);
+export default withStyles(styles)(MainPage);

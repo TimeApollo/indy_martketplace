@@ -7,8 +7,9 @@ import FormControl from "@material-ui/core/FormControl";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-// import Checkbox from '@material-ui/core/Checkbox';
-
+import Checkbox from '@material-ui/core/Checkbox';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 const styles = theme => ({
   button: {
@@ -18,7 +19,7 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "-2em",
-    background: "#1fc8db 51%",
+    background: "#1fc8db",
     fontWeight: "bold",
     fontSize: "1.2em",
     color: "white",
@@ -51,7 +52,8 @@ const styles = theme => ({
     marginRight: "auto"
   },
   error: {
-    textAlign: "center"
+    textAlign: "center",
+
   },
   match: {
     textAlign: "center",
@@ -195,17 +197,24 @@ class EditProfilePage extends React.Component {
             onChange={this.handleOnChange}            
             />
           </FormControl>
+          Mediums
+          <List className={classes.error}>
+            <ListItem className={classes.error}>
+              Painting
+              <Checkbox>
+              </Checkbox>
+            </ListItem>
+          </List>
           <br />
           <br />
           <button
-            variant="extendedFab"
             className={classes.button}
             onClick={this.handleSubmitProfile}
           >
             Update Profile
           </button>
         </div>
-        <h1 className={classes.header}>Edit Profile</h1>
+        <h1 className={classes.header}>Delete Profile</h1>
         <div className={classes.form}>
           <FormControl style={{ margin: "1em" }}>
             <InputLabel>Password</InputLabel>
@@ -235,7 +244,6 @@ class EditProfilePage extends React.Component {
           <br />
           <br />
           <button
-            variant="extendedFab"
             className={classes.button}
           >
             Delete Profile

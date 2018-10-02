@@ -1,6 +1,6 @@
-import { GET_MESSAGES, POST_MESSAGE, MSG_POPUP, MSG_CLOSE, DM_POPUP, DM_CLOSE } from "../actions/messages";
+import { GET_MESSAGES, POST_MESSAGE, POST_SINGLE_MESSAGE, ASSIGN_CONVO, MSG_POPUP, MSG_CLOSE, DM_POPUP, DM_CLOSE } from "../actions/messages";
 
-const initialState = { allConvos: [], singleConvo: [], msgPopUp: false, dmPopUp: false };
+const initialState = { allConvos: [], currentEmails: [], currentMessages: [], msgPopUp: false, dmPopUp: false };
 
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -46,6 +46,29 @@ export default (state = initialState, action) => {
 
                     return 0;
                 })
+            }
+        case ASSIGN_CONVO:
+            console.log(action.payload)
+            let sortedEm = action.payload[0].emails.concat().sort()
+
+            // let msgCheck = () => {
+            //     if (currentMessages.length) {
+            //         return null;
+            //     } else {
+            //         return action.payload[0].messages
+            //     }
+            // }
+
+            return {
+                ...state,
+                currentEmails: sortedEm,
+                currentMessages: action.payload[0].messages
+            }
+        case POST_SINGLE_MESSAGE:
+            return {
+                ...state,
+                currentEmails: action.payload.emails.concat().sort(),
+                currentMessages: action.payload.messages
             }
         case MSG_POPUP:
             return {

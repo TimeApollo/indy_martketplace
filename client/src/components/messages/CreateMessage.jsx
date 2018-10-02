@@ -83,8 +83,6 @@ class TextFields extends React.Component {
       message: this.state.message
     };
 
-    console.log("message info", messageInfo)
-
     this.setState({email: '',
                   message: ''})
     this.props.postMessage(messageInfo);
@@ -122,12 +120,13 @@ class TextFields extends React.Component {
                 name="message"
                 id="standard-multiline-static"
                 label="Message"
-                multiline
+                multiline={true}
                 rows="20"
                 value={this.state.message}
                 onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
+
               />
               <Button
                 id="new-msg-btn"

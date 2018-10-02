@@ -16,7 +16,7 @@ import SingleConversation from './SingleConversation.jsx';
 import ConvoModal from './ConvoModal';
 
 //Redux imports
-import { getMessages, getSingleConvo, createMsgPopup } from '../../actions/messages';
+import { getMessages, getSingleConvo, assignSingletoStore, createMsgPopup } from '../../actions/messages';
 
 const styles = {
   root: {
@@ -27,12 +27,10 @@ const styles = {
 
 class MessageList extends React.Component {
     state = {
-        singleConvoArr: [],
-        refreshConvo: false
+        singleConvoArr: []
     }
 
     handleMsgList = event => {
-        console.log("hello")
         let userMsgInfo = {
             userId: this.props.userId
         };
@@ -44,23 +42,11 @@ class MessageList extends React.Component {
         const result = this.props.convoList.filter(convo => id === convo._id);
 
         this.setState({singleConvoArr: result});
-        console.log(this.state.singleConvoArr);
+        this.props.assignSingletoStore(result);
     }
-
-    // refreshConvo = () => {
-    //     this.setState({refreshConvo: !this.state.refreshConvo})
-    // }
 
     componentDidMount() {
-        console.log(this.state.singleConvoArr)
         this.handleMsgList()
-    }
-
-    componentDidUpdate(prevProps) {
-        console.log(prevProps)
-        if (prevProps.convoList !== this.props.convoList) {
-            this.setState({refreshConvo: !this.state.refreshConvo})
-        }
     }
 
     render() {
@@ -69,13 +55,7 @@ class MessageList extends React.Component {
         return (
           <div id="convo-page" className={classes.root}>
             { this.props.msgPopUp && <CreateMessage /> }
-            { this.props.dmPopUp && <ConvoModal
-                recEmail={this.state.singleConvoArr[0].emails[1] === this.props.userEmail 
-                    ? this.state.singleConvoArr[0].emails[0]
-                    : this.state.singleConvoArr[0].emails[1]}
-                messages={this.state.singleConvoArr[0].messages}
-                refresh={this.state.refreshConvo}
-            /> }
+            { this.props.dmPopUp && <ConvoModal /> }
             <Paper id="convo-page-bar" className={classes.root} elevation={2}>
                 <Toolbar>
                     <Typography variant="title" color="inherit">
@@ -89,7 +69,15 @@ class MessageList extends React.Component {
                 </IconButton>
             </Paper>
             <div className="convo-wrap">
-                {this.props.convoList.length ? this.props.convoList.map(convo => <SingleConversation
+                {this.props.convoList.length ? this.props.convoList.sort((a,b) => {
+                    if (a.messages[a.messages.length - 1].timestamp < b.messages[b.messages.length - 1].timestamp) {
+                        return 1;
+                    }
+                    if (a.messages[a.messages.length - 1].timestamp < b.messages[b.messages.length - 1].timestamp) {
+                        return -1;
+                    }
+                    return 0;
+                }).map(convo => <SingleConversation
                         key={convo._id}
                         id={convo._id}
                         sender={convo.emails[1] === this.props.userEmail ? convo.emails[0] : convo.emails[1]}
@@ -117,6 +105,7 @@ const mapStateToProps = ({messages, auth}) => ({
 const mapDispatchToProps = ( dispatch ) => {
     return {
       getMessages: userMsgInfo => dispatch(getMessages(userMsgInfo)),
+      assignSingletoStore: newConvoArray => dispatch(assignSingletoStore(newConvoArray)),
       getSingleConvo: convoId => dispatch(getSingleConvo(convoId)),
       createMsgPopup: () => dispatch(createMsgPopup())
     }
