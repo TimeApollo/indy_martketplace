@@ -221,6 +221,7 @@ class EditProfilePage extends React.Component {
                 >
                   <Checkbox
                     onChange={this.handleOnChange}
+                    checked={this.state[mediums]}
                     value={mediums}
                     key={mediums}
                     name={mediums}

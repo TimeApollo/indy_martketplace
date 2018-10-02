@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 });
 
-class StylesSidebar extends Component {
+class ArtistStylesSidebar extends Component {
   render() {
 
   const { classes } = this.props;
@@ -36,9 +36,12 @@ class StylesSidebar extends Component {
         <br />
         <Divider />
         <br />
-        <List>
-          {this.props.user.styles}
-      </List>
+        {this.props.user.styles.map(style => (
+
+          <List>
+            {style}
+          </List>
+        ))}
       <br/>
       <Divider/>
       <br/>
@@ -48,7 +51,7 @@ class StylesSidebar extends Component {
   }
 }
 
-StylesSidebar.propTypes = {
+ArtistStylesSidebar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 const mapStateToProps = ({ auth }) => ({
@@ -58,4 +61,4 @@ const mapStateToProps = ({ auth }) => ({
 export default connect(
   mapStateToProps,
   undefined
-)(withStyles(styles)(StylesSidebar));
+)(withStyles(styles)(ArtistStylesSidebar));
