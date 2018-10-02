@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-
+import FilterComponent from "./FilterComponent.jsx"
 
 const styles = theme => ({
   button: {
@@ -53,7 +53,8 @@ const styles = theme => ({
     marginRight: "auto"
   },
   error: {
-    textAlign: "center"
+    textAlign: "center",
+
   },
   match: {
     textAlign: "center",
@@ -208,7 +209,6 @@ class EditProfilePage extends React.Component {
           <br />
           <br />
           <button
-            variant="extendedFab"
             className={classes.button}
             onClick={this.handleSubmitProfile}
           >
@@ -245,12 +245,13 @@ class EditProfilePage extends React.Component {
           <br />
           <br />
           <button
-            variant="extendedFab"
             className={classes.button}
           >
             Delete Profile
           </button>
         </div>
+
+        <FilterComponent></FilterComponent>
       </div>
     );
   }
