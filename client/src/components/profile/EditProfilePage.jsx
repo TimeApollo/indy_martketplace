@@ -19,7 +19,7 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "-2em",
-    background: "#1fc8db 51%",
+    background: "#1fc8db",
     fontWeight: "bold",
     fontSize: "1.2em",
     color: "white",
