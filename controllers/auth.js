@@ -40,6 +40,9 @@ auth.post("/login", (req, res) => {
   ) {
     if (err) {
       res.json(err);
+    } else if (!user){
+      console.log('here')
+      res.json({errors: 'UserName or Password was incorrect. Please try again.'})
     } else {
       delete user._doc.password
       user = {

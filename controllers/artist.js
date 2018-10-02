@@ -8,6 +8,19 @@ artist.get('/', (req, res) => {
   })
 })
 
+artist.get('/:id', (req, res) => {
+  User.findById(req.params.id, function (err, user) {
+      if (err) {
+          res.json(err)
+      } else {
+        user = {
+          ...user._doc,
+        };
+        res.json(user)
+      }
+  })
+})
+
 module.exports = {
   artist
 }
