@@ -110,7 +110,7 @@ class CenteredTabs extends React.Component {
               >
                 <Tab label="Homepage" component={Link} to="/" value="/"/>
                 <Tab label="Artwork" component={Link} to="/artwork" value="/Artwork"/>
-                <Tab label="Upload" component={Link} to="/upload" value="/upload"/>
+                {this.props.isArtist ? <Tab label="Upload" component={Link} to="/upload" value="/upload"/> : null }
                 <Tab label="Messages" component={Link} to="/messages" value="/messages"/>
                 <Tab label="Profile" component={Link} to="/profile" value="/profile"/>
                 <Tab label="Edit Profile" component={Link} to="/editProfile" />
@@ -178,7 +178,8 @@ CenteredTabs.propTypes = {
 const mapStateToProps = ({auth, tabs}) => {
   return {
     loggedIn: auth.user.isLoggedIn,
-    currentTab: tabs.value
+    currentTab: tabs.value,
+    isArtist: auth.user.isArtist
   }
 }
 

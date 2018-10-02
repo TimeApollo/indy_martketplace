@@ -113,7 +113,6 @@ class EditProfilePage extends React.Component {
   // };
 
   handleSubmitProfile = () => {
-
     let selectedMediums = []
     this.setState({ doesPasswordMatch: false });
     mediumsArray.forEach(medium => {

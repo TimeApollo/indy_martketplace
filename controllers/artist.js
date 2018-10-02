@@ -1,9 +1,14 @@
 const express = require('express')
 const { User } = require('../models')
-const user = express.Router()
+const artist = express.Router()
 
+artist.get('/', (req, res) => {
+  User.find({isArtist: true}, null , {sort: { firstName: 1}}, function ( err , artists ){
+    res.json(artists)
+  })
+})
 
-user.get('/:id', (req, res) => {
+artist.get('/:id', (req, res) => {
   User.findById(req.params.id, function (err, user) {
       if (err) {
           res.json(err)
@@ -16,12 +21,6 @@ user.get('/:id', (req, res) => {
   })
 })
 
-user.get('/', (req, res) => {
-  User.find({}, null , { sort: { firstName: 1}} , function ( err , users ){
-    res.json(users)
-  })
-})
-
 module.exports = {
-  user
+  artist
 }
