@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import StylesSidebar from "./StylesSidebar";
 import ArtistAboutSidebar from "./ArtistAboutSidebar";
 import Gallery from "./Gallery";
 import Paper from "@material-ui/core/Paper";
+import { getArtistArtwork } from "../../actions/art"
 
 const styles = {
   row: {
@@ -45,6 +47,11 @@ const styles = {
 };
 
 class ArtistProfilePage extends Component {
+
+  componentDidMount = () => {
+    this.props.getArtistArtwork(this.props.userId)
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -64,13 +71,13 @@ class ArtistProfilePage extends Component {
             <Paper elevation={15} className={classes.paper}>
               FOR SALE
             </Paper>
-            <Gallery className={classes.gallery} />
+            {this.props.userArtworkSale.length ? <Gallery className={classes.gallery} artworks={this.props.userArtworkSale} /> : null }
             <br />
             <br />
             <Paper elevation={15} className={classes.paper}>
               SOLD
             </Paper>
-            <Gallery className={classes.gallery} />
+            {this.props.userArtworkSold.length ? <Gallery className={classes.gallery} artworks={this.props.userArtworkSold}/> : null }
           </div>
         </div>
       </React.Fragment>
@@ -82,4 +89,18 @@ ArtistProfilePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ArtistProfilePage);
+const mapStateToProps = ({ art , auth }) => ({
+  userArtworkSale: art.userArtwork.filter( art => art.forSale === true ),
+  userArtworkSold: art.userArtwork.filter( art => art.forSale === false ),
+  userId: auth.user.userId
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getArtistArtwork: (userId) => {
+      dispatch(getArtistArtwork(userId));
+    }
+  };
+};
+
+export default connect( mapStateToProps , mapDispatchToProps )(withStyles(styles)(ArtistProfilePage));
