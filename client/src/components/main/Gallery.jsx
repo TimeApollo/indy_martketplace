@@ -6,85 +6,25 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-import image from "../../images/penny.png";
 // import Typography from '@material-ui/core/Typography';
 // import Modal from '@material-ui/core/Modal';
 // import Button from '@material-ui/core/Button';
-
-const tileData = [
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-  {
-    img: image,
-    title: "Image",
-    author: "author"
-  },
-];
 
 const styles = theme => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
   },
+  gridListArtist: {
+    width: "40em",
+    height: "26.7em"
+  },
   gridList: {
     width: "40em",
-    height: "40em"
+    height: "35em"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
@@ -112,7 +52,40 @@ class Gallery extends Component {
     this.setState({ open: false });
   };
 
-  // singleImageModal = () => {
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <GridList cols={3} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
+          {this.props.artworks ? this.props.artworks.map(art => (
+            <GridListTile key={art._id}>
+              <img src={art.url} alt={art.title} />
+              <GridListTileBar
+                style={{height: "2.5em"}}
+                title={art.title}
+                subtitle={<span>by: {art.artist}</span>}
+                actionIcon={
+                  <IconButton className={classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+          )) : null }
+        </GridList>
+      </div>
+    );
+  }
+}
+
+Gallery.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(Gallery);
+
+ // singleImageModal = () => {
   //   return (
   //     <div>
   //       <Typography gutterBottom>Click to get the full Modal experience!</Typography>
@@ -136,36 +109,3 @@ class Gallery extends Component {
   //     </div>
   //   );
   // }
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <GridList cols={3} className={classes.gridList}>
-          {tileData.map(tile => (
-            <GridListTile key={Math.random()}>
-              <img src={tile.img} alt={tile.title} />
-              <GridListTileBar
-                style={{height: "2.5em"}}
-                title={tile.title}
-                subtitle={<span>by: {tile.author}</span>}
-                actionIcon={
-                  <IconButton className={classes.icon}>
-                    <InfoIcon />
-                  </IconButton>
-                }
-              />
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
-    );
-  }
-}
-
-Gallery.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export default withStyles(styles)(Gallery);
