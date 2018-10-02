@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ArtistListSidebar from "../profile/ArtistListSidebar";
 import Gallery from "../profile/Gallery";
+import FilterComponent from "../profile/FilterComponent"
 
 const styles = {
   row: {
@@ -50,11 +51,7 @@ class MainPage extends Component {
       <React.Fragment>
         <div className={classes.row}>
           <div className={classes.sidebar}>
-            <img
-              src={require("../../images/penny.png")}
-              alt="penny"
-              className={classes.bigAvatar}
-            />
+            <FilterComponent/>
             <ArtistListSidebar />
           </div>
           <div className={classes.gallery}>
