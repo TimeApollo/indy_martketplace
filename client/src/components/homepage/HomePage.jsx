@@ -40,6 +40,7 @@ const styles = theme => ({
     whiteSpace: "pre-wrap",
   }
 });
+
 class HomePage extends Component {
   render() {
     const { classes } = this.props;
