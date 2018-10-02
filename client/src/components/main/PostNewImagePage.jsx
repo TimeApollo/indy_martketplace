@@ -49,62 +49,113 @@ const styles = theme => ({
 });
 
 const photograpyStyleArr = [
-  "portrait",
-  "wedding",
   "abstract",
-  "landscape",
-  "candid/street",
-  "wildlife",
-  "nature",
-  "still life",
   "architechural",
   "astro",
+  "candid",
+  "landscape",
   "macro",
-  "sports"
+  "nature",
+  "portrait",
+  "sports",
+  "still life",
+  "street",
+  "wedding",
+  "wildlife",
 ];
 const paintingStyleArr = [
   "abstract",
-  "realism",
+  "acryilic",
+  "cubism",
+  "digital",
+  "expressionism",
+  "fluid",
+  "geometric",
+  "impressionism",
+  "ink",
+  "landscape",
+  "modernism",
+  "nature",
+  "oil",
   "pop",
+  "pet portrait",
+  "pop",
+  "portrait",
+  "realism",
+  "resin",
+  "spray paint",
+  "still life",
   "surrealism",
   "visionary",
-  "modernism",
-  "impressionism",
-  "expressionism",
-  "cubism",
-  "oil",
-  "acryilic",
-  "fluid",
   "watercolor",
-  "pastel",
-  "ink",
-  "spray paint",
-  "digital",
-  "landscape",
-  "nature",
   "wildlife",
-  "still life",
-  "resin",
-  "geometric",
-  "pet portrait"
 ];
 const furnitureDesignStyleArr = [
-  "modern",
-  "minimalism",
   "art deco",
   "contemporary",
-  "rustic",
-  "ecletic",
-  "industrial",
   "country",
-  "upcycled",
-  "outdoor",
-  "wood",
+  "ecletic",
+  "futurism",
+  "industrial",
   "metal",
+  "modern",
+  "minimalism",
+  "outdoor",
   "resin",
+  "rustic",
+  "upcycled",
   "victorian",
-  "futurism"
+  "wood",
 ];
+
+const MixedMediaStyleArr = [
+  "abstract",
+  "acryilic",
+  "architechural",
+  "art deco",
+  "astro",
+  "candid",
+  "contemporary",
+  "country",
+  "cubism",
+  "digital",
+  "ecletic",
+  "expressionism",
+  "fluid",
+  "futurism",
+  "geometric",
+  "impressionism",
+  "industrial",
+  "ink",
+  "landscape",
+  "macro",
+  "metal",
+  "modern",
+  "modernism",
+  "minimalism",
+  "nature",
+  "oil",
+  "outdoor",
+  "pop",
+  "portrait",
+  "pet portrait",
+  "pop",
+  "realism",
+  "resin",
+  "rustic",
+  "sports",
+  "spray paint",
+  "still life",
+  "street",
+  "surrealism",
+  "upcycled",
+  "victorian",
+  "visionary",
+  "watercolor",
+  "wedding",
+  "wildlife",
+  "wood",
+]
 
 class UploadForm extends React.Component {
   state = {
@@ -205,7 +256,8 @@ class UploadForm extends React.Component {
             </MenuItem>
             <MenuItem value={"Photography"}>Photography</MenuItem>
             <MenuItem value={"Painting"}>Painting</MenuItem>
-            <MenuItem value={"FurnatureDesign"}>Furnature Design</MenuItem>
+            <MenuItem value={"FurnitureDesign"}>Furniture Design</MenuItem>
+            <MenuItem value={"MixedMedia"}>Mixed Media</MenuItem>
           </Select>
         </FormControl>
         <FormControl component="fieldset" className={classes.formControl}>
@@ -248,8 +300,27 @@ class UploadForm extends React.Component {
                 );
               })
             : null}
-          {this.state.medium === "FurnatureDesign"
+          {this.state.medium === "FurnitureDesign"
             ? furnitureDesignStyleArr.map(style => {
+                return (
+                  <React.Fragment key={style}>
+                    <FormGroup name="styles">
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            onChange={this.handleChange({ style })}
+                            value={style}
+                          />
+                        }
+                        label={style}
+                      />
+                    </FormGroup>
+                  </React.Fragment>
+                );
+              })
+            : null}
+                      {this.state.medium === "MixedMedia"
+            ? MixedMediaStyleArr.map(style => {
                 return (
                   <React.Fragment key={style}>
                     <FormGroup name="styles">

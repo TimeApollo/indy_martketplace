@@ -111,7 +111,6 @@ class LoginForm extends React.Component {
           <br />
           <br />
           <button
-            variant="extendedFab"
             className={classes.button}
             onClick={this.handleLoginUser}
           >
