@@ -27,7 +27,7 @@ const styles = theme => ({
     width: "20em",
     marginLeft: "auto",
     marginRight: "auto",
-    background: "dark blue"
+    background: "dark blue",
   },
   type: {
     color: "white", 
@@ -37,7 +37,7 @@ const styles = theme => ({
     textAlign: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
   }
 });
 class HomePage extends Component {

@@ -50,7 +50,7 @@ const styles = theme => ({
 
 const photograpyStyleArr = [
   "abstract",
-  "architechural",
+  "architectural",
   "astro",
   "candid",
   "landscape",
@@ -94,7 +94,7 @@ const furnitureDesignStyleArr = [
   "art deco",
   "contemporary",
   "country",
-  "ecletic",
+  "eclectic",
   "futurism",
   "industrial",
   "metal",
