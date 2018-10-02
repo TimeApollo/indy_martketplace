@@ -27,7 +27,8 @@ const styles = {
 
 class MessageList extends React.Component {
     state = {
-        singleConvoArr: []
+        singleConvoArr: [],
+        refreshConvo: false
     }
 
     handleMsgList = event => {
@@ -46,15 +47,21 @@ class MessageList extends React.Component {
         console.log(this.state.singleConvoArr);
     }
 
+    // refreshConvo = () => {
+    //     this.setState({refreshConvo: !this.state.refreshConvo})
+    // }
+
     componentDidMount() {
         console.log(this.state.singleConvoArr)
         this.handleMsgList()
     }
 
-    // componentDidUpdate(prevProps) {
-    //     console.log("UPDATE: ", prevProps)
-    //     this.props.getMessages()
-    // }
+    componentDidUpdate(prevProps) {
+        console.log(prevProps)
+        if (prevProps.convoList !== this.props.convoList) {
+            this.setState({refreshConvo: !this.state.refreshConvo})
+        }
+    }
 
     render() {
         const { classes } = this.props;
@@ -67,6 +74,7 @@ class MessageList extends React.Component {
                     ? this.state.singleConvoArr[0].emails[0]
                     : this.state.singleConvoArr[0].emails[1]}
                 messages={this.state.singleConvoArr[0].messages}
+                refresh={this.state.refreshConvo}
             /> }
             <Paper id="convo-page-bar" className={classes.root} elevation={2}>
                 <Toolbar>

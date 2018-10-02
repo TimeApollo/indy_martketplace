@@ -121,7 +121,7 @@
     justify-content: flex-end;
     background-image: linear-gradient(to right, rgb(147, 255, 255), rgb(204, 204, 204));
     height: 95%;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .convo-modal-wrap {

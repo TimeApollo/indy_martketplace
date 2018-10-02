@@ -1,6 +1,6 @@
 import { GET_MESSAGES, POST_MESSAGE, MSG_POPUP, MSG_CLOSE, DM_POPUP, DM_CLOSE } from "../actions/messages";
 
-const initialState = { allConvos: [], msgPopUp: false, dmPopUp: false };
+const initialState = { allConvos: [], singleConvo: [], msgPopUp: false, dmPopUp: false };
 
 export default (state = initialState, action) => {
     switch (action.type) {

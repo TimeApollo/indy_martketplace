@@ -62,8 +62,7 @@ const styles = theme => ({
 class DirectConvo extends React.Component {
     state = {
         messages: this.props.messages,
-        message: '',
-        // printMessage: '',
+        message: ''
     }
     
     handleChange = event => {
@@ -78,16 +77,19 @@ class DirectConvo extends React.Component {
           email: this.props.recEmail,
           message: this.state.message
         };
-
-        // this.setState({printMessage: this.state.message})
     
         console.log("message info", messageInfo)
     
+        this.setState({message: ''})
         this.props.postMessage(messageInfo);
     }
 
-    // componentWillReceiveProps = ({messages}) => {
-    //     this.setState({messages: messages})
+    // componentWillReceiveProps(props) {
+    //     const {refresh} = this.props;
+
+    //     if (this.props.refresh !== refresh) {
+
+    //     }
     // }
 
     render() {
@@ -139,17 +141,13 @@ class DirectConvo extends React.Component {
   }
 }
 
-// {/* { this.state.printMessage ? <div className="sender-msg-wrap">
-//                                             <div className="sender-bubble">{this.state.printMessage}</div>
-//                                             {/* <div className="single-msg-time">{message.timestamp}</div> */}
-//                                         </div> : null} */}
-
 DirectConvo.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({auth}) => ({
+const mapStateToProps = ({auth, messages}) => ({
     userEmail: auth.user.email_lower,
+    singleConvo: messages
 });
 
 const mapDispatchToProps = ( dispatch ) => {
