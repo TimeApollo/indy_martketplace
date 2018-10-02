@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editProfile } from "../../actions/auth";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 
 const styles = theme => ({
@@ -45,7 +41,7 @@ const styles = theme => ({
     marginTop: "0",
     border: "4px solid black",
     width: "50em",
-    height: "100%",
+    height: "20em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -56,7 +52,7 @@ const styles = theme => ({
     display: "flex", 
     justifyContent: "center",
     textAlign: "center",
-
+    color: "black"
   },
   match: {
     textAlign: "center",
@@ -67,7 +63,7 @@ const styles = theme => ({
 const filterArray = [
   "abstract",
   "acryilic",
-  "architechural",
+  "architectural",
   "art deco",
   "astro",
   "candid",
@@ -75,7 +71,7 @@ const filterArray = [
   "country",
   "cubism",
   "digital",
-  "ecletic",
+  "eclectic",
   "expressionism",
   "fluid",
   "furniture design",
@@ -136,15 +132,19 @@ class FilterComponent extends React.Component {
         <h1 className={classes.header}>Filter</h1>
         <div className={classes.form}>
         <List className={classes.list}>
-            {filterArray.map(styles => {
-              <ListItem
-                className={classes.list}
-                value={classes}
-                name={classes}
-              >
-              <Checkbox>
-              </Checkbox>
-            </ListItem>
+            {filterArray.map(style => {
+                  <React.Fragment key={style}>
+                  <FormGroup name="styles">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value={style}
+                        />
+                      }
+                      label={style}
+                    />
+                  </FormGroup>
+                </React.Fragment>
             })}
         </List>
           <br />
