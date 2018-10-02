@@ -83,8 +83,8 @@ class TextFields extends React.Component {
       message: this.state.message
     };
 
-    console.log("message info", messageInfo)
-
+    this.setState({email: '',
+                  message: ''})
     this.props.postMessage(messageInfo);
   } 
 
