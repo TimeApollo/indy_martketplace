@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getArtworkAndFiltered } from "../../actions/art";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import ArtistListSidebar from "../profile/ArtistListSidebar";
+import ArtistListSidebar from "./ArtistListSidebar";
 import MainGallery from "../mainpage/MainGallery";
 import FilterComponent from "./FilterComponent"
 
@@ -11,37 +11,26 @@ const styles = {
   row: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "5em"
+    marginTop: "1vw"
   },
-  bigAvatar: {
-    border: "1px solid",
-    borderColor: "rgb(65, 118, 115)",
-    backgroundColor: "rgb(0, 169, 160)",
-    borderRadius: "8em",
-    width: "10em",
-    height: "10em",
-    marginRight: "auto",
+  filter: {
     display: "flex",
-    marginLeft: "5.5em"
+    justifyContent: "center",
+    marginTop: "1vw",
   },
   sidebar: {
-    width: "20",
+    width: "33vw",
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
+    align: "center",
     textAlign: "center",
     marginBottom: "3em"
   },
-  paper: {
-    width: "8em",
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "center",
-    marginBottom: "2em",
-    marginLeft: "auto",
-    marginRight: "auto"
-  },
   gallery: {
-    marginLeft: "5em"
+    marginLeft: "1vw",
+    marginRight: "1vw",
+    width: "65vw"
   }
 };
 
@@ -56,9 +45,11 @@ class MainPage extends Component {
 
     return (
       <React.Fragment>
+        <div className={classes.filter}>
+          <FilterComponent/>
+        </div>
         <div className={classes.row}>
           <div className={classes.sidebar}>
-            <FilterComponent/>
             <ArtistListSidebar />
           </div>
           <div className={classes.gallery}>
