@@ -147,7 +147,6 @@ class EditProfilePage extends React.Component {
     this.setState({ doesPasswordMatch: false });
     mediumsArray.forEach(medium => {
       if (this.state[medium]) {
-        console.log("here");
         selectedMediums.push(medium);
       }
     });
@@ -157,7 +156,6 @@ class EditProfilePage extends React.Component {
         selectedStyles.push(style);
       }
     });
-    console.log(selectedMediums);
     if (this.state.password) {
       if (this.state.password === this.state.passwordMatch) {
         this.props.editProfile(

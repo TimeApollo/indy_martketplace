@@ -25,7 +25,6 @@ router.patch("/", (req, res) => {
           if (err) {
             res.json(err);
           } else {
-            console.log("update", convo);
             res.json(convo);
           }
         }
@@ -40,7 +39,6 @@ router.patch("/", (req, res) => {
           if (err) {
             res.json(err);
           } else {
-            console.log(convo);
             res.json({ emails: convo.emails, messages: convo.messages });
           }
         }
@@ -53,12 +51,10 @@ router.patch("/", (req, res) => {
 router.get("/:id", (req, res) => {
   // Conversations.find()
   User.findById(req.params.id, function(err, user) {
-    console.log(user);
     if (err) {
       res.json(err);
     } else {
       Conversations.find({ emails: { $in: user.email_lower }}, null, {sort: {"messages.timestamp": -1}}, function(err, convo) {
-        console.log("looking", convo)
         if (err) {
           res.json(err);
         } else if (convo) {
