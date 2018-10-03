@@ -9,7 +9,7 @@ module.exports = [
   "country",
   "cubism",
   "digital",
-  "ecletic",
+  "eclectic",
   "expressionism",
   "fluid",
   "futurism",

@@ -77,7 +77,7 @@ const mediumsArray = [
 const stylesArray = [
   "abstract",
   "acryilic",
-  "architechural",
+  "architectural",
   "art_deco",
   "astro",
   "candid",
@@ -85,7 +85,7 @@ const stylesArray = [
   "country",
   "cubism",
   "digital",
-  "ecletic",
+  "eclectic",
   "expressionism",
   "fluid",
   "futurism",
