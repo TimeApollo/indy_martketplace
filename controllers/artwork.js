@@ -3,6 +3,7 @@ const stream = require('stream')
 const s3 = require('../config/s3.config.js');
 const upload = require('../config/multer.config.js');
 const {Artwork} = require('../models')
+const moment = require("moment");
 const artwork = express.Router()
 
 
@@ -10,12 +11,13 @@ artwork.post('/upload', upload.single("file"), doUpload = (req, res) => {
 	const artpiece = new Artwork({
 		userId: req.body.userId,
 		firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    	lastName: req.body.lastName,
 		email: req.body.email,
 		email_lower: req.body.email_lower,
 		image: req.body.uploadFile,
 		title: req.body.title,
 		artist: req.body.artist,
+		date: moment().format('MMMM Do YYYY, h:mm:ss a'),
 		forSale: req.body.forSale,
 		medium: req.body.medium,
 		styles: req.body.styles

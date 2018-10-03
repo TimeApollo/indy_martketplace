@@ -113,11 +113,8 @@ export const getArtistArtworkSuccess = (artwork) => {
   }
 }
 
-export const createImgPopup = (clickedId) => {
-  return {
-    type: IMG_POPUP,
-    payload: clickedId 
-  }
+export const createImgPopup = (singleArt) => dispatch => {
+  dispatch({ type: IMG_POPUP, payload: singleArt })
 }
 
 export const exitImgPopup = () => {
@@ -125,6 +122,7 @@ export const exitImgPopup = () => {
     type: EXIT_IMG_POPUP
   }
 }
+
 export const getArtworkAndFiltered = () => dispatch => {
   dispatch(isGettingArtwork())
 

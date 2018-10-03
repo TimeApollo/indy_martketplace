@@ -11,10 +11,10 @@
     url: String,
     title:  String,
     artist: String,
-    date: { type: Date, default: Date.now },
+    date: String,
     forSale: Boolean,
     medium: String,
-    styles: [String],
+    styles: [String]
   });
 
   module.exports = mongoose.model('Artwork', ArtworkSchema);

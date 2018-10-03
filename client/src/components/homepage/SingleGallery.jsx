@@ -32,6 +32,12 @@ const styles = theme => ({
 });
 
 class SingleGallery extends React.Component {
+  handleSingleImage = (id) => (event) => {
+    const result = this.props.artwork.filter(piece => id === piece._id)
+
+    console.log("filtered arpieces result: ", result[0])
+    this.props.createImgPopup(result[0])
+  }
 
   componentDidMount(){
      this.props.getArtwork()
@@ -45,7 +51,7 @@ class SingleGallery extends React.Component {
         <GridList className={classes.gridList} cols={8}>
           {this.props.artwork.length ? this.props.artwork.map(piece => (
             <GridListTile key={piece._id}>
-              <img src={piece.url} alt={piece.title} onClick={() => this.props.createImgPopup()}/>
+              <img src={piece.url} alt={piece.title} onClick={this.handleSingleImage(piece._id)}/>
               <GridListTileBar
                 title={piece.title}
                 classes={{
@@ -75,7 +81,7 @@ const mapDispatchToProps = dispatch => {
     getArtwork: () => {
       dispatch(getArtwork());
     },
-    createImgPopup: () => dispatch(createImgPopup())
+    createImgPopup: singleArt => dispatch(createImgPopup(singleArt))
   };
 };
 
