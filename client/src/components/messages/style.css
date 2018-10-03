@@ -73,10 +73,10 @@
   margin-bottom: 0px;
   margin-left: auto;
   margin-right: auto;
-  height: 80vh;
+  height: 60em;
   width: 50%;
   border: 1px solid rgb(199, 199, 199);
-  justify-content: left;
+  margin-bottom: 5em;
 }
 
 .msg-popup {
@@ -87,11 +87,11 @@
   z-index: 2;
   position: fixed;
   margin: 0 auto;
-  height: 100vh;
+  height: 70em;
   width: 100%;
   top: -10px;
   background-color: rgba(0, 0, 0, 0.6);
-  overflow: hidden;
+  overflow-y: scroll;
 }
 
 #msg-info-wrap {
@@ -135,6 +135,7 @@
   background-color: white;
   align-items: center;
   justify-content: space-between;
+  width: 50%;
 }
 
 .msgs-wrap {
@@ -147,14 +148,17 @@
     #1fc8db 59%,
     #2cb5e8 75%
   );
-  height: 30em;
+  /* height: 40em;
   overflow-y: scroll;
+  word-break: break-all;
+  word-wrap: break-word; */
 }
 
 .convo-modal-wrap {
   align-items: center;
   width: 50%;
-  height: 80%;
+  height: 40em;
+  overflow-y: scroll;
 }
 
 .single-msg-time {
@@ -211,7 +215,7 @@
   background-color: rgb(30, 30, 30);
   border-bottom: 3px solid aqua;
   width: 50%;
-  margin-top: 15em;
+  margin-top: 1em;
 }
 
 .convo-who {
