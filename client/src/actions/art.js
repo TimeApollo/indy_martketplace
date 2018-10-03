@@ -8,6 +8,10 @@ export const IS_GETTING_ARTIST_ARTWORK = "IS_GETTING_ARTIST_ARTWORK";
 export const GET_ARTIST_ARTWORK_SUCCESS = "GET_ARTIST_ARTWORK_SUCCESS";
 export const IMG_POPUP = "IMG_POPUP";
 export const EXIT_IMG_POPUP = "EXIT_IMG_POPUP";
+<<<<<<< HEAD
+=======
+export const GET_ARTWORK_FITLERED_SUCCESS = "GET_ARTWORK_FITLERED_SUCCESS";
+>>>>>>> 5eaebc23b0964d0fd92e98db52949d0cb16c711f
 
 export const submitUpload = uploadFormData => dispatch => {
   // dispatchEvent(isUploading())
