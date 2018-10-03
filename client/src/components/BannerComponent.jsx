@@ -1,18 +1,25 @@
-import React from 'react'
+import React from "react";
 class BannerComponent extends React.Component {
   render() {
     return (
       <div
         style={{
           position: "relative",
-          width: "100vw",
+          width: "100vw"
         }}
       >
-        <nav style={{ display: "flex", justifyContent: "center" }}>
+        <nav
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            backgroundColor: "rgb(33, 38, 34)"
+          }}
+        >
           <img
             className="banner"
-            src={require("../images/logo.png")}
+            src={require("../images/logo2.png")}
             alt="logo"
+            style={{ backgroundColor: "black" }}
             // style={{marginBottom: "18em"}}
           />
         </nav>
@@ -21,4 +28,4 @@ class BannerComponent extends React.Component {
   }
 }
 
-export default (BannerComponent)
+export default BannerComponent;

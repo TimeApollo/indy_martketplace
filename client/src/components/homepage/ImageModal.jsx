@@ -24,8 +24,13 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   link: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+    color: "white"
+  },
+  image: {
+    width: "100%",
+    height: "100%"
+  },
 });
 
 class ImageModal extends React.Component {
@@ -47,7 +52,7 @@ class ImageModal extends React.Component {
               <div className="name">
                 <div className="art-name">{artwork.title}</div>
                 <div className="artist">
-                  <List className={classes.link}>
+                  <List>
                     <ListItem
                       key={artwork._id}
                       dense
@@ -55,36 +60,24 @@ class ImageModal extends React.Component {
                       onClick={() =>
                         this.props.getOneArtist(this.props.artwork.userId)
                       }
-                      className={classes.listItem}
                     >
                       <ListItemText
-                        className={classes.link}
-                        primary={`${
-                          artwork.artist
-                        } (Click to go to Artist Profile Page)}`}
-                      />
+                        style={{
+                          marginLeft: "11em",
+                          color: "white", 
+                          width: "25em"
+                      }}
+                      ><p style={{color: "white", alignContent: "left"}}>{artwork.artist} <br/> (Click to go to Artist Profile Page)</p></ListItemText>
                     </ListItem>
                   </List>
                 </div>
               </div>
             </div>
-            {artwork.forSale ? (
+            {/* {artwork.forSale ? (
               <div className="for-sale">For Sale</div>
             ) : (
               <div className="not-sale">Not For Sale</div>
-            )}
-          </div>
-          <hr />
-          <div className="art-type">
-            <div className="medium">
-              <b>Medium:</b> {artwork.medium}
-            </div>
-            <div className="style-list">
-              <b>Styles:</b>{" "}
-              {artwork.styles.map(style => (
-                <span className="style">{style}, </span>
-              ))}
-            </div>
+            )} */}
           </div>
         </div>
       </div>

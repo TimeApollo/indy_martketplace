@@ -12,7 +12,7 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "15em",
+    width: "20em",
     fontFamily: "sans-serif",
     textAlign: "center"
   },

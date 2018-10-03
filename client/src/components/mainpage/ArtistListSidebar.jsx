@@ -16,10 +16,11 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "25vw",
+    width: "20vw",
     fontFamily: "sans-serif",
     textAlign: "center",
-    marginRight: "3em"
+    marginRight: "1em",
+    marginLeft: "-2em"
   },
   icon: {
     margin: theme.spacing.unit
