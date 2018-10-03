@@ -1,58 +1,115 @@
-import React from 'react';
-import { connect } from 'react-redux';
-
+import React from "react";
+import { connect } from "react-redux";
+import { getOneArtist } from "../../actions/artist";
 import { exitImgPopup } from "../../actions/art";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 
-import './style.css';
+import "./style.css";
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    width: "25vw",
+    fontFamily: "sans-serif",
+    textAlign: "center",
+    marginRight: "3em"
+  },
+  icon: {
+    margin: theme.spacing.unit
+  },
+  link: {
+    textAlign: "center"
+  }
+});
 
 class ImageModal extends React.Component {
-    render() {
-        const artwork = this.props.artwork;
+  render() {
+    const { classes } = this.props;
+    const artwork = this.props.artwork;
 
-        return (
-            <div className="img-popup" onClick={ () => this.props.exitImgPopup() }>
-                <div className="img-wrap">
-                    <div className="img-date">
-                        <div className="date">{artwork.date}</div>
-                        <div className="image-div">
-                            <img src={artwork.url} alt={artwork.title} className="image"/>
-                        </div>
-                    </div>
-                    <div className="info-wrap">
-                        <div className="art-info">
-                            <div className="name">
-                                <div className="art-name">{artwork.title}</div>
-                                <div className="artist">
-                                    <div className="artist-link">{artwork.artist}</div>
-                                    <div className="artist-dir">(Click to view artist profile)</div>
-                                </div>
-                            </div>
-                            {artwork.forSale 
-                                ? <div className="for-sale">For Sale</div>
-                                : <div className="not-sale">Not For Sale</div>}
-                        </div>
-                        <hr/>
-                        <div className="art-type">
-                            <div className="medium"><b>Medium:</b> {artwork.medium}</div>
-                            <div className="style-list"><b>Styles:</b> {artwork.styles.map(style =>
-                                <span className="style">{style}, </span>)}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    return (
+      <div className="img-popup" onClick={() => this.props.exitImgPopup()}>
+        <div className="img-wrap">
+          <div className="img-date">
+            <div className="date">{artwork.date}</div>
+            <div className="image-div">
+              <img src={artwork.url} alt={artwork.title} className="image" />
             </div>
-        )
-    }
+          </div>
+          <div className="info-wrap">
+            <div className="art-info">
+              <div className="name">
+                <div className="art-name">{artwork.title}</div>
+                <div className="artist">
+                  <List className={classes.link}>
+                    <ListItem
+                      key={artwork._id}
+                      dense
+                      button
+                      onClick={() =>
+                        this.props.getOneArtist(this.props.artwork.userId)
+                      }
+                      className={classes.listItem}
+                    >
+                      <ListItemText
+                        className={classes.link}
+                        primary={`${
+                          artwork.artist
+                        } (Click to go to Artist Profile Page)}`}
+                      />
+                    </ListItem>
+                  </List>
+                </div>
+              </div>
+            </div>
+            {artwork.forSale ? (
+              <div className="for-sale">For Sale</div>
+            ) : (
+              <div className="not-sale">Not For Sale</div>
+            )}
+          </div>
+          <hr />
+          <div className="art-type">
+            <div className="medium">
+              <b>Medium:</b> {artwork.medium}
+            </div>
+            <div className="style-list">
+              <b>Styles:</b>{" "}
+              {artwork.styles.map(style => (
+                <span className="style">{style}, </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = ({art}) => ({
-    artwork: art.singleArt
-})
+ImageModal.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 
-const mapDispatchToProps = ( dispatch ) => {
-    return {
-        exitImgPopup: () => dispatch(exitImgPopup())
+const mapStateToProps = ({ art, artist }) => ({
+  artwork: art.singleArt
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    exitImgPopup: () => dispatch(exitImgPopup()),
+    getOneArtist: userId => {
+      dispatch(getOneArtist(userId));
     }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(ImageModal));
