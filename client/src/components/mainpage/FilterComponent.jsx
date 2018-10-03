@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { changeFilteredArray } from "../../actions/art";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -68,8 +69,8 @@ const styles = theme => ({
 });
 
 const mediumsArray = [
-  "Furniture_Design",
-  "Mixed_Media",
+  "FurnitureDesign",
+  "MixedMedia",
   "Painting",
   "Photography"
 ];
@@ -78,7 +79,7 @@ const stylesArray = [
   "abstract",
   "acryilic",
   "architechural",
-  "art_deco",
+  "artdeco",
   "astro",
   "candid",
   "contemporary",
@@ -104,14 +105,14 @@ const stylesArray = [
   "outdoor",
   "pop",
   "portrait",
-  "pet_portrait",
+  "petportrait",
   "pop",
   "realism",
   "resin",
   "rustic",
   "sports",
-  "spray_paint",
-  "still_life",
+  "spraypaint",
+  "stilllife",
   "street",
   "surrealism",
   "upcycled",
@@ -180,11 +181,18 @@ class FilterComponent extends React.Component {
 
   handleChange = event => {
     console.log(event.target.name);
-    event.target.value = event.target.value
-    this.setState({
-      [event.target.name]: !this.state[event.target.name],
-    });
+    this.setState({[event.target.name]: !this.state[event.target.name]});
   };
+
+  componentDidUpdate(prevProps, prevState){
+    if ( prevState !== this.state ){
+      let mediums = [] , styles = [];
+      mediums = mediumsArray.filter( medium => this.state[medium] === true );
+      styles = stylesArray.filter( style => this.state[style] === true )
+  
+      this.props.changeFilteredArray( mediums , styles )
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -238,33 +246,20 @@ FilterComponent.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(
-  undefined,
-  undefined
-)(withStyles(styles)(FilterComponent));
+const mapStateToProps = ({ art }) => ({
+  artwork: art.artwork,
+  filteredArtwork: art.filteredArtwork,
+});
 
-{
-  /* <List className={classes.error}>
-            {mediumsArray.map(medium => (
-              <ListItem 
-                value= {medium} 
-                key= {medium} 
-                className={classes.error}
-              >
-              <Checkbox/>
-              {medium}
-              </ListItem>
-            ))}
-            Styles
-            {stylesArray.map(style => (
-              <ListItem 
-                value= {style} 
-                key= {style} 
-                className={classes.error}
-              >
-              <Checkbox/>
-              {style}
-              </ListItem>
-            ))}
-          </List> */
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    changeFilteredArray: ( mediums , styles ) => {
+      dispatch(changeFilteredArray( mediums , styles ));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(FilterComponent));
