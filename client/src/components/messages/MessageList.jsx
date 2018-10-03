@@ -26,9 +26,6 @@ const styles = {
 };
 
 class MessageList extends React.Component {
-    state = {
-        singleConvoArr: []
-    }
 
     handleMsgList = event => {
         let userMsgInfo = {
@@ -41,7 +38,6 @@ class MessageList extends React.Component {
     handleSingleConvo = (id) => (event) => {
         const result = this.props.convoList.filter(convo => id === convo._id);
 
-        this.setState({singleConvoArr: result});
         this.props.assignSingletoStore(result);
     }
 

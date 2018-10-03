@@ -22,7 +22,7 @@ const initialState = {
     userArtwork: [],
     isGettingArtistArtwork: false,
     imgPopup: false,
-    currentImageId: "",
+    singleArt: {},
     filteredArtwork: []
 }
 
@@ -78,10 +78,11 @@ const artReducer = (state = initialState, action) => {
                 isGettingArtistArtwork: true,
             }
         case IMG_POPUP:
-            console.log("clicked id: ", action.payload)
+            console.log("single artpiece: ", action.payload)
             return {
                 ...state,
-                imgPopup: true
+                imgPopup: true,
+                singleArt: action.payload
             }
         case EXIT_IMG_POPUP:
             return {
