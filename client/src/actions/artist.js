@@ -7,7 +7,6 @@ export const getOneArtist = (userId) => dispatch => {
   fetch(`/api/artist/${userId}`)
     .then(res => res.json())
     .then(artist => {
-      console.log(artist);
       dispatch({ type: GET_ONE_ARTIST, payload: artist });
       dispatch(push('/artist'))
     });
