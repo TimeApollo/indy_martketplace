@@ -100,6 +100,12 @@ class RegisterForm extends React.Component {
     }
   };
 
+  handleEnterKey = event => {
+    if (event.key === "Enter") {
+      this.handleRegisterUser();
+    }
+  };
+
   handleRegisterUser = () => {
     let regFormData = {
       firstName: this.state.firstName,
@@ -141,6 +147,7 @@ class RegisterForm extends React.Component {
               value={this.state.firstName} 
               onChange={this.handleChange} 
               required={true}
+              onKeyPress={this.handleEnterKey}
             />
           </FormControl>
           { this.state.errorfirstName ? <div className={classes.error}>Please Enter First Name</div> : null }
@@ -152,6 +159,7 @@ class RegisterForm extends React.Component {
               value={this.state.lastName} 
               onChange={this.handleChange} 
               required={true}
+              onKeyPress={this.handleEnterKey}
             />
           </FormControl>
           { this.state.errorlastName ? <div className={classes.error}>Please Enter Last Name</div> : null }
@@ -162,7 +170,8 @@ class RegisterForm extends React.Component {
               name="email" 
               value={this.state.email}
               onChange={this.handleChange}
-              required={true} 
+              required={true}
+              onKeyPress={this.handleEnterKey}
             />
           </FormControl>
           { this.state.erroremail ? <div className={classes.error}>Please Enter Email</div> : null }
@@ -186,6 +195,7 @@ class RegisterForm extends React.Component {
               value={this.state.passwordMatch}
               onChange={this.handleChange}
               required={true}
+              onKeyPress={this.handleEnterKey}
             />
           </FormControl>
           { this.state.errorpasswordMatch ? <div className={classes.match}>Please Enter Password</div> : null }
@@ -198,6 +208,7 @@ class RegisterForm extends React.Component {
             className={classes.group}
             value={this.state.isArtist}
             onChange={this.handleChange}
+            onKeyPress={this.handleEnterKey}
           >
             <FormControlLabel value='true' control={<Radio />} label="Artist" />
             <FormControlLabel value='false' control={<Radio />} label="Art Lover" />
