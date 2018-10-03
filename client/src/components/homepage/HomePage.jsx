@@ -41,10 +41,43 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     whiteSpace: "pre-wrap",
+  },
+  button: {
+    margin: theme.spacing.unit,
+    display: "flex",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "-2em",
+    background: "#1fc8db 51%",
+    fontWeight: "bold",
+    fontSize: "1.2em",
+    color: "white",
+    paddingLeft: "1em",
+    paddingRight: "1em",
+    borderRadius: ".5em",
+    border: "white",
+    paddingTop: ".3em",
+    paddingBottom: ".3em"
+  },
+  regMsg: {
+    display: "flex",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "-2em",
   }
 });
 
 class HomePage extends Component {
+  state = {
+    loginCheck: true,
+  }
+
+  toggleLoginCheck = () => {
+    this.setState({loginCheck: !this.state.loginCheck})
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -63,8 +96,28 @@ class HomePage extends Component {
             BUY ART.   SELL ART.   LOVE ART.
           </Typography>
         </Paper>
-        <LoginForm />
-        <RegisterForm />
+        {this.state.loginCheck 
+          ? <React.Fragment>
+              <LoginForm />
+              <div>
+                <div className={classes.regMsg}>New to Indy mARTketplace? Click here to register!</div>
+                <br/>
+                <br/>
+                <br/>
+                <button className={classes.button} onClick={this.toggleLoginCheck}> Register </button>
+              </div>
+            </React.Fragment>
+          : <React.Fragment>
+              <RegisterForm />
+              <div>
+                <div className={classes.regMsg}>Already a member? Click here to login!</div>
+                <br/>
+                <br/>
+                <br/>
+                <button className={classes.button} onClick={this.toggleLoginCheck}> Login </button>
+              </div>
+            </React.Fragment>
+        }
       </React.Fragment>
     );
   }

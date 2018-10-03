@@ -100,3 +100,8 @@
 .medium {
     margin-bottom: 5px;
 }
+
+.lr-toggle {
+    position: relative;
+    margin: 0 auto;
+}
