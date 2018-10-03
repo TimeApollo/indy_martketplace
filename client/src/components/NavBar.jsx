@@ -19,6 +19,8 @@ const styles = theme => ({
   },
   paper: {
     position: "absolute",
+    zIndex: 3,
+    
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -133,6 +135,7 @@ class CenteredTabs extends React.Component {
             >
               <Tab label="Homepage" component={Link} to="/" value="/"/>
               <Tab label="Artwork" component={Link} to="/artwork" value="/artwork"/>
+                {/* <Tab label="About" component={Link} to="/about" /> */}
               <Tab label="Login" onClick={this.openLogin} value="/login"/>
               {this.state.loginOpened ? (
                 <Modal

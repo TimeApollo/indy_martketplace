@@ -12,8 +12,6 @@ export default (state = initialState, action) => {
         case POST_MESSAGE:
             let sortedEmails = action.payload.emails.concat().sort();
 
-            console.log("initial convo state: ", state.allConvos)
-
             let newAllConvos = state.allConvos.map(convo => {
                 let sortedConvoEmails = convo.emails.concat().sort()
                 
@@ -32,8 +30,6 @@ export default (state = initialState, action) => {
                 }
             })
 
-            console.log("new convo array: ", newAllConvos)
-
             return {
                 ...state,
                 allConvos: newAllConvos.sort((a, b) => {
@@ -48,7 +44,6 @@ export default (state = initialState, action) => {
                 })
             }
         case ASSIGN_CONVO:
-            console.log(action.payload)
             let sortedEm = action.payload[0].emails.concat().sort()
 
             // let msgCheck = () => {

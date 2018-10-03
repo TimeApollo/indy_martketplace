@@ -4,8 +4,6 @@ import { changeFilteredArray } from "../../actions/art";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
@@ -42,13 +40,13 @@ const styles = theme => ({
     marginTop: "0",
     border: "4px solid black",
     width: "95vw",
-    // height: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     marginLeft: "auto",
-    marginRight: "auto"
-    // flexFlow: "row wrap"
+    marginRight: "auto",
+    padding: "1em",
+    marginBottom: "2em"
   },
   list: {
     display: "flex",
@@ -65,6 +63,16 @@ const styles = theme => ({
     fontSize: ".9em",
     padding: "0"
     // flexFlow: "wrap",
+  },
+  title: {
+    paddingLeft: "1em",
+    paddingTop: "1em",
+    fontWeight: "bolder"
+  },
+  align: {
+    width: "8.7em",
+    padding: "0",
+    margin: "0"
   }
 });
 
@@ -78,15 +86,15 @@ const mediumsArray = [
 const stylesArray = [
   "abstract",
   "acryilic",
-  "architechural",
-  "artdeco",
+  "architectural",
+  "art_deco",
   "astro",
   "candid",
   "contemporary",
   "country",
   "cubism",
   "digital",
-  "ecletic",
+  "eclectic",
   "expressionism",
   "fluid",
   "futurism",
@@ -125,11 +133,10 @@ const stylesArray = [
 ];
 
 class FilterComponent extends React.Component {
-
   state = {
-    Furniture_Design:false,
-    Mixed_Media:false,
-    Painting:false,
+    Furniture_Design: false,
+    Mixed_Media: false,
+    Painting: false,
     Photography: false,
     abstract: false,
     acryilic: false,
@@ -176,21 +183,22 @@ class FilterComponent extends React.Component {
     watercolor: false,
     wedding: false,
     wildlife: false,
-    wood: false,
-  }
+    wood: false
+  };
 
   handleChange = event => {
     console.log(event.target.name);
-    this.setState({[event.target.name]: !this.state[event.target.name]});
+    this.setState({ [event.target.name]: !this.state[event.target.name] });
   };
 
-  componentDidUpdate(prevProps, prevState){
-    if ( prevState !== this.state ){
-      let mediums = [] , styles = [];
-      mediums = mediumsArray.filter( medium => this.state[medium] === true );
-      styles = stylesArray.filter( style => this.state[style] === true )
-  
-      this.props.changeFilteredArray( mediums , styles )
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState !== this.state) {
+      let mediums = [],
+        styles = [];
+      mediums = mediumsArray.filter(medium => this.state[medium] === true);
+      styles = stylesArray.filter(style => this.state[style] === true);
+
+      this.props.changeFilteredArray(mediums, styles);
     }
   }
 
@@ -201,38 +209,42 @@ class FilterComponent extends React.Component {
       <div>
         <h1 className={classes.header}>Filter</h1>
         <div className={classes.form}>
-            Mediums
+          <div className={classes.title}> Mediums</div>
           <FormGroup row>
             {mediumsArray.map(medium => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name={medium}
-                  checked={this.state[medium]}
-                  onChange={this.handleChange}
-                  value={medium}
-                />
-              }
-              label={medium}
-              />))}
-              <button className={classes.button}>Filter</button>
+              <FormControlLabel
+                className={classes.align}
+                control={
+                  <Checkbox
+                    name={medium}
+                    checked={this.state[medium]}
+                    onChange={this.handleChange}
+                    value={medium}
+                  />
+                }
+                label={medium}
+              />
+            ))}
+            <button className={classes.button}>Filter</button>
             <br />
             <br />
           </FormGroup>
-           Styles
+          <div className={classes.title}> Styles</div>
           <FormGroup row>
             {stylesArray.map(style => (
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name={style}
-                  checked={this.state[style]}
-                  onChange={this.handleChange}
-                  value={style}
-                />
-              }
-              label={style}
-              />))}
+              <FormControlLabel
+                className={classes.align}
+                control={
+                  <Checkbox
+                    name={style}
+                    checked={this.state[style]}
+                    onChange={this.handleChange}
+                    value={style}
+                  />
+                }
+                label={style}
+              />
+            ))}
             <br />
             <br />
           </FormGroup>
@@ -248,13 +260,13 @@ FilterComponent.propTypes = {
 
 const mapStateToProps = ({ art }) => ({
   artwork: art.artwork,
-  filteredArtwork: art.filteredArtwork,
+  filteredArtwork: art.filteredArtwork
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeFilteredArray: ( mediums , styles ) => {
-      dispatch(changeFilteredArray( mediums , styles ));
+    changeFilteredArray: (mediums, styles) => {
+      dispatch(changeFilteredArray(mediums, styles));
     }
   };
 };
