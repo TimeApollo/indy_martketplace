@@ -89,7 +89,7 @@
   margin: 0 auto;
   height: 70em;
   width: 100%;
-  top: -10px;
+  top: -0.5px;
   background-color: rgba(0, 0, 0, 0.6);
   overflow-y: scroll;
 }
@@ -161,11 +161,6 @@
   overflow-y: scroll;
 }
 
-.single-msg-time {
-  margin: 0 auto;
-  font-size: 10px;
-}
-
 .sender-msg-wrap {
   flex-direction: column;
   align-self: flex-end;
@@ -180,15 +175,20 @@
 
 .sender-bubble {
   display: flex;
+  justify-content: flex-end;
   color: black;
-  align-self: flex-end;
   font-weight: bold;
   flex-flow: wrap;
   overflow-y: visible;
   word-break: break-all;
   width: 20em;
-  align-content: right;
-  text-align: right;
+}
+
+.sender-msg-time {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  font-size: 10px;
 }
 
 .rec-bubble {
@@ -200,6 +200,11 @@
   flex-flow: wrap;
   overflow-y: visible;
   word-break: break-all;
+}
+
+.rec-msg-time {
+  margin: 0 auto;
+  font-size: 10px;
 }
 
 .msg-input {
