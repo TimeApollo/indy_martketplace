@@ -20,8 +20,8 @@ const styles = theme => ({
   paper: {
     position: "absolute",
     zIndex: 3,
-    
-    width: theme.spacing.unit * 50,
+    width: "35em",
+    margin: "auto",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4
