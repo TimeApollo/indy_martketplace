@@ -41,9 +41,7 @@ export const getSingleConvo = (convoId) => dispatch => {
     console.log(convoId)
     fetch('/api/messages/' + convoId)
         .then( res => res.json() )
-        .then(res => {
-            console.log(res);
-        })
+        .then(res => {})
 }
 
 export const assignSingletoStore = (newConvoArray) => dispatch => {

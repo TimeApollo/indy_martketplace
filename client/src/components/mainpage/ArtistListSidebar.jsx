@@ -19,7 +19,6 @@ const styles = theme => ({
     width: "20vw",
     fontFamily: "sans-serif",
     textAlign: "center",
-    // marginRight: "1em",
     marginLeft: "-2em"
   },
   icon: {
@@ -36,7 +35,6 @@ class ArtistListSidebar extends Component {
   }
 
   handleClick = artistId => {
-    console.log(artistId);
     this.props.getOneArtist(artistId);
   };
 

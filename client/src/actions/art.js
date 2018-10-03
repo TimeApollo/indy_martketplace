@@ -12,8 +12,6 @@ export const GET_ARTWORK_FITLERED_SUCCESS = "GET_ARTWORK_FITLERED_SUCCESS";
 export const FILTER_ART_ARRAY = "FILTER_ART_ARRAY";
 
 export const submitUpload = uploadFormData => dispatch => {
-  // dispatchEvent(isUploading())
-  // console.log(uploadFormData);
   let formData = new FormData();
   for (let name in uploadFormData) {
     if(Array.isArray(uploadFormData[name])){
@@ -25,22 +23,13 @@ export const submitUpload = uploadFormData => dispatch => {
       formData.append(name, uploadFormData[name]);
     }
   }
-  for(let value of formData.values()) {
-    console.log(value)
-  }
   const header = {
     method: "POST",
     body: formData
   };
   fetch("/api/artwork/upload/", header)
     .then(response => response.json())
-    .then(uploadResponse => {
-      // if (!uploadResponse) {
-      //     dispatch(uploadFail)
-      // }
-      console.log(uploadResponse);
-      // dispatchEvent(downloadUpload())
-    });
+    .then(uploadResponse => {});
 };
 
 export const isUploading = () => {

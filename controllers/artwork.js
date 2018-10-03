@@ -28,10 +28,8 @@ artwork.post('/upload', upload.single("file"), doUpload = (req, res) => {
 	params.Key = artpiece.id;
 	params.Body = req.file.buffer;
 	params.ACL = 'public-read';
-		
-	// console.log("this is the model",artpiece)
+	
 	s3Client.upload(params, (err, data) => {
-		console.log( data )
 		if (err) {
 			res.status(500).json({error:"Error -> " + err});
 		} else {
