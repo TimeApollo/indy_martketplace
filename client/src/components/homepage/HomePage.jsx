@@ -5,10 +5,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import { connect } from 'react-redux';
 
 import SingleGallery from "./SingleGallery.jsx";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import ImageModal from "./ImageModal";
+
 
 const styles = theme => ({
   form: {
@@ -46,6 +49,7 @@ class HomePage extends Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
+        { this.props.imgPopup && <ImageModal /> }
         <SingleGallery />
         <Paper className={classes.form}>
           <Typography className={classes.type}>
@@ -70,4 +74,8 @@ HomePage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(HomePage);
+const mapStateToProps = ({art}) => ({
+  imgPopup: art.imgPopup
+});
+
+export default connect(mapStateToProps, undefined)(withStyles(styles)(HomePage));
