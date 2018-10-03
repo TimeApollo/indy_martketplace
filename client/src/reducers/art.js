@@ -96,7 +96,6 @@ const artReducer = (state = initialState, action) => {
                 filteredArtwork: action.payload,
             }
         case FILTER_ART_ARRAY:
-            console.log(action.payload)
             let filteredArtArray = []
 
             filteredArtArray = state.artwork.filter( art => {

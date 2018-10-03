@@ -37,7 +37,6 @@ export const registerUser = ({
   fetch("/api/auth/register", header)
     .then(response => response.json())
     .then(registerResponse => {
-      console.log("hello", registerResponse);
       if (registerResponse.hasOwnProperty("error")) {
         if (registerResponse.error.hasOwnProperty("errmsg")) {
           dispatch(

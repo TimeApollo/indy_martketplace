@@ -73,11 +73,6 @@ class ImageModal extends React.Component {
                 </div>
               </div>
             </div>
-            {/* {artwork.forSale ? (
-              <div className="for-sale">For Sale</div>
-            ) : (
-              <div className="not-sale">Not For Sale</div>
-            )} */}
           </div>
         </div>
       </div>

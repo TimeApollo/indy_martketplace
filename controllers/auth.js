@@ -4,7 +4,6 @@ const auth = express.Router();
 
 //register user
 auth.post("/register", (req, res) => {
-  console.log(req.body);
   User.create(
     {
       firstName: req.body.firstName,
@@ -41,7 +40,6 @@ auth.post("/login", (req, res) => {
     if (err) {
       res.json(err);
     } else if (!user){
-      console.log('here')
       res.json({errors: 'UserName or Password was incorrect. Please try again.'})
     } else {
       delete user._doc.password
@@ -91,7 +89,6 @@ auth.patch("/editProfile", (req, res) => {
       if (err) {
         res.json(err)
       } else {
-        console.log("user" + user)
         res.json(user)
       }
     }
@@ -99,10 +96,8 @@ auth.patch("/editProfile", (req, res) => {
 });
 
 auth.patch("/deleteUser", (req, res) => {
-  console.log(req.body)
   User.findOneAndRemove({password: req.body.userPass, _id: req.body.usersId})
   .then(function(user) {
-    console.log(user)
     res.send(user)
   })
 })

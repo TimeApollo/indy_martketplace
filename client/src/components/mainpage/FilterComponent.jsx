@@ -191,7 +191,6 @@ class FilterComponent extends React.Component {
   };
 
   handleChange = event => {
-    console.log(event.target.name);
     this.setState({ [event.target.name]: !this.state[event.target.name] });
   };
 
