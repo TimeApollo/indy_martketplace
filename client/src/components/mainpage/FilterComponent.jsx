@@ -45,14 +45,16 @@ const styles = theme => ({
     justifyContent: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    padding: "1em",
+    paddingLeft: "1em",
+    paddingTop: "1em", 
+    paddingBottom: "1em",
     marginBottom: "2em"
   },
   list: {
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
-    color: "black"
+    color: "black",
   },
   match: {
     textAlign: "center",
@@ -72,7 +74,9 @@ const styles = theme => ({
   align: {
     width: "8.7em",
     padding: "0",
-    margin: "0"
+    margin: "0",
+    paddingRight: "-5em",
+    marginRight: ".2em"
   }
 });
 
@@ -225,9 +229,6 @@ class FilterComponent extends React.Component {
                 label={medium}
               />
             ))}
-            <button className={classes.button}>Filter</button>
-            <br />
-            <br />
           </FormGroup>
           <div className={classes.title}> Styles</div>
           <FormGroup row>
