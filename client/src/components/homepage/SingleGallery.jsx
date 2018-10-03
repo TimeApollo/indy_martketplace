@@ -35,7 +35,6 @@ class SingleGallery extends React.Component {
   handleSingleImage = (id) => (event) => {
     const result = this.props.artwork.filter(piece => id === piece._id)
 
-    console.log("filtered arpieces result: ", result[0])
     this.props.createImgPopup(result[0])
   }
 
