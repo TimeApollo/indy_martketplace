@@ -39,13 +39,14 @@ mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open to ' + process.env.MONGODB_URI);
 }); 
 
-const gracefulExit = function() { 
-  mongoose.connection.close(function () {
-    console.log('Mongoose default connection with DB :' + process.env.MONGODB_URI + ' is disconnected through app termination');
-    process.exit(0);
-  });
-}
+// dont use in production. this is for local deployment.
+// const gracefulExit = function() { 
+//   mongoose.connection.close(function () {
+//     console.log('Mongoose default connection with DB :' + process.env.MONGODB_URI + ' is disconnected through app termination');
+//     process.exit(0);
+//   });
+// }
 
-process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+// process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
 
