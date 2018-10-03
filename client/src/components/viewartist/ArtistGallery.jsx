@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -9,6 +10,8 @@ import InfoIcon from "@material-ui/icons/Info";
 // import Typography from '@material-ui/core/Typography';
 // import Modal from '@material-ui/core/Modal';
 // import Button from '@material-ui/core/Button';
+
+import { createImgPopup } from "../../actions/art";
 
 const styles = theme => ({
   root: {
@@ -39,10 +42,16 @@ const styles = theme => ({
 });
 
 class ArtistGallery extends Component {
-
   state = {
     open: false,
   };
+
+  handleSingleImage = (id) => (event) => {
+    const result = this.props.artworks.filter(piece => id === piece._id)
+
+    console.log("filtered arpieces result: ", result[0])
+    this.props.createImgPopup(result[0])
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -60,7 +69,7 @@ class ArtistGallery extends Component {
         <GridList cols={3} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
           {this.props.artworks ? this.props.artworks.map(art => (
             <GridListTile key={art._id}>
-              <img src={art.url} alt={art.title} />
+              <img src={art.url} alt={art.title} onClick={this.handleSingleImage(art._id)} />
               <GridListTileBar
                 style={{height: "2.5em"}}
                 title={art.title}
@@ -83,29 +92,10 @@ ArtistGallery.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ArtistGallery);
+const mapDispatchToProps = dispatch => {
+  return {
+    createImgPopup: singleArt => dispatch(createImgPopup(singleArt))
+  };
+};
 
- // singleImageModal = () => {
-  //   return (
-  //     <div>
-  //       <Typography gutterBottom>Click to get the full Modal experience!</Typography>
-  //       <Button onClick={this.handleOpen}>Open Modal</Button>
-  //       <Modal
-  //         aria-labelledby="simple-modal-title"
-  //         aria-describedby="simple-modal-description"
-  //         open={this.state.open}
-  //         onClose={this.handleClose}
-  //       >
-  //         <div style={getModalStyle()} className={classes.paper}>
-  //           <Typography variant="title" id="modal-title">
-  //             Text in a modal
-  //           </Typography>
-  //           <Typography variant="subheading" id="simple-modal-description">
-  //             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-  //           </Typography>
-  //           <SimpleModalWrapped />
-  //         </div>
-  //       </Modal>
-  //     </div>
-  //   );
-  // }
+export default connect(undefined, mapDispatchToProps)(withStyles(styles)(ArtistGallery));

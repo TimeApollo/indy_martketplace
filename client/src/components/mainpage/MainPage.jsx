@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ArtistListSidebar from "./ArtistListSidebar";
 import MainGallery from "../mainpage/MainGallery";
-import FilterComponent from "./FilterComponent"
+import FilterComponent from "./FilterComponent";
+
+import ImageModal from "../homepage/ImageModal.jsx";
 
 const styles = {
   row: {
@@ -45,6 +47,7 @@ class MainPage extends Component {
 
     return (
       <React.Fragment>
+        { this.props.imgPopup && <ImageModal /> }
         <div className={classes.filter}>
           <FilterComponent/>
         </div>
@@ -68,6 +71,7 @@ MainPage.propTypes = {
 const mapStateToProps = ({ art }) => ({
   artwork: art.artwork,
   filteredArtwork: art.filteredArtwork,
+  imgPopup: art.imgPopup
 });
 
 const mapDispatchToProps = dispatch => {

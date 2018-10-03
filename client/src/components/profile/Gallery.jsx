@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
@@ -9,6 +10,8 @@ import InfoIcon from "@material-ui/icons/Info";
 // import Typography from '@material-ui/core/Typography';
 // import Modal from '@material-ui/core/Modal';
 // import Button from '@material-ui/core/Button';
+
+import { createImgPopup } from "../../actions/art";
 
 const styles = theme => ({
   root: {
@@ -39,10 +42,16 @@ const styles = theme => ({
 });
 
 class Gallery extends Component {
-
   state = {
     open: false,
   };
+
+  handleSingleImage = (id) => (event) => {
+    const result = this.props.artworks.filter(piece => id === piece._id)
+
+    console.log("filtered arpieces result: ", result[0])
+    this.props.createImgPopup(result[0])
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -60,7 +69,7 @@ class Gallery extends Component {
         <GridList cols={6} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
           {this.props.artworks ? this.props.artworks.map(art => (
             <GridListTile key={art._id}>
-              <img src={art.url} alt={art.title} />
+              <img src={art.url} alt={art.title} onClick={this.handleSingleImage(art._id)} />
               <GridListTileBar
                 style={{height: "2.5em"}}
                 title={art.title}
@@ -83,4 +92,10 @@ Gallery.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Gallery);
+const mapDispatchToProps = dispatch => {
+  return {
+    createImgPopup: singleArt => dispatch(createImgPopup(singleArt))
+  };
+};
+
+export default connect(undefined, mapDispatchToProps)(withStyles(styles)(Gallery));
