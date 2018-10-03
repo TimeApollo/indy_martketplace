@@ -225,9 +225,6 @@ class FilterComponent extends React.Component {
                 label={medium}
               />
             ))}
-            <button className={classes.button}>Filter</button>
-            <br />
-            <br />
           </FormGroup>
           <div className={classes.title}> Styles</div>
           <FormGroup row>
