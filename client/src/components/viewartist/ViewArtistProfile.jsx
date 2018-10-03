@@ -6,7 +6,9 @@ import ViewStylesSidebar from "./ViewStylesSidebar";
 import ViewArtistAbout from "./ViewArtistAbout";
 import ArtistGallery from "./ArtistGallery";
 import Paper from "@material-ui/core/Paper";
-import { getArtistArtwork } from "../../actions/art"
+import { getArtistArtwork } from "../../actions/art";
+
+import ImageModal from "../homepage/ImageModal.jsx";
 
 const styles = {
   row: {
@@ -57,6 +59,7 @@ class ViewArtistProfile extends Component {
 
     return (
       <React.Fragment>
+        { this.props.imgPopup && <ImageModal /> }
         <div className={classes.row}>
           <div className={classes.sidebar}>
             <img
@@ -92,7 +95,8 @@ ViewArtistProfile.propTypes = {
 const mapStateToProps = ({ art , artist }) => ({
   userArtworkSale: art.userArtwork.filter( art => art.forSale === true ),
   userArtworkSold: art.userArtwork.filter( art => art.forSale === false ),
-  userId: artist.artist.userId
+  userId: artist.artist.userId,
+  imgPopup: art.imgPopup
 });
 
 const mapDispatchToProps = dispatch => {

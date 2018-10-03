@@ -8,6 +8,8 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 
+import { createImgPopup } from "../../actions/art";
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -37,10 +39,16 @@ const styles = theme => ({
 });
 
 class Gallery extends Component {
-
   state = {
     open: false,
   };
+
+  handleSingleImage = (id) => (event) => {
+    const result = this.props.filteredArtwork.filter(piece => id === piece._id)
+
+    console.log("filtered arpieces result: ", result[0])
+    this.props.createImgPopup(result[0])
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -58,7 +66,7 @@ class Gallery extends Component {
         <GridList cols={3} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
           {this.props.filteredArtwork ? this.props.filteredArtwork.map(art => (
             <GridListTile key={art._id}>
-              <img src={art.url} alt={art.title} />
+              <img src={art.url} alt={art.title} onClick={this.handleSingleImage(art._id)}/>
               <GridListTileBar
                 style={{height: "2.5em"}}
                 title={art.title}
@@ -85,4 +93,10 @@ const mapStateToProps = ({ art }) => ({
   filteredArtwork: art.filteredArtwork
 });
 
-export default connect(mapStateToProps , undefined )(withStyles(styles)(Gallery));
+const mapDispatchToProps = dispatch => {
+  return {
+    createImgPopup: singleArt => dispatch(createImgPopup(singleArt))
+  };
+};
+
+export default connect(mapStateToProps , mapDispatchToProps )(withStyles(styles)(Gallery));
