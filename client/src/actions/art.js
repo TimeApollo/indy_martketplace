@@ -7,6 +7,7 @@ export const GET_ARTWORK_SUCCESS = "GET_ARTWORK_SUCCESS";
 export const IS_GETTING_ARTIST_ARTWORK = "IS_GETTING_ARTIST_ARTWORK";
 export const GET_ARTIST_ARTWORK_SUCCESS = "GET_ARTIST_ARTWORK_SUCCESS";
 export const GET_ARTWORK_FITLERED_SUCCESS = "GET_ARTWORK_FITLERED_SUCCESS";
+export const FILTER_ART_ARRAY = "FILTER_ART_ARRAY";
 
 export const submitUpload = uploadFormData => dispatch => {
   // dispatchEvent(isUploading())
@@ -130,5 +131,12 @@ export const getArtworkAndFilteredSuccess = (artwork) => {
   return {
     type: GET_ARTWORK_FITLERED_SUCCESS,
     payload: artwork 
+  }
+}
+
+export const changeFilteredArray = ( mediums , styles ) => {
+  return {
+    type: FILTER_ART_ARRAY,
+    payload: { mediums , styles }
   }
 }
