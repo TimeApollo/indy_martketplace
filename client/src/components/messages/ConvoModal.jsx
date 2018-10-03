@@ -122,8 +122,13 @@ class DirectConvo extends React.Component {
             </SvgIcon>
           </IconButton>
         </div>
-        <div className="convo-modal-wrap">
-          <div className="msgs-wrap">
+        <div className="convo-modal-wrap"
+          style={{overflowY: "scroll !important"}}
+        >
+          <div 
+          className="msgs-wrap"
+          style={{overflowY: "scroll !important"}}
+          >
             {this.props.currentMessages.length &&
               this.props.currentMessages.map(message => {
                 if (message !== null) {
@@ -149,7 +154,8 @@ class DirectConvo extends React.Component {
                 }
               })}
           </div>
-          <form id="write-msg-wrap" noValidate autoComplete="off">
+        </div>
+        <form id="write-msg-wrap" noValidate autoComplete="off">
             <input
               className="msg-input"
               type="text"
@@ -167,7 +173,6 @@ class DirectConvo extends React.Component {
               Send
             </Button>
           </form>
-        </div>
       </div>
     );
   }
