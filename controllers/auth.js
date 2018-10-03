@@ -100,7 +100,7 @@ auth.patch("/editProfile", (req, res) => {
 
 auth.patch("/deleteUser", (req, res) => {
   console.log(req.body)
-  User.findOneAndRemove({password: req.body.userInfo.userPass, _id: req.body.userInfo.usersId})
+  User.findOneAndRemove({password: req.body.userPass, _id: req.body.usersId})
   .then(function(user) {
     console.log(user)
     res.send(user)

@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { editProfile,deleteUser } from "../../actions/auth";
+import {tabChange} from "../../actions/tab";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Typography from '@material-ui/core/Typography';
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
@@ -13,10 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';;
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Typography from '@material-ui/core/Typography';
-import { formatMs } from "@material-ui/core/styles/transitions";
+
 
 let mediumsArray = require("./mediumsArray.js");
 let stylesArray = require("./stylesArray.js");
@@ -207,10 +206,12 @@ class EditProfilePage extends React.Component {
     const userConfirmPass = this.state.passwordMatch
     const usersId = this.props.userId
     const userInfo = { userPass, usersId }
+    let value = '/'
     if(userPass !== userConfirmPass) {
       this.setState({doesPasswordMatch: false})
       return 
     } else {
+      this.props.tabChange(value)
       this.props.deleteUser(userInfo)
     }
   }
@@ -393,7 +394,8 @@ const mapDispatchToProps = dispatch => {
         )
       );
     },
-    deleteUser: (userInfo) => dispatch(deleteUser(userInfo))
+    deleteUser: (userInfo) => dispatch(deleteUser(userInfo)),
+    tabChange: (value) => dispatch(tabChange(value)),
   };
 };
 
