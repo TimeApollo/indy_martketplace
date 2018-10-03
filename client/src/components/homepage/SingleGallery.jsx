@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getArtwork } from "../../actions/art";
+import { getArtwork, createImgPopup } from "../../actions/art";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import GridList from "@material-ui/core/GridList";
@@ -45,7 +45,7 @@ class SingleGallery extends React.Component {
         <GridList className={classes.gridList} cols={8}>
           {this.props.artwork.length ? this.props.artwork.map(piece => (
             <GridListTile key={piece._id}>
-              <img src={piece.url} alt={piece.title} />
+              <img src={piece.url} alt={piece.title} onClick={() => this.props.createImgPopup()}/>
               <GridListTileBar
                 title={piece.title}
                 classes={{
@@ -74,7 +74,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getArtwork: () => {
       dispatch(getArtwork());
-    }
+    },
+    createImgPopup: () => dispatch(createImgPopup())
   };
 };
 
