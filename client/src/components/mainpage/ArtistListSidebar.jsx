@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllArtists , getOneArtist } from "../../actions/artist";
+import { getAllArtists, getOneArtist } from "../../actions/artist";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 
 const styles = theme => ({
@@ -18,10 +18,14 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     width: "25vw",
     fontFamily: "sans-serif",
-    textAlign: "center"
+    textAlign: "center",
+    marginRight: "3em"
   },
   icon: {
     margin: theme.spacing.unit
+  },
+  link: {
+    textAlign: "center",
   }
 });
 
@@ -30,10 +34,10 @@ class ArtistListSidebar extends Component {
     this.props.getAllArtists();
   }
 
-  handleClick = (artistId) => {
-    console.log(artistId)
-    this.props.getOneArtist(artistId)
-  }
+  handleClick = artistId => {
+    console.log(artistId);
+    this.props.getOneArtist(artistId);
+  };
 
   render() {
     const { classes } = this.props;
@@ -47,25 +51,28 @@ class ArtistListSidebar extends Component {
           <br />
           <Divider />
           <br />
-          <Typography component="p">
+          <div component="p" className={classes.list}>
             Click on Artist To Check Out Their Page!
-            <List>
-              {this.props.artists ? 
-                this.props.artists.map(artist => (
-                  <ListItem
-                    key={artist._id}
-                    dense
-                    button
-                    onClick={()=> this.handleClick(artist._id)}
-                    className={classes.listItem}
-                  >
-                    <ListItemText primary={`${artist.firstName} ${artist.lastName}`}/>
-                  </ListItem>
-                ))
+            <List className={classes.link}>
+              {this.props.artists
+                ? this.props.artists.map(artist => (
+                    <ListItem
+                      key={artist._id}
+                      dense
+                      button
+                      onClick={() => this.handleClick(artist._id)}
+                      className={classes.listItem}
+                    >
+                      <ListItemText
+                        className={classes.link}
+                        primary={`${artist.firstName} ${artist.lastName}`}
+                      />
+                    </ListItem>
+                  ))
                 : null}
             </List>
             <Icon />
-          </Typography>
+          </div>
           <br />
           <Divider />
           <br />
@@ -87,7 +94,7 @@ const mapDispatchToProps = dispatch => {
     getAllArtists: () => {
       dispatch(getAllArtists());
     },
-    getOneArtist: (userId) => {
+    getOneArtist: userId => {
       dispatch(getOneArtist(userId));
     }
   };

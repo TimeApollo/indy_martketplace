@@ -1,32 +1,38 @@
 #convo-wrap {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
   margin: 0 auto;
   width: 90%;
+  height: 6em;
 }
 
 .pic-wrap {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 20px;
 }
 
 .pic {
-  background-color: gray;
   border-radius: 50%;
   width: 60px;
   height: 60px;
 }
 
 .info-wrap {
-  justify-content: flex-start;
-  width: 80%;
+  width: 10em !important;
+  justify-content: left;
+  height: 4em !important;
+  display: inline-block;
+  margin-left: -10em;
 }
 
 .content {
   color: gray;
+  width: 25em;
+  word-break: break-all;
+  justify-content: left;
+  padding-bottom: 2em;
 }
 
 .timestamp {
@@ -35,7 +41,7 @@
   align-items: flex-end;
   align-self: flex-start;
   text-align: right;
-  width: 10%;
+  width: 25%;
   font-size: 15px;
   color: gray;
 }
@@ -48,7 +54,21 @@
 }
 
 .convo-wrap {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 50%;
+  border: 1px solid rgb(199, 199, 199);
+  justify-content: left;
+}
+
+.convo {
+  overflow-y: scroll;
+  overflow-x: scroll;
   margin-top: 5px;
   margin-bottom: 0px;
   margin-left: auto;
@@ -56,6 +76,7 @@
   height: 80vh;
   width: 50%;
   border: 1px solid rgb(199, 199, 199);
+  justify-content: left;
 }
 
 .msg-popup {
@@ -187,14 +208,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: rgb(30, 30, 30);
   border-bottom: 3px solid aqua;
   width: 50%;
-  margin-top: 20em;
+  margin-top: 15em;
 }
 
 .convo-who {
-  color: black;
+  color: white;
   font-size: 2.5em;
   margin: 10px;
 }

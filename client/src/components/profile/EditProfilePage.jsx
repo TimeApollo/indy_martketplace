@@ -8,8 +8,11 @@ import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Checkbox from "@material-ui/core/Checkbox";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';;
 
 let mediumsArray = require("./mediumsArray.js");
 let stylesArray = require("./stylesArray.js");
@@ -24,7 +27,7 @@ const styles = theme => ({
     justifyContent: "center",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "-2em",
+    marginTop: "-1.5em",
     background: "#1fc8db",
     fontWeight: "bold",
     fontSize: "1.2em",
@@ -62,12 +65,36 @@ const styles = theme => ({
     textAlign: "center",
     fontSize: ".9em",
     padding: "0"
-    // flexFlow: "wrap",
   },
   match: {
     textAlign: "center",
     marginBottom: "2em"
-  }
+  },
+  title: {
+    paddingLeft: "1em",
+    paddingTop: "1em",
+    fontWeight: "bolder"
+  },
+  styles: {
+    textAlign: "center",
+    fontSize: ".9em",
+    padding: "0",
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  align: {
+    width: "10em",
+    padding: "0",
+    margin: "0"
+  },
+  group: {
+    display: "flex",
+    flexDirection: 'row',
+    flexWrap: "nowrap",
+    width: "auto",
+    height: "auto",
+    justifyContent: "space-around",
+  },
 });
 class EditProfilePage extends React.Component {
   state = {
@@ -113,21 +140,21 @@ class EditProfilePage extends React.Component {
   // };
 
   handleSubmitProfile = () => {
-    let selectedMediums = []
+    let selectedMediums = [];
     this.setState({ doesPasswordMatch: false });
     mediumsArray.forEach(medium => {
       if (this.state[medium]) {
-        console.log('here')
-        selectedMediums.push(medium)
+        console.log("here");
+        selectedMediums.push(medium);
       }
-    })
-    let selectedStyles = []
+    });
+    let selectedStyles = [];
     stylesArray.forEach(style => {
       if (this.state[style]) {
-        selectedStyles.push(style)
+        selectedStyles.push(style);
       }
-    })
-    console.log(selectedMediums)
+    });
+    console.log(selectedMediums);
     if (this.state.password) {
       if (this.state.password === this.state.passwordMatch) {
         this.props.editProfile(
@@ -211,15 +238,12 @@ class EditProfilePage extends React.Component {
               onChange={this.handleOnChange}
             />
           </FormControl>
-          Mediums
-          <List className={classes.error}>
+          <div className={classes.title}> Mediums</div>
+          <FormGroup row>
             {mediumsArray.map(mediums => (
-              <FormControl>
-                <ListItem
-                  value={mediums}
-                  className={classes.error}
-                  name={mediums}
-                >
+              <FormControlLabel
+                className={classes.align}
+                control={
                   <Checkbox
                     onChange={this.handleOnChange}
                     checked={this.state[mediums]}
@@ -227,27 +251,42 @@ class EditProfilePage extends React.Component {
                     key={mediums}
                     name={mediums}
                   />
-                  {mediums}
-                </ListItem>
-              </FormControl>
+                }
+                label={mediums}
+              />
             ))}
-            Styles
+          </FormGroup>
+          <div className={classes.title}> Styles</div>
+          <FormGroup row>
             {stylesArray.map(styles => (
-              <ListItem
-                value={styles}
-                className={classes.error}
-                name={styles}
-              >
-                <Checkbox
-                  onChange={this.handleOnChange}
-                  value={styles}
-                  key={styles}
-                  name={styles}
-                />
-                {styles}
-              </ListItem>
+              <FormControlLabel
+                className={classes.align}
+                control={
+                  <Checkbox
+                    onChange={this.handleOnChange}
+                    checked={this.state[styles]}
+                    value={styles}
+                    key={styles}
+                    name={styles}
+                  />
+                }
+                label={styles}
+              />
             ))}
-          </List>
+          </FormGroup>
+          <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel style={{textAlign:"center", paddingTop: ".5em"}} component="legend">Want to post your own artwork? Please choose Artist!</FormLabel>
+          <RadioGroup
+            aria-label="Account"
+            name="isArtist"
+            className={classes.group}
+            value={this.state.isArtist}
+            onChange={this.handleChange}
+          >
+            <FormControlLabel value='true' control={<Radio />} label="Artist" />
+            <FormControlLabel value='false' control={<Radio />} label="Art Lover" />
+          </RadioGroup>
+        </FormControl>
           <br />
           <br />
           <button className={classes.button} onClick={this.handleSubmitProfile}>

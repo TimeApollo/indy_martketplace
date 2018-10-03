@@ -90,11 +90,11 @@ class DirectConvo extends React.Component {
     return (
         <div className="msg-popup">
             <div className="convo-nav">
-                <div className="convo-who">{this.props.currentEmails[1] === this.props.userEmail 
+                <div className="convo-who">Message with: {this.props.currentEmails[1] === this.props.userEmail 
                     ? this.props.currentEmails[0]
                     : this.props.currentEmails[1]}</div>
                 <IconButton >
-                    <SvgIcon onClick={ () => this.props.exitDmPopup()}>
+                    <SvgIcon style={{color: "white"}}onClick={ () => this.props.exitDmPopup()}>
                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                     </SvgIcon>
                 </IconButton>

@@ -5,7 +5,7 @@ class BannerComponent extends React.Component {
       <div
         style={{
           position: "relative",
-          width: "100vw"
+          width: "100vw",
         }}
       >
         <nav style={{ display: "flex", justifyContent: "center" }}>

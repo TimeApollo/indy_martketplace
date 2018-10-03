@@ -10,6 +10,7 @@ import UploadForm from "./profile/PostNewImagePage.jsx";
 import EditProfilePage from "./profile/EditProfilePage.jsx";
 import MainPage from "./mainpage/MainPage.jsx";
 import ViewArtistProfile from "./viewartist/ViewArtistProfile";
+import AboutPage from "./profile/AboutPage.jsx"
 import "./App.css";
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
           <Route exact path="/profile" component={UserProfilePageContainer} />
           <Route exact path="/editProfile" component={EditProfilePage} />
           <Route exact path="/artist" component={ViewArtistProfile} />
+          {/* <Route exact path="/about" component={AboutPage} /> */}
         </Switch>
       </div>
     );

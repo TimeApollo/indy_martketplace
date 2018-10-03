@@ -64,7 +64,7 @@ class MessageList extends React.Component {
                     </SvgIcon>
                 </IconButton>
             </Paper>
-            <div className="convo-wrap">
+            <div className="convo">
                 {this.props.convoList.length ? this.props.convoList.sort((a,b) => {
                     if (a.messages[a.messages.length - 1].timestamp < b.messages[b.messages.length - 1].timestamp) {
                         return 1;
