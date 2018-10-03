@@ -56,7 +56,7 @@ class AboutPage extends React.Component {
           </p>
           </Typography>
         </Paper>
-      <React.Fragment/>
+      </React.Fragment>
     )
   }
 }
