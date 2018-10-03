@@ -6,8 +6,12 @@ export const UPLOAD_FAIL = "UPLOAD_FAIL";
 export const GET_ARTWORK_SUCCESS = "GET_ARTWORK_SUCCESS";
 export const IS_GETTING_ARTIST_ARTWORK = "IS_GETTING_ARTIST_ARTWORK";
 export const GET_ARTIST_ARTWORK_SUCCESS = "GET_ARTIST_ARTWORK_SUCCESS";
+<<<<<<< HEAD
 export const IMG_POPUP = "IMG_POPUP";
 export const EXIT_IMG_POPUP = "EXIT_IMG_POPUP";
+=======
+export const GET_ARTWORK_FITLERED_SUCCESS = "GET_ARTWORK_FITLERED_SUCCESS";
+>>>>>>> d98571bcc231a6a96f548dbd346978a3e04f0742
 
 export const submitUpload = uploadFormData => dispatch => {
   // dispatchEvent(isUploading())
@@ -121,5 +125,27 @@ export const createImgPopup = (clickedId) => {
 export const exitImgPopup = () => {
   return {
     type: EXIT_IMG_POPUP
+  }
+}
+export const getArtworkAndFiltered = () => dispatch => {
+  dispatch(isGettingArtwork())
+
+  const header = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+
+  fetch("/api/artwork/", header )
+    .then( response => response.json())
+    .then( artwork => {
+      dispatch(getArtworkAndFilteredSuccess(artwork))
+    })
+}
+
+export const getArtworkAndFilteredSuccess = (artwork) => {
+  return {
+    type: GET_ARTWORK_FITLERED_SUCCESS,
+    payload: artwork 
   }
 }

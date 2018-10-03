@@ -47,7 +47,10 @@ const styles = theme => ({
     justifyContent: "center",
     marginLeft: "auto",
     marginRight: "auto"
-  }
+  },
+  error: {
+    textAlign: "center"
+  },
 });
 
 class LoginForm extends React.Component {
@@ -88,6 +91,7 @@ class LoginForm extends React.Component {
     return (
       <div>
         <h1 className={classes.header}>LOGIN</h1>
+        {this.props.login.isLoginFail ? <div className={classes.error}> Email or Password was incorrect. Please try again </div> : null }
         <div className={classes.form}>
           <FormControl required={true} style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>

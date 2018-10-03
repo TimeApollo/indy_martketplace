@@ -177,8 +177,9 @@ export const editProfile = (firstName, lastName, password, about, mediums, style
   }
   fetch(`/api/auth/editProfile/`, header)
   .then(res => res.json())
-  .then(users => {
-    dispatch(editProfileSuccess(users))
+  .then(user => {
+    dispatch(editProfileSuccess(user));
+    dispatch(push("/profile"))  
   })
 }
 

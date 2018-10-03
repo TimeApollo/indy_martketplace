@@ -9,6 +9,7 @@ import UserProfilePageContainer from "./profile/UserProfilePageContainer.jsx"
 import UploadForm from "./profile/PostNewImagePage.jsx";
 import EditProfilePage from "./profile/EditProfilePage.jsx";
 import MainPage from "./mainpage/MainPage.jsx";
+import ViewArtistProfile from "./viewartist/ViewArtistProfile";
 import "./App.css";
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/artwork" component={MainPage} />
           <Route exact path="/profile" component={UserProfilePageContainer} />
           <Route exact path="/editProfile" component={EditProfilePage} />
+          <Route exact path="/artist" component={ViewArtistProfile} />
         </Switch>
       </div>
     );

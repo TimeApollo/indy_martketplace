@@ -40,6 +40,9 @@ auth.post("/login", (req, res) => {
   ) {
     if (err) {
       res.json(err);
+    } else if (!user){
+      console.log('here')
+      res.json({errors: 'UserName or Password was incorrect. Please try again.'})
     } else {
       delete user._doc.password
       user = {
@@ -82,12 +85,14 @@ auth.patch("/editProfile", (req, res) => {
     patch.lastName = req.body.lastName
   }
 
+  console.log("patch:" , patch)
+
   User.findOneAndUpdate({ _id: req.body.userId }, {$set: patch}, { new: true }, 
     function(err, user) {
       if (err) {
         res.json(err)
       } else {
-        console.log(user)
+        console.log("user" + user)
         res.json(user)
       }
     }

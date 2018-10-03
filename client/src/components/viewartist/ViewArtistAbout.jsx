@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 });
 
-class ArtistAboutSidebar extends Component {
+class ViewArtistAbout extends Component {
   render() {
     const { classes } = this.props;
 
@@ -25,17 +25,14 @@ class ArtistAboutSidebar extends Component {
       <div className={classes.root}>
         <Paper className={classes.root} elevation={15}>
           <Typography variant="headline" component="h1">
-            {this.props.user.firstName} {this.props.user.lastName}
+            {this.props.artist.firstName} {this.props.artist.lastName}
           </Typography>
-          <br/>
-          <Divider/>
-          <br/>
-          <Typography component="h2">{this.props.user.mediums.join(", ")}</Typography>
+          <Typography component="h2">{this.props.artist.mediums.join(", ")}</Typography>
           <br />
           <Divider />
           <br />
           <Typography component="p">
-            {this.props.user.about}
+            {this.props.artist.about}
           </Typography>
           <br />
           <Divider />
@@ -47,12 +44,12 @@ class ArtistAboutSidebar extends Component {
   }
 }
 
-ArtistAboutSidebar.propTypes = {
+ViewArtistAbout.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ auth }) => ({
-  user: auth.user
+const mapStateToProps = ({ artist }) => ({
+  artist: artist.artist
 });
 
 // const mapDispatchToProps = dispatch => {
@@ -62,4 +59,4 @@ const mapStateToProps = ({ auth }) => ({
 export default connect(
   mapStateToProps,
   undefined
-)(withStyles(styles)(ArtistAboutSidebar));
+)(withStyles(styles)(ViewArtistAbout));

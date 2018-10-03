@@ -16,7 +16,7 @@ import ImageModal from "./ImageModal";
 const styles = theme => ({
   form: {
     marginBottom: "0",
-    width: "100%",
+    width: "100em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

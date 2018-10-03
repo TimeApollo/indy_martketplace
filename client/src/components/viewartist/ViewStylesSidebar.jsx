@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
 
 const styles = theme => ({
   root: {
@@ -14,52 +15,46 @@ const styles = theme => ({
     width: "15em",
     fontFamily: "sans-serif",
     textAlign: "center"
+  },
+  edit: {
+    color: "gray"
   }
 });
 
-class ArtistAboutSidebar extends Component {
+class ViewStylesSidebar extends Component {
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <Paper className={classes.root} elevation={15}>
+        <Paper className={classes.root} elevation={10}>
           <Typography variant="headline" component="h1">
-            {this.props.user.firstName} {this.props.user.lastName}
+            STYLES
           </Typography>
-          <br/>
-          <Divider/>
-          <br/>
-          <Typography component="h2">{this.props.user.mediums.join(", ")}</Typography>
           <br />
           <Divider />
           <br />
-          <Typography component="p">
-            {this.props.user.about}
-          </Typography>
+
+          {this.props.artist.styles.map(style => (
+            <List>{style}</List>
+          ))}
           <br />
           <Divider />
           <br />
         </Paper>
-        <br />
       </div>
     );
   }
 }
 
-ArtistAboutSidebar.propTypes = {
+ViewStylesSidebar.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
-const mapStateToProps = ({ auth }) => ({
-  user: auth.user
+const mapStateToProps = ({ artist }) => ({
+  artist: artist.artist
 });
-
-// const mapDispatchToProps = dispatch => {
-
-// };
 
 export default connect(
   mapStateToProps,
   undefined
-)(withStyles(styles)(ArtistAboutSidebar));
+)(withStyles(styles)(ViewStylesSidebar));

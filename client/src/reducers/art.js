@@ -6,8 +6,12 @@ import {
     GET_ARTWORK_SUCCESS,
     IS_GETTING_ARTIST_ARTWORK,
     GET_ARTIST_ARTWORK_SUCCESS,
+<<<<<<< HEAD
     IMG_POPUP,
     EXIT_IMG_POPUP
+=======
+    GET_ARTWORK_FITLERED_SUCCESS
+>>>>>>> d98571bcc231a6a96f548dbd346978a3e04f0742
 } from "../actions/art";
 
 const initialState = {
@@ -20,17 +24,24 @@ const initialState = {
     isGettingArtwork: false,
     userArtwork: [],
     isGettingArtistArtwork: false,
+<<<<<<< HEAD
     imgPopup: false,
     currentImageId: "",
+=======
+    filteredArtwork: []
+>>>>>>> d98571bcc231a6a96f548dbd346978a3e04f0742
 }
 
 const artReducer = (state = initialState, action) => {
     switch (action.type) {
         case IS_UPLOADING:
             return {
+                ...state,
                 upload: {
                     ...state.upload,
                     isUploading: true,
+                    isUploadingFail: false,
+                    isUploadingSuccess: false
                 }
             }
         case UPLOAD_FAIL:
@@ -82,6 +93,13 @@ const artReducer = (state = initialState, action) => {
             return {
                 ...state,
                 imgPopup: false
+            }
+        case GET_ARTWORK_FITLERED_SUCCESS:
+            return {
+                ...state,
+                isGettingArtistArtwork: false,
+                artwork: action.payload,
+                filteredArtwork: action.payload,
             }
         default:
             return state;
