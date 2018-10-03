@@ -131,16 +131,14 @@ class DirectConvo extends React.Component {
                     return (
                       <div className="sender-msg-wrap">
                         <div className="sender-bubble">{message.message}</div>
-                        <div className="single-msg-time">
-                          {message.timestamp}
-                        </div>
+                        <div className="sender-msg-time">{message.timestamp}</div>
                       </div>
                     );
                   } else {
                     return (
                       <div className="rec-msg-wrap">
                         <div className="rec-bubble">{message.message}</div>
-                        <div className="single-msg-time">
+                        <div className="rec-msg-time">
                           {message.timestamp}
                         </div>
                       </div>
