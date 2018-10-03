@@ -167,28 +167,28 @@ class UploadForm extends React.Component {
     forSale: "",
     uploadFile: {},
     styles: [],
-    title: ""
+    title: "",
+    uploaded: false,
   };
 
   handleChange = name => event => {
-    this.setState({ styles: [...this.state.styles, event.target.value] });
-    console.log(this.state.styles);
+    this.setState({ styles: [...this.state.styles, event.target.value], uploaded: false });
   };
   handleMedium = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ 
+      [event.target.name]: event.target.value, uploaded: false });
   };
   handleOpen = () => {
     this.setState({ open: !this.state.open });
   };
   handleForSale = event => {
-    this.setState({ forSale: event.target.value });
+    this.setState({ forSale: event.target.value, uploaded: false });
   };
   handleTitle = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value, uploaded: false });
   };
   onFileSelect = event => {
-    console.log(event.target.files[0]);
-    this.setState({ uploadFile: event.target.files[0] });
+    this.setState({ uploadFile: event.target.files[0], uploaded: false });
   };
   onSubmit = () => {
     let uploadFormData = {
@@ -204,9 +204,16 @@ class UploadForm extends React.Component {
       artist: this.props.artist,
       userId: this.props.userId
     };
-    console.log(this.state)
-    // console.log(uploadFormData);
     this.props.submitUpload(uploadFormData);
+    this.setState({
+      open: false,
+      medium: "",
+      forSale: "",
+      uploadFile: {},
+      styles: [],
+      title: "",
+      uploaded: true
+    })
   };
   render() {
     const { classes } = this.props;
@@ -221,6 +228,13 @@ class UploadForm extends React.Component {
           onChange={this.onFileSelect}
         />
         <label htmlFor="contained-button-file">
+        <React.Fragment>
+          {this.state.uploadFile !== {} ? (
+            <Typography variant="subheading" gutterBottom>
+              {this.state.uploadFile.name}
+            </Typography>
+          ) : null}
+        </React.Fragment>
           <Button
             variant="contained"
             component="span"
@@ -229,18 +243,12 @@ class UploadForm extends React.Component {
             Select File to Upload
           </Button>
         </label>
-        <React.Fragment>
-          {this.state.uploadFile !== {} ? (
-            <Typography variant="subheading" gutterBottom>
-              {this.state.uploadFile.name}
-            </Typography>
-          ) : null}
-        </React.Fragment>
         <TextField
           id="standard-dense"
           label="Title"
           name="title"
           className={classNames(classes.textField, classes.dense)}
+          value={this.state.title}
           margin="dense"
           onChange={this.handleTitle}
         />
@@ -363,6 +371,13 @@ class UploadForm extends React.Component {
         >
           Submit Upload
         </Button>
+        <React.Fragment>
+          {this.state.uploaded ? (
+            <Typography variant="subheading" gutterBottom>
+              Artwork Uploaded!
+            </Typography>
+          ) : null}
+        </React.Fragment>
       </div>
     );
   }

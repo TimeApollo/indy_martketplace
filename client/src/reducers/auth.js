@@ -9,7 +9,7 @@ import {
   REGISTER_FAIL,
   EDIT_PROFILE,
   IS_EDITING,
-  DELETE_USER_SUCCESS
+  DELETE_USER
 } from "../actions/auth";
 
 const initialState = {
@@ -159,17 +159,15 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isPasswordUpdated: false
       };
-    default:
-      return state;
-
-    case LOGOUT_USER_REQUEST:
+      
+      case LOGOUT_USER_REQUEST:
       return {
         ...state,
         logout: {
           isLoggingOut: true
         }
       };
-    case LOGOUT_USER_RESPONSE:
+      case LOGOUT_USER_RESPONSE:
       return {
         ...state,
         user: initialState.user,
@@ -179,6 +177,12 @@ const authReducer = (state = initialState, action) => {
           success: action.payload.success
         }
       };
+      case DELETE_USER:
+      return {
+        ...initialState
+      }
+      default:
+        return state;
   }
 };
 

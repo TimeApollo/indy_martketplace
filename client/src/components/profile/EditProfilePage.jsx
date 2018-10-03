@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { editProfile } from "../../actions/auth";
+import { editProfile,deleteUser } from "../../actions/auth";
+import {tabChange} from "../../actions/tab";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
+import Typography from '@material-ui/core/Typography';
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
@@ -13,6 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';;
+
 
 let mediumsArray = require("./mediumsArray.js");
 let stylesArray = require("./stylesArray.js");
@@ -106,7 +109,7 @@ class EditProfilePage extends React.Component {
     mediums: [],
     styles: [],
     isArtist: this.props.isArtist,
-    doesPasswordMatch: false
+    doesPasswordMatch: true
   };
 
   passwordMismatch = () => {
@@ -191,8 +194,27 @@ class EditProfilePage extends React.Component {
   };
 
   handleOnChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.name)
+    this.setState({ 
+      [event.target.name]: event.target.value,
+      doesPasswordMatch: true
+     });
   };
+
+  handleDeleteProfile = () => {
+    const userPass = this.state.password
+    const userConfirmPass = this.state.passwordMatch
+    const usersId = this.props.userId
+    const userInfo = { userPass, usersId }
+    let value = '/'
+    if(userPass !== userConfirmPass) {
+      this.setState({doesPasswordMatch: false})
+      return 
+    } else {
+      this.props.tabChange(value)
+      this.props.deleteUser(userInfo)
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -322,7 +344,13 @@ class EditProfilePage extends React.Component {
           </FormControl>
           <br />
           <br />
-          <button className={classes.button}>Delete Profile</button>
+          {this.state.doesPasswordMatch !== true ? (
+            <Typography variant="body2" gutterBottom>
+            Passwords do not match
+            </Typography>
+          ): null
+          }
+          <button className={classes.button} onClick={this.handleDeleteProfile}>Delete Profile</button>
         </div>
       </div>
     );
@@ -335,7 +363,9 @@ EditProfilePage.propTypes = {
 
 function mapStateToProps({ auth }) {
   return {
-    user: auth.user
+    user: auth.user,
+    userEmail: auth.user.email,
+    userId: auth.user.userId
   };
 }
 
@@ -363,10 +393,9 @@ const mapDispatchToProps = dispatch => {
           userId
         )
       );
-    }
-    // deleteUser: token => {
-    //   dispatch(deleteUser(token));
-    // }
+    },
+    deleteUser: (userInfo) => dispatch(deleteUser(userInfo)),
+    tabChange: (value) => dispatch(tabChange(value)),
   };
 };
 
