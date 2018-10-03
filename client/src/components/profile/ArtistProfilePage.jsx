@@ -16,17 +16,6 @@ const styles = {
     justifyContent: "center",
     marginTop: "5em"
   },
-  bigAvatar: {
-    border: "1px solid",
-    borderColor: "rgb(65, 118, 115)",
-    backgroundColor: "rgb(0, 169, 160)",
-    borderRadius: "8em",
-    width: "10em",
-    height: "10em",
-    marginRight: "auto",
-    display: "flex",
-    marginLeft: "5.5em"
-  },
   sidebar: {
     width: "20",
     display: "flex",
@@ -62,11 +51,6 @@ class ArtistProfilePage extends Component {
         { this.props.imgPopup && <ImageModal /> }
         <div className={classes.row}>
           <div className={classes.sidebar}>
-            <img
-              src={require("../../images/penny.png")}
-              alt="penny"
-              className={classes.bigAvatar}
-            />
             <ArtistAboutSidebar/>
             <ArtistStylesSidebar />
           </div>
