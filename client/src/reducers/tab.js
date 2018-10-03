@@ -9,7 +9,7 @@ const tabReducer = (state = initialState, action) => {
                 ...state,
                 value: action.payload
             }
-            default: return state
+        default: return state
     }
 }
 

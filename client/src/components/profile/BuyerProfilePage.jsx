@@ -6,6 +6,8 @@ import BuyerAboutSidebar from "./BuyerAboutSidebar";
 import Gallery from "./Gallery";
 import Paper from "@material-ui/core/Paper";
 
+import ImageModal from "../homepage/ImageModal.jsx";
+
 const styles = {
   row: {
     display: "flex",
@@ -50,6 +52,7 @@ class BuyerProfilePage extends Component {
 
     return (
       <React.Fragment>
+        { this.props.imgPopup && <ImageModal /> }
         <div className={classes.row}>
           <div className={classes.sidebar}>
             <img
@@ -78,7 +81,8 @@ BuyerProfilePage.propTypes = {
 };
 
 const mapStateToProps = ({ art }) => ({
-  artwork: art.artwork
+  artwork: art.artwork,
+  imgPopup: art.imgPopup
 });
 
 export default connect( mapStateToProps , undefined )(withStyles(styles)(BuyerProfilePage));
