@@ -6,12 +6,8 @@ import {
     GET_ARTWORK_SUCCESS,
     IS_GETTING_ARTIST_ARTWORK,
     GET_ARTIST_ARTWORK_SUCCESS,
-<<<<<<< HEAD
     IMG_POPUP,
     EXIT_IMG_POPUP
-=======
-    GET_ARTWORK_FITLERED_SUCCESS
->>>>>>> d98571bcc231a6a96f548dbd346978a3e04f0742
 } from "../actions/art";
 
 const initialState = {
@@ -24,12 +20,8 @@ const initialState = {
     isGettingArtwork: false,
     userArtwork: [],
     isGettingArtistArtwork: false,
-<<<<<<< HEAD
     imgPopup: false,
     currentImageId: "",
-=======
-    filteredArtwork: []
->>>>>>> d98571bcc231a6a96f548dbd346978a3e04f0742
 }
 
 const artReducer = (state = initialState, action) => {

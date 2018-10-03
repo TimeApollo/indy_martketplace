@@ -119,7 +119,8 @@
 .msgs-wrap {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
+    flex-flow: wrap;
     background-image: linear-gradient(141deg, #9fb8ad 10%, #1fc8db 59%, #2cb5e8 75%);
     height: 30em;
     overflow-x: hidden;
@@ -150,11 +151,19 @@
 }
 
 .sender-bubble {
-    display: flex;
+    display: inline-block;
     color: black;
-    align-self: end;
+    /* align-self: end; */
+    justify-content: right;
     padding: .5em;
     font-weight: bold;
+    text-align: right;
+    width: 15em;
+    height: 100%;
+    flex-flow: wrap;
+    overflow-y: visible; 
+    word-break: break-all;
+
 }
 
 .rec-bubble {
