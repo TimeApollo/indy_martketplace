@@ -6,9 +6,10 @@ import {
     GET_ARTWORK_SUCCESS,
     IS_GETTING_ARTIST_ARTWORK,
     GET_ARTIST_ARTWORK_SUCCESS,
+    GET_ARTWORK_FITLERED_SUCCESS,
+    FILTER_ART_ARRAY,
     IMG_POPUP,
     EXIT_IMG_POPUP,
-    GET_ARTWORK_FITLERED_SUCCESS
 } from "../actions/art";
 
 const initialState = {
@@ -95,6 +96,32 @@ const artReducer = (state = initialState, action) => {
                 isGettingArtistArtwork: false,
                 artwork: action.payload,
                 filteredArtwork: action.payload,
+            }
+        case FILTER_ART_ARRAY:
+            console.log(action.payload)
+            let filteredArtArray = []
+
+            filteredArtArray = state.artwork.filter( art => {
+                if ( !action.payload.mediums.length && !action.payload.styles.length ){
+                    return true
+                } else if ( !action.payload.mediums.length && action.payload.styles.length ){
+                    return action.payload.styles.some( style => art.styles.includes( style ))
+                } else if ( action.payload.mediums.length && !action.payload.styles.length ){
+                    return action.payload.mediums.some( medium => art.medium === medium)
+                } else {
+                    return action.payload.mediums.some( medium => { 
+                        if (art.medium === medium){
+                            return true
+                        } else {
+                            return action.payload.styles.some( style => art.styles.includes( style ))
+                        }
+                    })
+                }
+            })
+            
+            return {
+                ...state,
+                filteredArtwork: filteredArtArray,
             }
         default:
             return state;
