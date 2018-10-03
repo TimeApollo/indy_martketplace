@@ -21,6 +21,20 @@ artist.get('/:id', (req, res) => {
   })
 })
 
+user.get('/', (req, res) => {
+  User.find({}, null , { sort: { firstName: 1}} , function ( err , users ){
+    res.json(users)
+  })
+})
+
+user.get('/delete/:id', function(req,res){
+  res.send()
+})
+
+// user.remove('/delete', (req,res) => {
+//   User.findOneAndRemove({})
+// })
+
 module.exports = {
   artist
 }

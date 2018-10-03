@@ -1,4 +1,5 @@
 import { push } from "connected-react-router";
+import { userInfo } from "os";
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
@@ -10,6 +11,7 @@ export const IS_LOGGING_IN = "IS_LOGGING_IN";
 export const IS_REGISTERING = "IS_REGISTERING";
 export const EDIT_PROFILE = "EDIT_PROFILE";
 export const IS_EDITING = "IS_EDITING";
+export const DELETE_USER = "DELETE_USER"
 
 export const registerUser = ({
   firstName,
@@ -194,4 +196,24 @@ export const editProfileSuccess = (user) => {
     type: EDIT_PROFILE,
     payload: user
   }
+}
+
+export const deleteUser = (userInfo) => dispatch => {
+  const header = {
+    method: "PATCH",
+    headers: {
+      "Contenet-Type": "application/json",
+    },
+    body: JSON.stringify(userInfo)
+  }
+  fetch('/api/auth/deleteUser', header)
+  .then(res => res.json())
+  .then(response => {
+    console.log(response)
+  })
+  // return {
+  //   type: DELETE_USER,
+  //   userId: userId,
+  //   userPass: userPass
+  // }
 }
