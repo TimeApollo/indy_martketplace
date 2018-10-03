@@ -37,7 +37,6 @@ export const registerUser = ({
   fetch("/api/auth/register", header)
     .then(response => response.json())
     .then(registerResponse => {
-      console.log("hello", registerResponse);
       if (registerResponse.hasOwnProperty("error")) {
         if (registerResponse.error.hasOwnProperty("errmsg")) {
           dispatch(
@@ -158,7 +157,6 @@ const logoutUserRequest = () => {
 };
 
 const logoutUserReceived = data => {
-  console.log(data);
   return {
     type: LOGOUT_USER_RESPONSE,
     payload: data
@@ -228,7 +226,6 @@ export const deleteUser = userInfo => dispatch => {
     .then(response => {
       dispatch(successfullProfileDelete());
       dispatch(push("/"));
-      console.log(response);
     });
 };
 export const successfullProfileDelete = () => {
