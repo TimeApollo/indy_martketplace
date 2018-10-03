@@ -85,7 +85,6 @@ auth.patch("/editProfile", (req, res) => {
     patch.lastName = req.body.lastName
   }
 
-  console.log("patch:" , patch)
 
   User.findOneAndUpdate({ _id: req.body.userId }, {$set: patch}, { new: true }, 
     function(err, user) {
@@ -98,6 +97,15 @@ auth.patch("/editProfile", (req, res) => {
     }
   )
 });
+
+auth.patch("/deleteUser", (req, res) => {
+  console.log(req.body)
+  User.findOneAndRemove({password: req.body.userPass, _id: req.body.usersId})
+  .then(function(user) {
+    console.log(user)
+    res.send(user)
+  })
+})
 
 module.exports = {
   auth

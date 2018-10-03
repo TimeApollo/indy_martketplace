@@ -10,6 +10,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {tabChange} from "../../actions/tab";
 
 const styles = theme => ({
   button: {
@@ -108,7 +109,7 @@ class RegisterForm extends React.Component {
       email: this.state.email,
       isArtist: (this.state.isArtist === 'true' ? true : false )
     };
-  
+    let value = '/profile'
     if ( !this.state.firstName ){ this.setState({ submit: false , errorfirstName: true })}
     else if ( !this.state.lastName ){ this.setState({ submit: false , errorlastName: true })}
     else if ( !this.state.email ){ this.setState({ submit: false , erroremail: true })}
@@ -118,6 +119,7 @@ class RegisterForm extends React.Component {
     else if ( this.state.password !== this.state.passwordMatch ){ 
       this.setState({ submit: false , isPasswordMatch: false })
     } else {
+      this.props.tabChange(value)
       this.props.registerUser(regFormData);
     }
   };
@@ -224,6 +226,7 @@ const mapStateToProps = ({ auth }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
+    tabChange: (value) => dispatch(tabChange(value)),
     registerUser: regFormData => {
       dispatch(registerUser(regFormData));
     }
