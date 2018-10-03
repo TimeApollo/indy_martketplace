@@ -8,11 +8,9 @@ export const DM_POPUP = 'DM_POPUP';
 export const DM_CLOSE = 'DM_CLOSE';
 
 export const getMessages = ({userId}) => dispatch => {
-    console.log(userId)
     fetch('/api/messages/' + userId)
         .then( res => res.json() )
         .then( data => {
-            console.log(data)
             dispatch({ type: GET_MESSAGES, payload: data })
         } )
 }
@@ -31,7 +29,6 @@ export const postMessage = ({senderEmail, email, message}) => dispatch => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log("post message response: ", res)
         dispatch({type: POST_MESSAGE, payload: res})
         dispatch({type: POST_SINGLE_MESSAGE, payload: res})
       })
