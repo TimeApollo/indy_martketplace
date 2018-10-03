@@ -127,21 +127,6 @@ class EditProfilePage extends React.Component {
     );
   };
 
-  // profileEditSuccess = () => {
-  //   return (
-  //     <Paper
-  //       style={{
-  //         width: "15em",
-  //         fontFamily: "sans-serif",
-  //         textAlign: "center"
-  //       }}
-  //       elevation={10}
-  //     >
-  //       Profile successfully updated!
-  //     </Paper>
-  //   );
-  // };
-
   handleSubmitProfile = () => {
     let selectedMediums = [];
     this.setState({ doesPasswordMatch: false });
@@ -302,7 +287,7 @@ class EditProfilePage extends React.Component {
             name="isArtist"
             className={classes.group}
             value={this.state.isArtist}
-            onChange={this.handleChange}
+            onChange={this.handleOnChange}
           >
             <FormControlLabel value='true' control={<Radio />} label="Artist" />
             <FormControlLabel value='false' control={<Radio />} label="Art Lover" />
