@@ -101,6 +101,7 @@
   border-radius: 0.5%;
   height: 70%;
   width: 50%;
+  margin-bottom: 10em;
 }
 
 #new-msg-btn {
@@ -136,22 +137,13 @@
   align-items: center;
   justify-content: space-between;
   width: 50%;
+  margin-bottom: 5em;
 }
 
 .msgs-wrap {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background-image: linear-gradient(
-    141deg,
-    #9fb8ad 10%,
-    #1fc8db 59%,
-    #2cb5e8 75%
-  );
-  /* height: 40em;
-  overflow-y: scroll;
-  word-break: break-all;
-  word-wrap: break-word; */
 }
 
 .convo-modal-wrap {
@@ -159,6 +151,12 @@
   width: 50%;
   height: 40em;
   overflow-y: scroll;
+  background-image: linear-gradient(
+    141deg,
+    #9fb8ad 10%,
+    #1fc8db 59%,
+    #2cb5e8 75%
+  );
 }
 
 .sender-msg-wrap {

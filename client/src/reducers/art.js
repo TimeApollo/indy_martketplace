@@ -78,7 +78,6 @@ const artReducer = (state = initialState, action) => {
                 isGettingArtistArtwork: true,
             }
         case IMG_POPUP:
-            console.log("single artpiece: ", action.payload)
             return {
                 ...state,
                 imgPopup: true,
