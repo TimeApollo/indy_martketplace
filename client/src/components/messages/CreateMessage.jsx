@@ -75,6 +75,20 @@ class TextFields extends React.Component {
     });
   };
 
+  // handleMessagePostEnter = event => {
+  //   if (event.key === "Enter") {
+  //     let messageInfo = {
+  //       senderEmail: this.props.userEmail,
+  //       email: this.state.email.toLowerCase(),
+  //       message: this.state.message
+  //     };
+  
+  //     this.setState({email: '',
+  //                   message: ''})
+  //     this.props.postMessage(messageInfo);
+  //   }
+  // };
+
   handleMessagePost = event => {
     let messageInfo = {
       senderEmail: this.props.userEmail,
@@ -125,7 +139,7 @@ class TextFields extends React.Component {
                 onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
-
+                // onKeyPress={this.handleMessagePostEnter}
               />
               <Button
                 id="new-msg-btn"

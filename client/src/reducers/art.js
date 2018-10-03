@@ -61,7 +61,6 @@ const artReducer = (state = initialState, action) => {
                 isGettingArtwork: true
             }
         case GET_ARTWORK_SUCCESS:
-            console.log("get_artwork_success log: ", action.payload)
             return {
                 ...state,
                 isGettingArtwork: false,

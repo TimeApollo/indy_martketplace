@@ -66,7 +66,7 @@ class LoginForm extends React.Component {
   };
 
   handleLoginUserEnter = event => {
-    if (event.target.key === "Enter") {
+    if (event.key === "Enter") {
       let loginData = {
         email: this.state.email,
         password: this.state.password
