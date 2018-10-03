@@ -27,6 +27,7 @@ class App extends Component {
           <Route exact path="/profile" component={UserProfilePageContainer} />
           <Route exact path="/editProfile" component={EditProfilePage} />
           <Route exact path="/artist" component={ViewArtistProfile} />
+          <Route exact path="/about" component={AboutPage}/>
           {/* <Route exact path="/about" component={AboutPage} /> */}
         </Switch>
       </div>
