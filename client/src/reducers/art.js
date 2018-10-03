@@ -8,6 +8,8 @@ import {
     GET_ARTIST_ARTWORK_SUCCESS,
     GET_ARTWORK_FITLERED_SUCCESS,
     FILTER_ART_ARRAY,
+    IMG_POPUP,
+    EXIT_IMG_POPUP,
 } from "../actions/art";
 
 const initialState = {
@@ -20,6 +22,8 @@ const initialState = {
     isGettingArtwork: false,
     userArtwork: [],
     isGettingArtistArtwork: false,
+    imgPopup: false,
+    currentImageId: "",
     filteredArtwork: []
 }
 
@@ -57,6 +61,7 @@ const artReducer = (state = initialState, action) => {
                 isGettingArtwork: true
             }
         case GET_ARTWORK_SUCCESS:
+            console.log("get_artwork_success log: ", action.payload)
             return {
                 ...state,
                 isGettingArtwork: false,
@@ -72,6 +77,17 @@ const artReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isGettingArtistArtwork: true,
+            }
+        case IMG_POPUP:
+            console.log("clicked id: ", action.payload)
+            return {
+                ...state,
+                imgPopup: true
+            }
+        case EXIT_IMG_POPUP:
+            return {
+                ...state,
+                imgPopup: false
             }
         case GET_ARTWORK_FITLERED_SUCCESS:
             return {
