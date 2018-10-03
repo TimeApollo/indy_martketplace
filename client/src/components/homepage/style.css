@@ -20,12 +20,74 @@
     background-color: white;
 }
 
-.date {
-    position: absolute;
+.image-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
 }
 
 .image {
-    width: 100%;
-    height: 60vh;
+    width: 60%;
+    height: 80%;
     border-radius: 1%;
+}
+
+.date {
+    position: absolute;
+    font-size: 1em;
+    margin: 5px;
+    width: 20%;
+}
+
+.info-wrap {
+    height: 40vh;
+    width: 100%;
+}
+
+.art-info {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+.art-name {
+    font-size: 3.5em;
+}
+
+.artist {
+    display: flex;
+    align-items: flex-end;
+}
+
+.artist-link {
+    color: grey;
+    font-size: 1.5em;
+}
+
+
+.artist-dir {
+    font-size: 0.7em;
+    margin-left: 5px;
+}
+
+.for-sale {
+    text-align: left;
+    color: green;
+}
+
+.not-sale {
+    text-align: left;
+    color: rgb(204, 204, 204);
+}
+
+.art-type {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.medium {
+    margin-bottom: 5px;
 }
