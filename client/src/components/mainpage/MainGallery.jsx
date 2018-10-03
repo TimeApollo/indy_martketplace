@@ -15,13 +15,14 @@ const styles = theme => ({
     justifyContent: "flex-start",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper,
+    padding: "2em"
   },
   gridListArtist: {
     width: "100%",
     height: "100%"
   },
   gridList: {
-    width: "40em",
+    width: "75vw",
     height: "35em"
   },
   icon: {
@@ -55,7 +56,7 @@ class Gallery extends Component {
 
     return (
       <div className={classes.root}>
-        <GridList cols={3} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
+        <GridList cols={6} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
           {this.props.filteredArtwork ? this.props.filteredArtwork.map(art => (
             <GridListTile key={art._id}>
               <img src={art.url} alt={art.title} />

@@ -61,9 +61,9 @@ class AboutPage extends React.Component {
   }
 }
 
-AboutPage.propTypes = {
+{/* AboutPage.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}; */}
 
 
 export default connect(undefined, undefined)(withStyles(styles)(AboutPage));

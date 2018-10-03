@@ -25,6 +25,10 @@ const styles = theme => ({
   },
   link: {
     textAlign: "center"
+  },
+  image: {
+    width: "100%", 
+    height: "100%",
   }
 });
 
