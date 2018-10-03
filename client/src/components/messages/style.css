@@ -1,0 +1,228 @@
+#convo-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  margin: 0 auto;
+  width: 90%;
+  height: 6em;
+}
+
+.pic-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pic {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.info-wrap {
+  width: 10em !important;
+  justify-content: left;
+  height: 4em !important;
+  display: inline-block;
+  margin-left: -10em;
+}
+
+.content {
+  color: gray;
+  width: 25em;
+  word-break: break-all;
+  justify-content: left;
+  padding-bottom: 2em;
+}
+
+.timestamp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: flex-start;
+  text-align: right;
+  width: 25%;
+  font-size: 15px;
+  color: gray;
+}
+
+#convo-page {
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: 3em;
+}
+
+.convo-wrap {
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 50%;
+  border: 1px solid rgb(199, 199, 199);
+  justify-content: left;
+}
+
+.convo {
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 60em;
+  width: 50%;
+  border: 1px solid rgb(199, 199, 199);
+  margin-bottom: 5em;
+}
+
+.msg-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  position: fixed;
+  margin: 0 auto;
+  height: 70em;
+  width: 100%;
+  top: -0.5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow-y: scroll;
+}
+
+#msg-info-wrap {
+  justify-content: space-around;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 0.5%;
+  height: 70%;
+  width: 50%;
+  margin-bottom: 10em;
+}
+
+#new-msg-btn {
+  width: 10%;
+  background-color: #1fc8db;
+  border-color: #1fc8db;
+  color: white;
+}
+
+.to {
+  margin: 5px 5px -30px 5px;
+}
+
+.filler-msg {
+  display: flex;
+  justify-content: center;
+  color: gray;
+}
+
+#convo-page-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+  height: 60px;
+  z-index: 1;
+}
+
+#write-msg-wrap {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  margin-bottom: 5em;
+}
+
+.msgs-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.convo-modal-wrap {
+  align-items: center;
+  width: 50%;
+  height: 40em;
+  overflow-y: scroll;
+  background-image: linear-gradient(
+    141deg,
+    #9fb8ad 10%,
+    #1fc8db 59%,
+    #2cb5e8 75%
+  );
+}
+
+.sender-msg-wrap {
+  flex-direction: column;
+  align-self: flex-end;
+  margin: 10px 30px;
+}
+
+.rec-msg-wrap {
+  flex-direction: column;
+  align-self: flex-start;
+  margin: 10px 30px;
+}
+
+.sender-bubble {
+  display: flex;
+  justify-content: flex-end;
+  color: black;
+  font-weight: bold;
+  flex-flow: wrap;
+  overflow-y: visible;
+  word-break: break-all;
+  width: 20em;
+}
+
+.sender-msg-time {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  font-size: 10px;
+}
+
+.rec-bubble {
+  display: flex;
+  color: black;
+  align-self: start;
+  width: 20em;
+  font-weight: bold;
+  flex-flow: wrap;
+  overflow-y: visible;
+  word-break: break-all;
+}
+
+.rec-msg-time {
+  margin: 0 auto;
+  font-size: 10px;
+}
+
+.msg-input {
+  margin-left: 1%;
+  width: 90%;
+  font-size: 1em;
+}
+
+.convo-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(30, 30, 30);
+  border-bottom: 3px solid aqua;
+  width: 50%;
+  margin-top: 1em;
+}
+
+.convo-who {
+  color: white;
+  font-size: 2.5em;
+  margin: 10px;
+}
