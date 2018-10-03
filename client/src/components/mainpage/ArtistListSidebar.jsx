@@ -13,10 +13,10 @@ import Icon from "@material-ui/core/Icon";
 
 const styles = theme => ({
   root: {
-    // ...theme.mixins.gutters(),
+    ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "30vw",
+    width: "25vw",
     fontFamily: "sans-serif",
     textAlign: "center"
   },
