@@ -80,7 +80,6 @@ const paintingStyleArr = [
   "modernism",
   "nature",
   "oil",
-  "pop",
   "pet portrait",
   "pop",
   "portrait",
