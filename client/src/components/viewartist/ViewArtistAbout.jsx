@@ -14,7 +14,18 @@ const styles = theme => ({
     width: "15em",
     fontFamily: "sans-serif",
     textAlign: "center"
-  }
+  },
+  bigAvatar: {
+    border: "1px solid",
+    borderColor: "rgb(65, 118, 115)",
+    backgroundColor: "rgb(0, 169, 160)",
+    borderRadius: "8em",
+    width: "10em",
+    height: "10em",
+    marginRight: "auto",
+    display: "flex",
+    marginLeft: "auto"
+  },
 });
 
 class ViewArtistAbout extends Component {
@@ -24,6 +35,11 @@ class ViewArtistAbout extends Component {
     return (
       <div className={classes.root}>
         <Paper className={classes.root} elevation={15}>
+        <img
+              src={require("../../images/penny.png")}
+              alt="penny"
+              className={classes.bigAvatar}
+            />
           <Typography variant="headline" component="h1">
             {this.props.artist.firstName} {this.props.artist.lastName}
           </Typography>

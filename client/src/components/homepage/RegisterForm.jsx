@@ -144,6 +144,7 @@ class RegisterForm extends React.Component {
           <FormControl style={{ margin: "1em" }} required={true}>
             <InputLabel>First Name</InputLabel>
             <Input 
+              autoFocus="true"
               type="text" 
               name="firstName"
               value={this.state.firstName} 
