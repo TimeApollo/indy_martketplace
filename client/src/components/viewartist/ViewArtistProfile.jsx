@@ -33,7 +33,7 @@ const styles = {
     marginRight: "auto"
   },
   gallery: {
-    marginLeft: "5em"
+    marginLeft: "3em", 
   }
 };
 

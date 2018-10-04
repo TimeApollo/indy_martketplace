@@ -22,12 +22,12 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridListArtist: {
-    width: "40em",
+    width: "55vw",
     height: "26.7em"
   },
   gridList: {
-    width: "40em",
-    height: "35em"
+    width: "55vw",
+    height: "26.7em"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
@@ -65,7 +65,7 @@ class ArtistGallery extends Component {
 
     return (
       <div className={classes.root}>
-        <GridList cols={3} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
+        <GridList cols={6} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
           {this.props.artworks ? this.props.artworks.map(art => (
             <GridListTile key={art._id}>
               <img src={art.url} alt={art.title} onClick={this.handleSingleImage(art._id)} />
