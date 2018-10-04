@@ -6,7 +6,7 @@ import NavBar from "./NavBar.jsx";
 import MessageList from "./messages/MessageList.jsx";
 import HomePage from "./homepage/HomePage.jsx";
 import UserProfilePageContainer from "./profile/UserProfilePageContainer.jsx"
-import UploadForm from "./profile/PostNewImagePage.jsx";
+import UploadForm from "./profile/UploadForm.jsx";
 import EditProfilePage from "./profile/EditProfilePage.jsx";
 import MainPage from "./mainpage/MainPage.jsx";
 import ViewArtistProfile from "./viewartist/ViewArtistProfile";

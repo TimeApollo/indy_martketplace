@@ -7,9 +7,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-// import Typography from '@material-ui/core/Typography';
-// import Modal from '@material-ui/core/Modal';
-// import Button from '@material-ui/core/Button';
+
 
 import { createImgPopup } from "../../actions/art";
 
@@ -22,12 +20,12 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridListArtist: {
-    width: "40em",
-    height: "26.7em"
+    width: "55vw",
+    height: "45em"
   },
   gridList: {
-    width: "40em",
-    height: "35em"
+    width: "55vw",
+    height: "45vh"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
@@ -65,7 +63,7 @@ class ArtistGallery extends Component {
 
     return (
       <div className={classes.root}>
-        <GridList cols={3} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
+        <GridList cols={6} className={ this.props.page === "buyer" ? classes.gridList : classes.gridListArtist}>
           {this.props.artworks ? this.props.artworks.map(art => (
             <GridListTile key={art._id}>
               <img src={art.url} alt={art.title} onClick={this.handleSingleImage(art._id)} />

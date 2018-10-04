@@ -66,6 +66,9 @@ const styles = theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "-2em",
+  },
+  home: {
+    paddingBottom: "5em"
   }
 });
 
@@ -99,7 +102,7 @@ class HomePage extends Component {
         {this.state.loginCheck 
           ? <React.Fragment>
               <LoginForm />
-              <div>
+              <div className={classes.home}>
                 <div className={classes.regMsg}>New to Indy mARTketplace? Click here to register!</div>
                 <br/>
                 <br/>
@@ -109,7 +112,7 @@ class HomePage extends Component {
             </React.Fragment>
           : <React.Fragment>
               <RegisterForm />
-              <div>
+              <div className={classes.home} >
                 <div className={classes.regMsg}>Already a member? Click here to login!</div>
                 <br/>
                 <br/>

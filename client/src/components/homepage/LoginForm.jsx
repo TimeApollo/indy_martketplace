@@ -95,7 +95,8 @@ class LoginForm extends React.Component {
         <div className={classes.form}>
           <FormControl required={true} style={{ margin: "1em" }}>
             <InputLabel>Email</InputLabel>
-            <Input 
+            <Input
+              autoFocus="true"
               type="email" 
               name="email" 
               onChange={this.handleOnChange}

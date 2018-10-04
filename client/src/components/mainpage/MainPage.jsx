@@ -27,7 +27,7 @@ const styles = {
     alignItems: "center",
     align: "center",
     textAlign: "center",
-    marginBottom: "3em"
+    marginBottom: "3em",
   },
   gallery: {
     marginLeft: "1vw",
