@@ -157,7 +157,6 @@ const logoutUserRequest = () => {
 };
 
 const logoutUserReceived = data => {
-  console.log(data);
   return {
     type: LOGOUT_USER_RESPONSE,
     payload: data
@@ -227,7 +226,6 @@ export const deleteUser = userInfo => dispatch => {
     .then(response => {
       dispatch(successfullProfileDelete());
       dispatch(push("/"));
-      console.log(response);
     });
 };
 export const successfullProfileDelete = () => {
