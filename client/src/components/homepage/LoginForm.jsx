@@ -41,7 +41,6 @@ const styles = theme => ({
     marginTop: "0",
     border: "4px solid black",
     width: "30em",
-    // height: "15em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
