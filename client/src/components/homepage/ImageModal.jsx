@@ -67,7 +67,7 @@ class ImageModal extends React.Component {
                           color: "white", 
                           width: "25em"
                       }}
-                      ><p style={{color: "white", alignContent: "left"}}>{artwork.artist} <br/> (Click to go to Artist Profile Page)</p></ListItemText>
+                      ><p style={{color: "white", alignContent: "left", marginLeft: "2em"}}>{artwork.artist} <br/> (Click to go to Artist Profile Page)</p></ListItemText>
                     </ListItem>
                   </List>
                 </div>

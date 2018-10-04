@@ -26,7 +26,7 @@ const styles = theme => ({
     background: "dark blue",
   },
   type: {
-    color: "white", 
+    color: "black", 
     fontWeight: "bold",
     fontSize: "1.5em",
     width: "25em",

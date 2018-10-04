@@ -39,7 +39,7 @@ const styles = theme => ({
     margin: "0",
     marginTop: "0",
     border: "4px solid black",
-    width: "95vw",
+    width: "90vw",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -48,7 +48,7 @@ const styles = theme => ({
     paddingLeft: "1em",
     paddingTop: "1em", 
     paddingBottom: "1em",
-    marginBottom: "2em"
+    marginBottom: "2em",
   },
   list: {
     display: "flex",
