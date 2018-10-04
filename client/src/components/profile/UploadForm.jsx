@@ -142,7 +142,6 @@ const MixedMediaStyleArr = [
   "pop",
   "portrait",
   "petportrait",
-  "pop",
   "realism",
   "resin",
   "rustic",
