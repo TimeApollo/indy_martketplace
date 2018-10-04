@@ -23,11 +23,11 @@ const styles = theme => ({
   },
   gridListArtist: {
     width: "55vw",
-    height: "26.7em"
+    height: "45em"
   },
   gridList: {
     width: "40em",
-    height: "35em"
+    height: "45em"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"

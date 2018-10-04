@@ -7,9 +7,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
-// import Typography from '@material-ui/core/Typography';
-// import Modal from '@material-ui/core/Modal';
-// import Button from '@material-ui/core/Button';
+
 
 import { createImgPopup } from "../../actions/art";
 
@@ -23,11 +21,11 @@ const styles = theme => ({
   },
   gridListArtist: {
     width: "55vw",
-    height: "26.7em"
+    height: "45em"
   },
   gridList: {
     width: "55vw",
-    height: "26.7em"
+    height: "45vh"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"

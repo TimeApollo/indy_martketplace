@@ -19,7 +19,7 @@ const styles = theme => ({
     width: "20vw",
     fontFamily: "sans-serif",
     textAlign: "center",
-    marginLeft: "-2em"
+    marginLeft: ".5em"
   },
   icon: {
     margin: theme.spacing.unit
