@@ -29,7 +29,6 @@ module.exports = [
   "pop",
   "portrait",
   "pet portrait",
-  "pop",
   "realism",
   "resin",
   "rustic",
