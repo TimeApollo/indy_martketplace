@@ -19,11 +19,19 @@ app.use(morgan('dev'))
 app.use(express.json());
 // app.use(express.static(path.join(__dirname, 'client/build')));
 
+// needed to direct express to serve files
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 //Api route
 app.use('/api/messages', controllers.messages);
 app.use('/api/auth', controllers.auth);
 app.use('/api/artwork', controllers.artwork);
 app.use('/api/artist', controllers.artist);
+
+//catch all to redirect everything back to the index file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 const URI = 'mongodb://localhost:27017/art'
 // const URI = process.env.MONGODB_URI
@@ -39,13 +47,14 @@ mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection open to ' + process.env.MONGODB_URI);
 }); 
 
-const gracefulExit = function() { 
-  mongoose.connection.close(function () {
-    console.log('Mongoose default connection with DB :' + process.env.MONGODB_URI + ' is disconnected through app termination');
-    process.exit(0);
-  });
-}
+// dont use in production. this is for local deployment.
+// const gracefulExit = function() { 
+//   mongoose.connection.close(function () {
+//     console.log('Mongoose default connection with DB :' + process.env.MONGODB_URI + ' is disconnected through app termination');
+//     process.exit(0);
+//   });
+// }
 
-process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+// process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
 
 
