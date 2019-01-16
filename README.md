@@ -1,4 +1,7 @@
-# indy_martketplace
+# Indy_mARTketplace
+
+Current Deployment: https://warm-refuge-64309.herokuapp.com/
+*Note: Deployment on heroku using free account. Serve takes a few minutes to spin up for first use of server in over 30 minutes.
 
 
 # Project Title
